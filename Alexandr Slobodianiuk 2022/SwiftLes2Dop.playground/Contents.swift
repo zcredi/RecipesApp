@@ -10,7 +10,7 @@ for var num in number {
     if num < 0 {
         num = 0
     }
-//    print(num)
+    print(num)
 }
 
 // Task 3
