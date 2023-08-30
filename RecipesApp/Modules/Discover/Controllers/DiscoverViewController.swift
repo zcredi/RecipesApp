@@ -13,6 +13,9 @@ var tableView = UITableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        createTable()
+        setupConstrains()
+        view.addSubview(tableView)
     }
 
 }
@@ -33,5 +36,12 @@ extension DiscoverViewController:  UITableViewDelegate, UITableViewDataSource {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 260
+    }
+    func setupConstrains() {
+        
+        tableView.snp.makeConstraints { make in
+      
+            make.top.trailing.leading.bottom.equalToSuperview()
+        }
     }
 }
