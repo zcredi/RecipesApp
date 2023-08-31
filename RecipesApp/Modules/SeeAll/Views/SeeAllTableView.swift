@@ -15,7 +15,8 @@ class SeeAllTableView: UITableView {
     }
     
     func configureTable() {
-        backgroundColor = .clear
+        backgroundColor = .white
+        separatorStyle = .none
         register(CustomCell.self, forCellReuseIdentifier: CustomCell.identifier)
         dataSource = self
         delegate = self

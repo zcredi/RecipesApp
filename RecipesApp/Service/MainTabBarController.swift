@@ -49,7 +49,7 @@ class MainTabBarController : UITabBarController {
         let home = HomeViewController()
         let discover = DiscoverViewController()
         let notification = UIViewController()
-        let profile = UIViewController()
+        let profile = SeeAllViewController()
         
         setViewControllers([home, discover, notification, profile], animated: true)
         

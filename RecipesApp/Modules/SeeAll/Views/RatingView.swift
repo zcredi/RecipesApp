@@ -8,9 +8,22 @@
 import UIKit
 class RatingView: UIView {
     
+    
+    
+    private let blurView: UIVisualEffectView = {
+        let blurEffect = UIBlurEffect(style: .dark)
+        let blurredEffectView = UIVisualEffectView(effect: blurEffect)
+        blurredEffectView.contentMode = .scaleAspectFill
+        blurredEffectView.layer.opacity = 0.4
+        blurredEffectView.translatesAutoresizingMaskIntoConstraints = false
+        return blurredEffectView
+    }()
+    
+    
     private let ratingLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        label.textColor = .white
+        label.text = "5.0"
         label.textAlignment = .left
         label.numberOfLines = .zero
         label.font = .boldSystemFont(ofSize: 16)
@@ -21,7 +34,8 @@ class RatingView: UIView {
     
     private let starImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "star")
+        imageView.image = UIImage(systemName: "star.fill")
+        imageView.tintColor = .black
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -40,18 +54,26 @@ class RatingView: UIView {
     }
     
     func setupUI() {
-        backgroundColor = UIColor(red: 48/255, green: 48/255, blue: 48/255, alpha: 0.3)
+        addSubview(blurView)
         addSubview(starImageView)
         addSubview(ratingLabel)
     }
     
     func setupConstraints() {
         NSLayoutConstraint.activate([
-        
-        
-        
-        
-        
+            blurView.topAnchor.constraint(equalTo: topAnchor),
+            blurView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            blurView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            blurView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            starImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            starImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
+            starImageView.heightAnchor.constraint(equalToConstant: 16),
+            starImageView.widthAnchor.constraint(equalToConstant: 16),
+            
+            ratingLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            ratingLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5)
+            
         ])
     }
 }

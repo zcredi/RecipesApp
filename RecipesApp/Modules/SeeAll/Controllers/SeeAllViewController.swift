@@ -10,34 +10,47 @@ import UIKit
 class SeeAllViewController: UIViewController {
     
     
+    private let seeAllTableView = SeeAllTableView()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        setupUI()
+        setupUI()
         setup()
         setupConstraints()
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        seeAllTableView.layer.cornerRadius = 30
+    }
 
     
-//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as! CustomCell
-//
-//        return cell
-//    }
-//
-//    func setupUI() {
-//        view.backgroundColor = .white
-//        tableView.register(CustomCell.self, forCellReuseIdentifier: "CustomCell")
-//
-//    }
+
+
+    private func setupUI() {
+        view.backgroundColor = .white
+        view.addSubview(seeAllTableView)
+
+    }
     
-    func setup() {
+    private func setup() {
         
         
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
+        seeAllTableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            seeAllTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            seeAllTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            seeAllTableView.topAnchor.constraint(equalTo: view.topAnchor),
+            seeAllTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        
+        
+        ])
         
     }
 }
