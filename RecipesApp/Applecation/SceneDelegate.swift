@@ -16,19 +16,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = WelcomeViewController()
-        ////        window?.rootViewController = MainTabBarController()
-        window?.makeKeyAndVisible()
         
-        //            if UserDefaults.standard.bool(forKey: "didSee") == false{
-        //                UserDefaults.standard.set(true, forKey: "didSee")
-        //                window?.rootViewController = WelcomeViewController()
-        //                window?.makeKeyAndVisible()
-        //            } else {
-        //                window?.rootViewController = HomeViewController()
-        //                window?.makeKeyAndVisible()
-        //            }
-        //        }
+        //MARK: Показывает только при первом запуске:
+        
+//        if UserDefaults.standard.bool(forKey: "didSee") == false {
+//            UserDefaults.standard.set(true, forKey: "didSee")
+//            window?.rootViewController = WelcomeViewController()
+//            } else { window?.rootViewController = HomeViewController()}
+        window?.makeKeyAndVisible()
     }
+        
+        
+    
     
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.

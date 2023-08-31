@@ -7,12 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		793B6F292A9E8037009AA7A5 /* Onboarding Page-3.png in Resources */ = {isa = PBXBuildFile; fileRef = 793B6F252A9E8036009AA7A5 /* Onboarding Page-3.png */; };
-		793B6F2A2A9E8037009AA7A5 /* Onboarding Page-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 793B6F262A9E8037009AA7A5 /* Onboarding Page-2.png */; };
-		793B6F2B2A9E8037009AA7A5 /* Onboarding Page-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 793B6F272A9E8037009AA7A5 /* Onboarding Page-1.png */; };
 		79BD78DE2A9F8E2B005D5900 /* PagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BD78DD2A9F8E2B005D5900 /* PagesViewController.swift */; };
 		79BD78E02AA0605A005D5900 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BD78DF2AA0605A005D5900 /* OnboardingViewController.swift */; };
-		79BD78E22AA0B2F4005D5900 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD78E12AA0B2F4005D5900 /* background.png */; };
 		863B3D402A9D1B0400187864 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 863B3D3F2A9D1B0400187864 /* Kingfisher */; };
 		864AAB992A9B45CD001955C7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864AAB982A9B45CD001955C7 /* AppDelegate.swift */; };
 		864AAB9B2A9B45CD001955C7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864AAB9A2A9B45CD001955C7 /* SceneDelegate.swift */; };
@@ -31,12 +27,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		793B6F252A9E8036009AA7A5 /* Onboarding Page-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Onboarding Page-3.png"; sourceTree = "<group>"; };
-		793B6F262A9E8037009AA7A5 /* Onboarding Page-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Onboarding Page-2.png"; sourceTree = "<group>"; };
-		793B6F272A9E8037009AA7A5 /* Onboarding Page-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Onboarding Page-1.png"; sourceTree = "<group>"; };
 		79BD78DD2A9F8E2B005D5900 /* PagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagesViewController.swift; sourceTree = "<group>"; };
 		79BD78DF2AA0605A005D5900 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
-		79BD78E12AA0B2F4005D5900 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		864AAB952A9B45CD001955C7 /* RecipesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecipesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		864AAB982A9B45CD001955C7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		864AAB9A2A9B45CD001955C7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -156,10 +148,6 @@
 				864AABA12A9B45CE001955C7 /* Assets.xcassets */,
 				864AABA32A9B45CE001955C7 /* LaunchScreen.storyboard */,
 				864AABA62A9B45CE001955C7 /* Info.plist */,
-				79BD78E12AA0B2F4005D5900 /* background.png */,
-				793B6F262A9E8037009AA7A5 /* Onboarding Page-2.png */,
-				793B6F252A9E8036009AA7A5 /* Onboarding Page-3.png */,
-				793B6F272A9E8037009AA7A5 /* Onboarding Page-1.png */,
 			);
 			path = Applecation;
 			sourceTree = "<group>";
@@ -367,13 +355,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				79BD78E22AA0B2F4005D5900 /* background.png in Resources */,
 				864AABBB2A9B5461001955C7 /* Poppins-Regular.ttf in Resources */,
 				864AABA52A9B45CE001955C7 /* LaunchScreen.storyboard in Resources */,
-				793B6F2A2A9E8037009AA7A5 /* Onboarding Page-2.png in Resources */,
-				793B6F292A9E8037009AA7A5 /* Onboarding Page-3.png in Resources */,
 				864AABA22A9B45CE001955C7 /* Assets.xcassets in Resources */,
-				793B6F2B2A9E8037009AA7A5 /* Onboarding Page-1.png in Resources */,
 				864AABBD2A9CBFA3001955C7 /* Poppins-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

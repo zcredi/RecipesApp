@@ -156,6 +156,7 @@ class OnboardingViewController: UIPageViewController, UIPageViewControllerDataSo
         self.dataSource = self
         self.delegate = self
         
+        
         let page1 = PagesViewController(imageName: "Onboarding Page-1", titleText: "Recipes from all over the World", subtitleText: "")
         let page2 = PagesViewController(imageName: "Onboarding Page-2", titleText: "Recipes with each and every detail", subtitleText: "")
         let page3 = PagesViewController(imageName: "Onboarding Page-3", titleText: "Cook it now or save it for later", subtitleText: "")
@@ -171,6 +172,8 @@ class OnboardingViewController: UIPageViewController, UIPageViewControllerDataSo
         view.addSubview(bottomStack)
         bottomStack.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         bottomStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
+        
+       
         
     }
     
