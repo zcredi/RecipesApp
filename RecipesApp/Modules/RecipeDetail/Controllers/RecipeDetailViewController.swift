@@ -1,10 +1,3 @@
-//
-//  RecipeDetailViewController.swift
-//  RecipesApp
-//
-//  Created by Владислав on 28.08.2023.
-//
-
 import UIKit
 
 // MARK: - RecipeDetailViewController
@@ -233,6 +226,4 @@ extension RecipeDetailViewController: UITableViewDelegate, UITableViewDataSource
     }
     
   }
-  
-  
 }
