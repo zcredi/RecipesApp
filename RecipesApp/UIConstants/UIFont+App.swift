@@ -1,10 +1,3 @@
-//
-//  UIFont+App.swift
-//  RecipesApp
-//
-//  Created by Владислав on 27.08.2023.
-//
-
 import UIKit
 
 extension UIFont {
