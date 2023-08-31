@@ -1,10 +1,3 @@
-//
-//  SceneDelegate.swift
-//  RecipesApp
-//
-//  Created by Владислав on 27.08.2023.
-//
-
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {

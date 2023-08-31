@@ -1,10 +1,3 @@
-//
-//  WelcomeViewController.swift
-//  RecipesApp
-//
-//  Created by Владислав on 28.08.2023.
-//
-
 import UIKit
 
 class WelcomeViewController: UIViewController {
@@ -111,8 +104,7 @@ class WelcomeViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
+        super.viewDidLoad()  
         view.addSubview(backgroundImageView)
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         backgroundImageView.sizeToFit()
@@ -150,12 +142,4 @@ class WelcomeViewController: UIViewController {
         
     }
 }
-
-
-    
-
-
-    
-    
-
 
