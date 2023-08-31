@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		52D4C9232A9F72B000046BAE /* InstructionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D4C9222A9F72B000046BAE /* InstructionCell.swift */; };
+		52D4C9252A9F848B00046BAE /* IngredientsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D4C9242A9F848B00046BAE /* IngredientsCell.swift */; };
 		863B3D402A9D1B0400187864 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 863B3D3F2A9D1B0400187864 /* Kingfisher */; };
 		864AAB992A9B45CD001955C7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864AAB982A9B45CD001955C7 /* AppDelegate.swift */; };
 		864AAB9B2A9B45CD001955C7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864AAB9A2A9B45CD001955C7 /* SceneDelegate.swift */; };
@@ -29,6 +31,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		52D4C9222A9F72B000046BAE /* InstructionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionCell.swift; sourceTree = "<group>"; };
+		52D4C9242A9F848B00046BAE /* IngredientsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsCell.swift; sourceTree = "<group>"; };
 		864AAB952A9B45CD001955C7 /* RecipesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecipesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		864AAB982A9B45CD001955C7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		864AAB9A2A9B45CD001955C7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +67,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		520880C22A9F296B00645BD0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		520880C32A9F297500645BD0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				52D4C9222A9F72B000046BAE /* InstructionCell.swift */,
+				52D4C9242A9F848B00046BAE /* IngredientsCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		864AAB8C2A9B45CD001955C7 = {
 			isa = PBXGroup;
 			children = (
@@ -199,8 +219,8 @@
 		864AABC32A9CCBF3001955C7 /* RecipeDetail */ = {
 			isa = PBXGroup;
 			children = (
-				864AABCF2A9CCC6E001955C7 /* Models */,
-				864AABCE2A9CCC6C001955C7 /* Views */,
+				520880C22A9F296B00645BD0 /* Model */,
+				520880C32A9F297500645BD0 /* Views */,
 				864AABCD2A9CCC6A001955C7 /* Controllers */,
 			);
 			path = RecipeDetail;
@@ -411,6 +431,8 @@
 				864AABBF2A9CC2E1001955C7 /* UILabel+App.swift in Sources */,
 				864AAB992A9B45CD001955C7 /* AppDelegate.swift in Sources */,
 				864AABB82A9B4A31001955C7 /* UIFont+App.swift in Sources */,
+				52D4C9252A9F848B00046BAE /* IngredientsCell.swift in Sources */,
+				52D4C9232A9F72B000046BAE /* InstructionCell.swift in Sources */,
 				864AABD32A9CCCC5001955C7 /* HomeViewController.swift in Sources */,
 				864AABB62A9B4A1D001955C7 /* UIColor+App.swift in Sources */,
 				864AABB32A9B4876001955C7 /* MainTabBarController.swift in Sources */,
