@@ -1,10 +1,3 @@
-//
-//  MainTabBarController.swift
-//  RecipesApp
-//
-//  Created by Владислав on 27.08.2023.
-//
-
 import UIKit
 
 class MainTabBarController: UITabBarController {
@@ -23,8 +16,9 @@ class MainTabBarController: UITabBarController {
     }
     
     private func setupItems() {
-        
-        let home = HomeViewController()
+        let homeVC = UINavigationController(rootViewController: HomeViewController())
+        homeVC.navigationController?.navigationBar.prefersLargeTitles = true
+        let home = homeVC
         let discover = DiscoverViewController()
         let notification = UIViewController()
         let profile = UIViewController()
