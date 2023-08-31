@@ -1,10 +1,3 @@
-//
-//  MainTabBarController.swift
-//  RecipesApp
-//
-//  Created by Владислав on 27.08.2023.
-//
-
 import UIKit
 
 class MainTabBarController : UITabBarController {
@@ -29,7 +22,6 @@ class MainTabBarController : UITabBarController {
         self.tabBar.addSubview(btnMiddle)
         setupCustomTabBar()
     }
-    
     func setupCustomTabBar() {
         
         let path : UIBezierPath = getPathForTabBar()

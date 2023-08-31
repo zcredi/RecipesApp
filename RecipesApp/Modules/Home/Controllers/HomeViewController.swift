@@ -1,30 +1,336 @@
-//
-//  HomeViewController.swift
-//  RecipesApp
-//
-//  Created by Владислав on 28.08.2023.
-//
-
 import UIKit
 
 class HomeViewController: UIViewController {
-
+    private let networkManager = NetworkManager()
+    private let urlGenerator = URLGenerate()
+    private var trendingNow: [InformationSearchRecipe] = []
+    private var saladRecipePopularCategory: [PopularCategoryInfo] = []
+    private var recentRecipeArray: [PopularCategoryInfo] = []
+    private let popularCategoryArray = ["Breakfast", "Dessert", "Appetizer", "Salad", "Appetizer", "Soup", "Drink", "Beverage", "Sauce", "Fingerfood", "Snack"]
+    private var selectedIndexPathForButtonCollectionTag: IndexPath?
+    private var popularCreatorsArray = [
+        "Jamie Oliver",
+         "Yotam Ottolenghi",
+         "Anthony Bourdain",
+         "Nusret Gökçe",
+         "Gordon Ramsay",
+         "Massimo Bottura",
+         "Christina Tosi",
+         "Sanjeev Kapoor",
+         "Joël Robuchon",
+         "Alain Ducasse",
+         "Ferran Adrià",
+         "Thomas Keller",
+         "Daniel Humm",
+         "Martha Stewart"
+    ]
+    
+    private lazy var searchRecipe: UISearchController = {
+        let sc = UISearchController(searchResultsController: nil)
+        sc.searchBar.placeholder = "Search Recipes"
+        return sc
+    }()
+    
+    private lazy var homeScrollView: UIScrollView = {
+        let sv = UIScrollView()
+        sv.translatesAutoresizingMaskIntoConstraints = false
+        return sv
+    }()
+    
+    private lazy var seeAllButton: UIButton = {
+        let button = UIButton()
+        button.setTitleColor(.red, for: .normal)
+        button.titleLabel?.font = UIFont.poppinsBold14()
+        button.setTitle("See All ->", for: .normal)
+        button.addTarget(self, action: #selector(trendingNowSeeAllButtonPressed(_:)), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private lazy var popularCategoryLabel: UILabel = {
+        let label = UILabel(text: "Popular Category", font: UIFont.poppinsBold20(), textColor: .black)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private lazy var recentRecipeLabel: UILabel = {
+        let label = UILabel(text: "Recent Recipe", font: UIFont.poppinsBold20(), textColor: .black)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private lazy var trendingNowLabel: UILabel = {
+        let label = UILabel(text: "Trending now 🔥", font: UIFont.poppinsBold20(), textColor: .black)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private lazy var popularCreatorsLabel: UILabel = {
+        let label = UILabel(text: "Popular Creators", font: UIFont.poppinsBold20(), textColor: .black)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private lazy var trendingNowCollectionView: UICollectionView = {
+        let collectionView = UICollectionView(itemWidth: 320, itemHeight: 250)
+        collectionView.register(TrendingNowCollectionViewCell.self, forCellWithReuseIdentifier: TrendingNowCollectionViewCell.identifier)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        return collectionView
+    }()
+    
+    private lazy var popularCategoryTagCollectionView: UICollectionView = {
+        let collectionView = UICollectionView(itemWidth: 90, itemHeight: 40)
+        collectionView.register(SwitchPopularCategoryCollectionViewCell.self, forCellWithReuseIdentifier: SwitchPopularCategoryCollectionViewCell.identifier)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        return collectionView
+    }()
+    
+    private lazy var popularCategoryCollectionView: UICollectionView = {
+        let collectionView = UICollectionView(itemWidth: 170, itemHeight: 200)
+        collectionView.register(PopularCategoryCollectionViewCell.self, forCellWithReuseIdentifier: PopularCategoryCollectionViewCell.identifier)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        return collectionView
+    }()
+    
+    
+    private lazy var recentRecipeCollectionView: UICollectionView = {
+        let collectionView = UICollectionView(itemWidth: 150, itemHeight: 250)
+        collectionView.register(RecentRecipeCollectionViewCell.self, forCellWithReuseIdentifier: RecentRecipeCollectionViewCell.identifier)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        return collectionView
+    }()
+    
+    private lazy var popularCreatorsCollectionView: UICollectionView = {
+        let collectionView = UICollectionView(itemWidth: 120, itemHeight: 150)
+        collectionView.register(PopularCreatorsCollectionViewCell.self, forCellWithReuseIdentifier: PopularCreatorsCollectionViewCell.identifier)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        return collectionView
+    }()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
+        navigationItem.searchController = searchRecipe
+        callNetworking()
+        selectedIndexPathForButtonCollectionTag = IndexPath(row: 0, section: 0)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        setupNavigationBar()
+        setupUI()
     }
-    */
+    
+    private func setupNavigationBar() {
+        let titleLabel = UILabel(text: "Get amazing recipe for cooking", font: UIFont.poppinsRegular20(), textColor: .black)
+        titleLabel.numberOfLines = 0
+        titleLabel.textAlignment = .center
+        navigationItem.titleView = titleLabel
+    }
+    
+    @IBAction func trendingNowSeeAllButtonPressed(_ sender: UIButton) {
+        print("Button pressed!!!")
+    }
+    
+    // MARK: - CallNetworking Method
+    private func callNetworking() {
+        let trendingNowRequest = urlGenerator.request(endpoint: "recipes/complexSearch", queryItems: [URLQueryItem(name: "sort", value: "rating"), URLQueryItem(name: "sortDirection", value: "desc"), URLQueryItem(name: "number", value: "10")])
+        let popularCategoryRequest = urlGenerator.request(endpoint: "recipes/complexSearch", queryItems: [URLQueryItem(name: "type", value: "breakfast"), URLQueryItem(name: "addRecipeInformation", value: "true")])
+        let recentRecipeRequest = urlGenerator.request(endpoint: "recipes/complexSearch", queryItems: [URLQueryItem(name: "type", value: "dessert"), URLQueryItem(name: "addRecipeInformation", value: "true")])
+        
+        
+        networkManager.request(generator: trendingNowRequest) { (result: Swift.Result<SearchRecipe, Error>) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let searched):
+                    self.trendingNow = searched.results
+                    self.trendingNowCollectionView.reloadData()
+                case .failure(let failure):
+                    print(failure.localizedDescription)
+                }
+            }
+        }
+        
+        networkManager.request(generator: popularCategoryRequest) { (result: Swift.Result<PopularCategory, Error>) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let searched):
+                    self.saladRecipePopularCategory = searched.results
+                    self.popularCategoryCollectionView.reloadData()
+                case .failure(let failure):
+                    print(failure.localizedDescription)
+                }
+            }
+        }
+        
+        networkManager.request(generator: recentRecipeRequest) { (result: Swift.Result<PopularCategory, Error>) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let searched):
+                    self.recentRecipeArray = searched.results
+                    self.recentRecipeCollectionView.reloadData()
+                case .failure(let failure):
+                    print(failure.localizedDescription)
+                }
+            }
+        }
+    }
 
+    
+    // MARK: - SetupUI Method
+    private func setupUI() {
+        view.addSubview(homeScrollView)
+        homeScrollView.addSubviews(trendingNowLabel, seeAllButton, trendingNowCollectionView, popularCategoryLabel, popularCategoryTagCollectionView, popularCategoryCollectionView, recentRecipeLabel, recentRecipeCollectionView, popularCreatorsLabel, popularCreatorsCollectionView)
+        
+        NSLayoutConstraint.activate([
+            homeScrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            homeScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            homeScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            homeScrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            trendingNowLabel.topAnchor.constraint(equalTo: homeScrollView.topAnchor, constant: 10),
+            trendingNowLabel.leadingAnchor.constraint(equalTo: homeScrollView.leadingAnchor, constant: 15),
+            
+            seeAllButton.topAnchor.constraint(equalTo: homeScrollView.topAnchor, constant: 10),
+            seeAllButton.trailingAnchor.constraint(equalTo: homeScrollView.trailingAnchor, constant: -15),
+            
+            trendingNowCollectionView.topAnchor.constraint(equalTo: homeScrollView.topAnchor, constant: 50),
+            trendingNowCollectionView.leadingAnchor.constraint(equalTo: homeScrollView.leadingAnchor),
+            trendingNowCollectionView.trailingAnchor.constraint(equalTo: homeScrollView.trailingAnchor),
+            trendingNowCollectionView.widthAnchor.constraint(equalTo: homeScrollView.widthAnchor),
+            trendingNowCollectionView.heightAnchor.constraint(equalToConstant: 260),
+            
+            
+            popularCategoryLabel.topAnchor.constraint(equalTo: trendingNowCollectionView.bottomAnchor, constant: 30),
+            popularCategoryLabel.leadingAnchor.constraint(equalTo: homeScrollView.leadingAnchor, constant: 15),
+            
+            popularCategoryTagCollectionView.topAnchor.constraint(equalTo: popularCategoryLabel.bottomAnchor, constant: 20),
+            popularCategoryTagCollectionView.leadingAnchor.constraint(equalTo: homeScrollView.leadingAnchor),
+            popularCategoryTagCollectionView.trailingAnchor.constraint(equalTo: homeScrollView.trailingAnchor),
+            popularCategoryTagCollectionView.widthAnchor.constraint(equalTo: homeScrollView.widthAnchor),
+            popularCategoryTagCollectionView.heightAnchor.constraint(equalToConstant: 40),
+            
+            
+            popularCategoryCollectionView.topAnchor.constraint(equalTo: popularCategoryTagCollectionView.bottomAnchor, constant: 20),
+            popularCategoryCollectionView.leadingAnchor.constraint(equalTo: homeScrollView.leadingAnchor),
+            popularCategoryCollectionView.trailingAnchor.constraint(equalTo: homeScrollView.trailingAnchor),
+            popularCategoryCollectionView.widthAnchor.constraint(equalTo: homeScrollView.widthAnchor),
+            popularCategoryCollectionView.heightAnchor.constraint(equalToConstant: 300),
+            
+            recentRecipeLabel.topAnchor.constraint(equalTo: popularCategoryCollectionView.bottomAnchor, constant: 20),
+            recentRecipeLabel.leadingAnchor.constraint(equalTo: homeScrollView.leadingAnchor, constant: 15),
+            
+            
+            recentRecipeCollectionView.topAnchor.constraint(equalTo: recentRecipeLabel.bottomAnchor, constant: 10),
+            recentRecipeCollectionView.leadingAnchor.constraint(equalTo: homeScrollView.leadingAnchor),
+            recentRecipeCollectionView.trailingAnchor.constraint(equalTo: homeScrollView.trailingAnchor),
+            recentRecipeCollectionView.widthAnchor.constraint(equalTo: homeScrollView.widthAnchor),
+            recentRecipeCollectionView.heightAnchor.constraint(equalToConstant: 300),
+            
+            
+            popularCreatorsLabel.topAnchor.constraint(equalTo: recentRecipeCollectionView.bottomAnchor, constant: 20),
+            popularCreatorsLabel.leadingAnchor.constraint(equalTo: homeScrollView.leadingAnchor, constant: 15),
+            
+            popularCreatorsCollectionView.topAnchor.constraint(equalTo: popularCreatorsLabel.bottomAnchor, constant: 10),
+            popularCreatorsCollectionView.leadingAnchor.constraint(equalTo: homeScrollView.leadingAnchor),
+            popularCreatorsCollectionView.trailingAnchor.constraint(equalTo: homeScrollView.trailingAnchor),
+            popularCreatorsCollectionView.widthAnchor.constraint(equalTo: homeScrollView.widthAnchor),
+            popularCreatorsCollectionView.heightAnchor.constraint(equalToConstant: 200),
+            popularCreatorsCollectionView.bottomAnchor.constraint(equalTo: homeScrollView.bottomAnchor, constant: -20)
+        ])
+    }
+}
+
+
+
+// MARK: - UICollectionViewDataSource, UICollectionViewDelegate
+extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        switch collectionView {
+        case trendingNowCollectionView: return trendingNow.count
+        case popularCategoryCollectionView: return saladRecipePopularCategory.count
+        case popularCategoryTagCollectionView: return popularCategoryArray.count
+        case recentRecipeCollectionView: return recentRecipeArray.count
+        case popularCreatorsCollectionView: return popularCreatorsArray.count
+        default: return 0
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        switch collectionView {
+        case trendingNowCollectionView:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrendingNowCollectionViewCell.identifier, for: indexPath) as! TrendingNowCollectionViewCell
+            let correctIndexPath = trendingNow[indexPath.row]
+            cell.configureCell(with: correctIndexPath)
+            return cell
+        case popularCategoryCollectionView:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PopularCategoryCollectionViewCell.identifier, for: indexPath) as! PopularCategoryCollectionViewCell
+            let correctIndexPath = saladRecipePopularCategory[indexPath.row]
+            cell.configureCell(with: correctIndexPath)
+            return cell
+        case popularCategoryTagCollectionView:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SwitchPopularCategoryCollectionViewCell.identifier, for: indexPath) as! SwitchPopularCategoryCollectionViewCell
+            cell.delegate = self
+            let category = popularCategoryArray[indexPath.row]
+            cell.configureCell(with: category)
+            
+            if indexPath == selectedIndexPathForButtonCollectionTag {
+                cell.toggleButtonState()
+            } else {
+                cell.resetButtonState()
+            }
+            
+            return cell
+        case recentRecipeCollectionView:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecentRecipeCollectionViewCell.identifier, for: indexPath) as! RecentRecipeCollectionViewCell
+            let correctIndexPath = recentRecipeArray[indexPath.row]
+            cell.configureCell(with: correctIndexPath)
+            return cell
+        
+        case popularCreatorsCollectionView:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PopularCreatorsCollectionViewCell.identifier, for: indexPath) as! PopularCreatorsCollectionViewCell
+            let correctIndexPath = popularCreatorsArray[indexPath.row]
+            cell.configureCell(with: correctIndexPath)
+            return cell
+        default: break
+        }
+        fatalError("Unknown collection view cell")
+    }
+}
+
+
+
+
+extension HomeViewController: SwitchPopularCategoryCellDelegate {
+    func didTapButton(in cell: SwitchPopularCategoryCollectionViewCell) {
+        if let previousSelectedIndexPath = selectedIndexPathForButtonCollectionTag,
+           let previousCell = popularCategoryTagCollectionView.cellForItem(at: previousSelectedIndexPath) as? SwitchPopularCategoryCollectionViewCell {
+            previousCell.resetButtonState()
+        }
+        
+        if let currentSelectedIndexPath = popularCategoryTagCollectionView.indexPath(for: cell) {
+            selectedIndexPathForButtonCollectionTag = currentSelectedIndexPath
+            cell.toggleButtonState()
+            let request = urlGenerator.request(endpoint: "recipes/complexSearch", queryItems: [URLQueryItem(name: "type", value: popularCategoryArray[currentSelectedIndexPath.row].lowercased()), URLQueryItem(name: "addRecipeInformation", value: "true")])
+            
+            networkManager.request(generator: request) { (result: Swift.Result<PopularCategory, Error>) in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let searched):
+                        self.saladRecipePopularCategory = searched.results
+                        self.popularCategoryCollectionView.reloadData()
+                    case .failure(let failure):
+                        print(failure.localizedDescription)
+                    }
+                }
+            }
+        }
+        
+    }
 }
