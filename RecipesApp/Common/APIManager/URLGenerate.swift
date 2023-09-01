@@ -3,7 +3,7 @@ import UIKit
 
 class URLGenerate {
     private let baseURL = "https://api.spoonacular.com/"
-    private let apiKey = "e91ba07811f54c309b4938171080ad0d"
+    private let apiKey = "64e61d1edab04b5a9f4b6186ccc3aa1d"
 
     func request(endpoint: String, queryItems: [URLQueryItem] = []) -> URLRequest? {
         guard let baseURL = URL(string: baseURL) else { return nil }

@@ -1,5 +1,5 @@
 import UIKit
-
+import Kingfisher
 class HomeViewController: UIViewController {
     private let networkManager = NetworkManager()
     private let urlGenerator = URLGenerate()
@@ -285,7 +285,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             let correctIndexPath = recentRecipeArray[indexPath.row]
             cell.configureCell(with: correctIndexPath)
             return cell
-        
+            
         case popularCreatorsCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PopularCreatorsCollectionViewCell.identifier, for: indexPath) as! PopularCreatorsCollectionViewCell
             let correctIndexPath = popularCreatorsArray[indexPath.row]
@@ -300,41 +300,34 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         switch collectionView {
         case trendingNowCollectionView:
             let currentCellID = trendingNow[indexPath.row].id
-            let request = urlGenerator.request(endpoint: "recipes/" + "\(currentCellID)/analyzedInstructions", queryItems: [URLQueryItem(name: "stepBreakdown", value: "true")])
-            networkManager.request(generator: request) { (result: Swift.Result<[InformationIngradient], Error>) in
-                switch result {
-                case .success(let searched):
-                    print(searched)
-                case .failure(let failure):
-                    print(failure.localizedDescription)
-                }
-            }
+            let recipeName = trendingNow[indexPath.row].title
+            let recipeImage = trendingNow[indexPath.row].image
+            let detailRecipeModel = DetailRecipeModel(nameRecipe: recipeName, imageRecipe: recipeImage)
+            
+            
+            let vc = RecipeDetailViewController(model: detailRecipeModel, id: currentCellID)
+            self.navigationController?.pushViewController(vc, animated: true)
             
         case popularCategoryCollectionView:
             let currentCellID = popularCategoryTagArray[indexPath.row].id
-            let request = urlGenerator.request(endpoint: "recipes/" + "\(currentCellID)/analyzedInstructions", queryItems: [URLQueryItem(name: "stepBreakdown", value: "true")])
+            let recipeName = popularCategoryTagArray[indexPath.row].title
+            let recipeImage = popularCategoryTagArray[indexPath.row].image
+            let detailRecipeModel = DetailRecipeModel(nameRecipe: recipeName, imageRecipe: recipeImage)
             
-            networkManager.request(generator: request) { (result: Swift.Result<[InformationIngradient], Error>) in
-                switch result {
-                case .success(let searched):
-                    print(searched)
-                case .failure(let failure):
-                    print(failure.localizedDescription)
-                }
-            }
+            
+            let vc = RecipeDetailViewController(model: detailRecipeModel, id: currentCellID)
+            self.navigationController?.pushViewController(vc, animated: true)
+            
             
         case recentRecipeCollectionView:
             let currentCellID = recentRecipeArray[indexPath.row].id
-            let request = urlGenerator.request(endpoint: "recipes/" + "\(currentCellID)/analyzedInstructions", queryItems: [URLQueryItem(name: "stepBreakdown", value: "true")])
+            let recipeName = recentRecipeArray[indexPath.row].title
+            let recipeImage = recentRecipeArray[indexPath.row].image
+            let detailRecipeModel = DetailRecipeModel(nameRecipe: recipeName, imageRecipe: recipeImage)
             
-            networkManager.request(generator: request) { (result: Swift.Result<[InformationIngradient], Error>) in
-                switch result {
-                case .success(let searched):
-                    print(searched)
-                case .failure(let failure):
-                    print(failure.localizedDescription)
-                }
-            }
+            
+            let vc = RecipeDetailViewController(model: detailRecipeModel, id: currentCellID)
+            self.navigationController?.pushViewController(vc, animated: true)
         default: break
         }
     }
