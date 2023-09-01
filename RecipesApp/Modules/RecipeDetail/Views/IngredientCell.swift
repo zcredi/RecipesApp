@@ -1,5 +1,5 @@
 //
-//  IngredientsCell.swift
+//  IngredientCell.swift
 //  RecipesApp
 //
 //  Created by Андрей Фроленков on 30.08.23.

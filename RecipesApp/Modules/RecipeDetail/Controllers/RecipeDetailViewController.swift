@@ -3,6 +3,9 @@ import UIKit
 // MARK: - RecipeDetailViewController
 final class RecipeDetailViewController: UIViewController {
   
+  // MARK: - Model
+  var detailRecipeModel: DetailRecipeModel?
+  
   // MARK: - Private Property
   private lazy var scrollView: UIScrollView = {
     let scrollView = UIScrollView()
@@ -60,6 +63,13 @@ final class RecipeDetailViewController: UIViewController {
     setupView()
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    recipeImage.image = detailRecipeModel?.imageRecipe
+    recipeNameLabel.text = detailRecipeModel?.nameRecipe
+  }
+  
 }
 
 // MARK: - Setting Views
@@ -84,7 +94,7 @@ private extension RecipeDetailViewController {
     contentView.addSubview(recipeImage)
     contentView.addSubview(ratingStack)
     contentView.addSubview(tableView)
-
+    
   }
   
   func configureRecipeNameLabel() {
@@ -171,7 +181,7 @@ extension RecipeDetailViewController: UITableViewDelegate, UITableViewDataSource
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     switch section {
     case 0:
-      return 5
+      return detailRecipeModel?.instruction.count ?? 1
     case 1:
       return 10
     default:
@@ -213,9 +223,13 @@ extension RecipeDetailViewController: UITableViewDelegate, UITableViewDataSource
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+    guard let detailModel = detailRecipeModel else { return UITableViewCell() }
+    let step = detailModel.ingredients[indexPath.row]
     switch indexPath.section {
     case 0:
       guard let cell = tableView.dequeueReusableCell(withIdentifier: InstructionCell.identifier, for: indexPath) as? InstructionCell else { return UITableViewCell() }
+      cell.stepLabel.text = step
       return cell
     case 1:
       guard let cell = tableView.dequeueReusableCell(withIdentifier: IngredientCell.identifier, for: indexPath) as? IngredientCell else { return UITableViewCell() }
