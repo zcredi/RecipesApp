@@ -189,4 +189,26 @@ class CustomViewTableCell: UITableViewCell {
     }
 }
 
+extension CustomViewTableCell {
+    func createCell(recipeimage: UIImage, recipeTitle: String, authorImage: UIImage, labelRating: String, authorlabel: String, cookingTime: String, isFavoring: Bool)
+    {
+        recipeImage.image = recipeimage
+        recipeNameLabel.text = recipeTitle
+        self.authorImage.image = authorImage
+        ratingLabel.text = labelRating
+        authorNameLabel.text = authorlabel
+        cookingTimeLabel.text = cookingTime
+    }
+    
+    override func prepareForReuse() {
+        recipeImage.image = nil
+        recipeNameLabel.text = nil
+        self.authorImage.image = nil
+        ratingLabel.text = nil
+        authorNameLabel.text = nil
+        cookingTimeLabel.text = nil
+    }
+}
+
+
 

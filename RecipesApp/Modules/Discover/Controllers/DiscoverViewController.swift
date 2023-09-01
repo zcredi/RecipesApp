@@ -27,7 +27,17 @@ extension DiscoverViewController:  UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        return cell
+        guard let newCell = cell as? CustomViewTableCell else {
+            return cell
+        }
+        newCell.createCell(recipeimage: UIImage(systemName: "studentdesk")!,
+                           recipeTitle: String("Recipe title \(indexPath.row)"),
+                           authorImage: UIImage(systemName: "person.circle.fill")!,
+                           labelRating: String(indexPath.row),
+                           authorlabel: "Author name \(indexPath.row)",
+                           cookingTime: "10",
+                           isFavoring: true)
+        return newCell
     }
     
     func createTable() {
@@ -42,6 +52,7 @@ extension DiscoverViewController:  UITableViewDelegate, UITableViewDataSource {
         tableView.snp.makeConstraints { make in
       
             make.top.trailing.leading.bottom.equalToSuperview()
+            
         }
     }
 }
