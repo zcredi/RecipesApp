@@ -38,7 +38,7 @@ class MainTabBarController : UITabBarController {
     }
     
     func addSomeTabItems() {
-        let home = HomeViewController()
+        let home = UINavigationController(rootViewController: HomeViewController())
         let discover = DiscoverViewController()
         let notification = UIViewController()
         let profile = SeeAllViewController()
