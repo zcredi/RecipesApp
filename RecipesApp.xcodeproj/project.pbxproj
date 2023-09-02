@@ -24,6 +24,8 @@
 		522A7DDE2AA1F76700BE821F /* DetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522A7DDD2AA1F76700BE821F /* DetailModel.swift */; };
 		79BD78DE2A9F8E2B005D5900 /* PagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BD78DD2A9F8E2B005D5900 /* PagesViewController.swift */; };
 		79BD78E02AA0605A005D5900 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BD78DF2AA0605A005D5900 /* OnboardingViewController.swift */; };
+		4CE0980D2A9E7FCE000D17F6 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4CE0980C2A9E7FCE000D17F6 /* SnapKit */; };
+		4CE0980F2A9E8034000D17F6 /* CastomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE0980E2A9E8034000D17F6 /* CastomTableViewCell.swift */; };
 		863B3D402A9D1B0400187864 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 863B3D3F2A9D1B0400187864 /* Kingfisher */; };
 		864AAB992A9B45CD001955C7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864AAB982A9B45CD001955C7 /* AppDelegate.swift */; };
 		864AAB9B2A9B45CD001955C7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864AAB9A2A9B45CD001955C7 /* SceneDelegate.swift */; };
@@ -65,6 +67,7 @@
 		522A7DDD2AA1F76700BE821F /* DetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailModel.swift; sourceTree = "<group>"; };
 		79BD78DD2A9F8E2B005D5900 /* PagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagesViewController.swift; sourceTree = "<group>"; };
 		79BD78DF2AA0605A005D5900 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		4CE0980E2A9E8034000D17F6 /* CastomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastomTableViewCell.swift; sourceTree = "<group>"; };
 		864AAB952A9B45CD001955C7 /* RecipesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecipesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		864AAB982A9B45CD001955C7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		864AAB9A2A9B45CD001955C7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +98,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				863B3D402A9D1B0400187864 /* Kingfisher in Frameworks */,
+				4CE0980D2A9E7FCE000D17F6 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,6 +320,7 @@
 			isa = PBXGroup;
 			children = (
 				864AABD42A9CCCCF001955C7 /* DiscoverViewController.swift */,
+				4CE0980E2A9E8034000D17F6 /* CastomTableViewCell.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -404,6 +409,7 @@
 			name = RecipesApp;
 			packageProductDependencies = (
 				863B3D3F2A9D1B0400187864 /* Kingfisher */,
+				4CE0980C2A9E7FCE000D17F6 /* SnapKit */,
 			);
 			productName = RecipesApp;
 			productReference = 864AAB952A9B45CD001955C7 /* RecipesApp.app */;
@@ -435,6 +441,7 @@
 			mainGroup = 864AAB8C2A9B45CD001955C7;
 			packageReferences = (
 				863B3D3E2A9D1B0400187864 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				4CE0980B2A9E7FCE000D17F6 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = 864AAB962A9B45CD001955C7 /* Products */;
 			projectDirPath = "";
@@ -469,6 +476,7 @@
 				40EE67032A9E160900461299 /* NetworkService.swift in Sources */,
 				40569B422A9FEA7F00C87666 /* SwitchPopularCategoryCollectionViewCell.swift in Sources */,
 				864AABBF2A9CC2E1001955C7 /* UILabel + App.swift in Sources */,
+				4CE0980F2A9E8034000D17F6 /* CastomTableViewCell.swift in Sources */,
 				864AAB992A9B45CD001955C7 /* AppDelegate.swift in Sources */,
 				864AABB82A9B4A31001955C7 /* UIFont+App.swift in Sources */,
 				4084C2272A9D2FE900842DEF /* SearchRecipeModel.swift in Sources */,
@@ -642,7 +650,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -673,7 +681,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -714,6 +722,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		4CE0980B2A9E7FCE000D17F6 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		863B3D3E2A9D1B0400187864 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher";
@@ -725,6 +741,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		4CE0980C2A9E7FCE000D17F6 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4CE0980B2A9E7FCE000D17F6 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
 		863B3D3F2A9D1B0400187864 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 863B3D3E2A9D1B0400187864 /* XCRemoteSwiftPackageReference "Kingfisher" */;
