@@ -1,10 +1,5 @@
-//  CustomCell.swift
-//  RecipesApp
-//
-//  Created by Elshad Babaev on 30.08.2023.
-//
-
 import UIKit
+import Kingfisher
 
 class CustomCell: UITableViewCell {
     // MARK: - Visual Components
@@ -14,20 +9,16 @@ class CustomCell: UITableViewCell {
     private let ratingView: RatingView = {
         let ratingView = RatingView()
         ratingView.translatesAutoresizingMaskIntoConstraints = false
-        ratingView.layer.cornerRadius = 8
+        ratingView.layer.cornerRadius = 10
         ratingView.clipsToBounds = true
-        
         return ratingView
     }()
     
     
     private let mealNameLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .white
-        label.text = "How to make yam & vegetable sauce at home"
+        let label = UILabel(text: "How to make yam & vegetable sauce at home", font: .poppinsBold16(), textColor: .white)
         label.textAlignment = .left
-        label.numberOfLines = .zero
-        label.font = .boldSystemFont(ofSize: 22)
+        label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -45,12 +36,9 @@ class CustomCell: UITableViewCell {
     }()
     
     private let ingredientsLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .white
-        label.text = "9 Ingredients | 25 min"
+        let label = UILabel(text: "9 Ingredients | 25 min", font: .poppinsRegular14(), textColor: .white)
         label.textAlignment = .left
-        label.numberOfLines = .zero
-        label.font = .systemFont(ofSize: 16)
+        label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -88,29 +76,33 @@ class CustomCell: UITableViewCell {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            mealImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 25),
-            mealImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -25),
-            mealImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            mealImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            mealImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
+            mealImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
+            mealImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            mealImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
             
-            ratingView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 35),
-            ratingView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            ratingView.leadingAnchor.constraint(equalTo: mealImageView.leadingAnchor, constant: 10),
+            ratingView.topAnchor.constraint(equalTo: mealImageView.topAnchor, constant: 10),
             ratingView.heightAnchor.constraint(equalToConstant: 28),
             ratingView.widthAnchor.constraint(equalToConstant: 55),
             
-            mealNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 110),
-            mealNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 35),
-            mealNameLabel.heightAnchor.constraint(equalToConstant: 55),
-            mealNameLabel.widthAnchor.constraint(equalToConstant: 300),
+            mealNameLabel.bottomAnchor.constraint(equalTo: ingredientsLabel.topAnchor, constant: -10),
+            mealNameLabel.leadingAnchor.constraint(equalTo: mealImageView.leadingAnchor,constant: 10),
+            mealNameLabel.trailingAnchor.constraint(equalTo: mealImageView.trailingAnchor, constant: -10),
+
             
-            ingredientsLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 35),
-            ingredientsLabel.topAnchor.constraint(equalTo: topAnchor, constant: 170)
-            
-            
-            
-            
+            ingredientsLabel.leadingAnchor.constraint(equalTo: mealImageView.leadingAnchor, constant: 10),
+            ingredientsLabel.bottomAnchor.constraint(equalTo: mealImageView.bottomAnchor, constant: -20)
         ])
     }
+    public func configure(withModelRecipe model: Recipe) {
+        guard let url = URL(string: model.image) else { return }
+        mealImageView.kf.setImage(with: url)
+        mealNameLabel.text = model.name
+        
+        
+    }
+    
 }
 
 // MARK: - Public Methods

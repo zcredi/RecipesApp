@@ -3,10 +3,10 @@ import Kingfisher
 class HomeViewController: UIViewController {
     private let networkManager = NetworkManager()
     private let urlGenerator = URLGenerate()
-    private var trendingNow: [InformationSearchRecipe] = []
+    private var trendingNow: [Recipe] = []
     private var popularCategoryTagArray: [PopularCategoryInfo] = []
     private var recentRecipeArray: [PopularCategoryInfo] = []
-    private let popularCategoryArray = ["Breakfast", "Dessert", "Appetizer", "Salad", "Appetizer", "Soup", "Drink", "Beverage", "Sauce", "Fingerfood", "Snack"]
+    private let popularCategoryArray = ["Breakfast", "Dessert", "Salad", "Appetizer", "Soup", "Drink", "Beverage", "Sauce", "Fingerfood", "Snack"]
     private var selectedIndexPathForButtonCollectionTag: IndexPath?
     private var popularCreatorsArray = [
         "Jamie Oliver",
@@ -134,20 +134,22 @@ class HomeViewController: UIViewController {
     
     @IBAction func trendingNowSeeAllButtonPressed(_ sender: UIButton) {
         print("Button pressed!!!")
+        let seeAllViewController = SeeAllViewController()
+        navigationController?.pushViewController(seeAllViewController, animated: true)
     }
     
     // MARK: - CallNetworking Method
 
     private func callNetworking() {
-        let trendingNowRequest = urlGenerator.request(endpoint: "recipes/complexSearch", queryItems: [URLQueryItem(name: "sort", value: "rating"), URLQueryItem(name: "sortDirection", value: "desc"), URLQueryItem(name: "number", value: "10")])
+        let trendingNowRequest = urlGenerator.request(endpoint: "food/search", queryItems: [URLQueryItem(name: "limitLicense", value: "true"), URLQueryItem(name: "limit", value: "10")])
         let popularCategoryRequest = urlGenerator.request(endpoint: "recipes/complexSearch", queryItems: [URLQueryItem(name: "type", value: "breakfast"), URLQueryItem(name: "addRecipeInformation", value: "true")])
         let recentRecipeRequest = urlGenerator.request(endpoint: "recipes/complexSearch", queryItems: [URLQueryItem(name: "type", value: "dessert"), URLQueryItem(name: "addRecipeInformation", value: "true")])
         
-        networkManager.request(generator: trendingNowRequest) { (result: Swift.Result<SearchRecipe, Error>) in
+        networkManager.request(generator: trendingNowRequest) { (result: Swift.Result<SearchResponse, Error>) in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let searched):
-                    self.trendingNow = searched.results
+                    self.trendingNow = searched.searchResults[0].results
                     self.trendingNowCollectionView.reloadData()
                 case .failure(let failure):
                     print(failure.localizedDescription)
@@ -300,7 +302,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         switch collectionView {
         case trendingNowCollectionView:
             let currentCellID = trendingNow[indexPath.row].id
-            let recipeName = trendingNow[indexPath.row].title
+            let recipeName = trendingNow[indexPath.row].name
             let recipeImage = trendingNow[indexPath.row].image
             let detailRecipeModel = DetailRecipeModel(nameRecipe: recipeName, imageRecipe: recipeImage)
             

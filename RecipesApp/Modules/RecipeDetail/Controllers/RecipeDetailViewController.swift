@@ -4,8 +4,6 @@ import UIKit
 // MARK: - RecipeDetailViewController
 
 final class RecipeDetailViewController: UIViewController {
-    // MARK: - Model
-
     public var id: Int
     private let networkManager = NetworkManager()
     private let urlGenerator = URLGenerate()
@@ -43,6 +41,7 @@ final class RecipeDetailViewController: UIViewController {
   
     private lazy var ratingImage: UIImageView = {
         let ratingImage = UIImageView()
+        ratingImage.contentMode = .scaleAspectFill
         ratingImage.image = UIImage(systemName: "star.fill")
         ratingImage.tintColor = .black
         return ratingImage
@@ -64,9 +63,11 @@ final class RecipeDetailViewController: UIViewController {
         tableView.estimatedRowHeight = UITableView.automaticDimension
         tableView.separatorStyle = .none
         tableView.backgroundColor = .white
+        tableView.isScrollEnabled = false
+        tableView.showsVerticalScrollIndicator = false
         return tableView
     }()
-  
+    
     private var ingredientCount = 0
   
     init(model: DetailRecipeModel, id: Int) {
@@ -96,42 +97,72 @@ final class RecipeDetailViewController: UIViewController {
         self.recipeImage.kf.setImage(with: url)
         self.recipeNameLabel.text = self.detailRecipeModel.nameRecipe
         
-        
         let instructionRequest = urlGenerator.request(endpoint: "recipes/" + "\(id)/analyzedInstructions", queryItems: [URLQueryItem(name: "stepBreakdown", value: "true")])
-        
+        print(instructionRequest)
         networkManager.request(generator: instructionRequest) { (result: Swift.Result<[InformationIngradient], Error>) in
             switch result {
             case .success(let searched):
+                guard !searched.isEmpty else {
+                    let alert = UIAlertController(title: "Internet data did not arrive", message: "The API creators didn't take care of all the requests ", preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "ОК", style: .default)
+                    
+                    alert.addAction(okAction)
+                    self.present(alert, animated: true)
+                    return
+                }
+                
                 let instruction = searched[0].steps
                 let ingredients = instruction[0].ingredients
                 self.instruction = instruction
                 self.ingredients = ingredients
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
+                    self.updateTableViewHeight()
                 }
                 
-                for info in searched { // предполагая, что ваш JSON был десериализован в переменную `yourJSONModel`
+                for info in searched {
                     for step in info.steps {
                         self.allIngredients.append(contentsOf: step.ingredients)
                     }
                 }
 
-                self.allIngredients = self.allIngredients.reduce([]) { (acc, ingredient) -> [Ingredient] in
+                self.allIngredients = self.allIngredients.reduce([]) { acc, ingredient -> [Ingredient] in
                     if acc.contains(where: { $0.id == ingredient.id }) {
                         return acc
                     } else {
                         return acc + [ingredient]
                     }
                 }
-
-                
-                print(searched)
             case .failure(let failure):
                 print(failure.localizedDescription)
             }
         }
-        
-        
+
+    }
+
+    private func updateTableViewHeight() {
+        // Вычислите общую высоту таблицы
+        var totalHeight: CGFloat = 0.0
+        for section in 0..<tableView.numberOfSections {
+            totalHeight += tableView.rectForHeader(inSection: section).height
+            totalHeight += tableView.rectForFooter(inSection: section).height
+            for row in 0..<tableView.numberOfRows(inSection: section) {
+                totalHeight += tableView.rectForRow(at: IndexPath(row: row, section: section)).height
+            }
+        }
+
+        // Установите эту высоту для tableView
+        for constraint in tableView.constraints where constraint.firstAttribute == .height {
+            constraint.isActive = false
+        }
+        tableView.heightAnchor.constraint(equalToConstant: totalHeight).isActive = true
+
+        // Обновите высоту contentView
+        let totalContentHeight = totalHeight + recipeImage.frame.height + ratingStack.frame.height + recipeNameLabel.frame.height + 50
+        for constraint in contentView.constraints where constraint.firstAttribute == .height {
+            constraint.isActive = false
+        }
+        contentView.heightAnchor.constraint(equalToConstant: totalContentHeight).isActive = true
     }
 }
 
@@ -189,49 +220,46 @@ private extension RecipeDetailViewController {
 // MARK: - Layuot
 
 private extension RecipeDetailViewController {
-    func setupLayout() {
+    private func setupLayout() {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
         recipeNameLabel.translatesAutoresizingMaskIntoConstraints = false
         recipeImage.translatesAutoresizingMaskIntoConstraints = false
         ratingStack.translatesAutoresizingMaskIntoConstraints = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
-    
+        
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-      
+          
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
-      
+          
             recipeNameLabel.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 16),
             recipeNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 19),
             recipeNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -19),
-      
+          
             recipeImage.topAnchor.constraint(equalTo: recipeNameLabel.bottomAnchor, constant: 12),
             recipeImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             recipeImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             recipeImage.heightAnchor.constraint(equalTo: recipeImage.widthAnchor, multiplier: 0.6),
-      
+          
             ratingStack.topAnchor.constraint(equalTo: recipeImage.bottomAnchor, constant: 12),
             ratingStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             ratingStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-      
-            ratingImage.heightAnchor.constraint(equalToConstant: 12),
-            ratingImage.widthAnchor.constraint(equalToConstant: 12),
-            ratingLabel.widthAnchor.constraint(equalToConstant: 25),
-      
-            tableView.topAnchor.constraint(equalTo: ratingLabel.bottomAnchor, constant: 5),
+            
+            ratingImage.heightAnchor.constraint(equalToConstant: 15),
+            ratingImage.widthAnchor.constraint(equalToConstant: 15),
+          
+            tableView.topAnchor.constraint(equalTo: ratingStack.bottomAnchor, constant: 5),
             tableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-      
+            tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
 }
@@ -278,11 +306,16 @@ extension RecipeDetailViewController: UITableViewDelegate, UITableViewDataSource
             let ingredientLabel = UILabel(text: "\(allIngredients.count) items", font: UIFont.poppinsRegular14(), textColor: UIColor.neutral50)
             ingredientLabel.textAlignment = .right
             let stackView = UIStackView(arrangedSubviews: [label, ingredientLabel])
-            stackView.distribution = .fillEqually
+            stackView.spacing = 2
+            stackView.distribution = .equalSpacing
             return stackView
         default:
             return label
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.01
     }
   
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -294,7 +327,6 @@ extension RecipeDetailViewController: UITableViewDelegate, UITableViewDataSource
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: IngredientCell.identifier, for: indexPath) as! IngredientCell
-            cell.delegate = self
             let ingredient = allIngredients[indexPath.row]
             let isSelected = selectedIngredients.contains(ingredient.id)
             cell.checkmark(isSelected: isSelected)
@@ -306,18 +338,16 @@ extension RecipeDetailViewController: UITableViewDelegate, UITableViewDataSource
         }
     }
 
-
-}
-
-extension RecipeDetailViewController: IngredientCellDelegate {
-    func didTapIngredientCell(_ cell: IngredientCell) {
-        guard let indexPath = tableView.indexPath(for: cell) else { return }
-        let ingredient = allIngredients[indexPath.row]
-        if selectedIngredients.contains(ingredient.id) {
-            selectedIngredients.remove(ingredient.id)
-        } else {
-            selectedIngredients.insert(ingredient.id)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 1 { // Убедитесь, что это раздел с ингредиентами
+            let ingredient = allIngredients[indexPath.row]
+            if selectedIngredients.contains(ingredient.id) {
+                selectedIngredients.remove(ingredient.id)
+            } else {
+                selectedIngredients.insert(ingredient.id)
+            }
+            tableView.reloadRows(at: [indexPath], with: .automatic)
         }
-        tableView.reloadRows(at: [indexPath], with: .automatic)
     }
 }
+

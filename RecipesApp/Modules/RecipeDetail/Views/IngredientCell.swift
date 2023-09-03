@@ -2,16 +2,13 @@ import Foundation
 import UIKit
 import Kingfisher
 
-protocol IngredientCellDelegate: AnyObject {
-    func didTapIngredientCell(_ cell: IngredientCell)
-}
+
 
 // MARK: - IngredientCell
 
 final class IngredientCell: UITableViewCell {
     static let identifier = "IngredientCell"
     
-    weak var delegate: IngredientCellDelegate?
     var choiceIngredientImage = false
   
     lazy var ingredientImage: UIImageView = {
@@ -23,7 +20,12 @@ final class IngredientCell: UITableViewCell {
         return ingredientImage
     }()
   
-    lazy var ingredientName = UILabel(text: "Fish", font: UIFont.poppinsBold16(), textColor: UIColor.neutral100)
+    private lazy var ingredientName: UILabel = {
+        let label = UILabel(text: "Fish", font: UIFont.poppinsBold12(), textColor: UIColor.neutral100)
+        label.numberOfLines = 0
+        return label
+    }()
+
     lazy var ingredientWeight = UILabel(text: "250g", font: UIFont.poppinsRegular14(), textColor: UIColor.neutral50)
   
     lazy var ingredientSelectButton: UIButton = {
@@ -53,12 +55,7 @@ final class IngredientCell: UITableViewCell {
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
     }
   
-    // MARK: - Actions
-
-    @objc
-    private func choiceIngredientTap(_ sender: UIButton) {
-        delegate?.didTapIngredientCell(self)
-    }
+    
   
     // MARK: - Private Methods
 
@@ -69,8 +66,6 @@ final class IngredientCell: UITableViewCell {
         contentView.addSubview(ingredientName)
         contentView.addSubview(ingredientWeight)
         contentView.addSubview(ingredientSelectButton)
-    
-        ingredientSelectButton.addTarget(self, action: #selector(choiceIngredientTap), for: .touchUpInside)
     }
   
     func checkmark(isSelected: Bool) {
@@ -96,6 +91,8 @@ final class IngredientCell: UITableViewCell {
             ingredientImage.widthAnchor.constraint(equalToConstant: 40),
       
             ingredientName.leadingAnchor.constraint(equalTo: ingredientImage.trailingAnchor, constant: 20),
+            ingredientName.trailingAnchor.constraint(equalTo: ingredientWeight.leadingAnchor, constant: -20),
+            
             ingredientName.centerYAnchor.constraint(equalTo: ingredientImage.centerYAnchor),
       
             ingredientWeight.leadingAnchor.constraint(equalTo: ingredientName.trailingAnchor, constant: 20),
