@@ -1,10 +1,3 @@
-//
-//  InstructionCell.swift
-//  RecipesApp
-//
-//  Created by Андрей Фроленков on 30.08.23.
-//
-
 import Foundation
 import UIKit
 

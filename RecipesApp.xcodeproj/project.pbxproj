@@ -15,8 +15,9 @@
 		40569B442A9FF3F700C87666 /* UICollectionView + App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40569B432A9FF3F700C87666 /* UICollectionView + App.swift */; };
 		40569B462A9FFB5800C87666 /* UIButton + App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40569B452A9FFB5800C87666 /* UIButton + App.swift */; };
 		40569B482AA0B3F500C87666 /* UIView + App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40569B472AA0B3F500C87666 /* UIView + App.swift */; };
+		40569B4C2AA3547F00C87666 /* PopularCategoryModel2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40569B4B2AA3547F00C87666 /* PopularCategoryModel2.swift */; };
+		40569B4E2AA3905500C87666 /* ReadyInMinutesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40569B4D2AA3905500C87666 /* ReadyInMinutesModel.swift */; };
 		4084C2272A9D2FE900842DEF /* SearchRecipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4084C2262A9D2FE900842DEF /* SearchRecipeModel.swift */; };
-		4084C2292A9D2FFA00842DEF /* TrendingNowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4084C2282A9D2FFA00842DEF /* TrendingNowModel.swift */; };
 		4084C22D2A9D367100842DEF /* InformationAboutIngradientModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4084C22C2A9D367100842DEF /* InformationAboutIngradientModel.swift */; };
 		40EE66FF2A9DED9B00461299 /* PopularCategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EE66FE2A9DED9B00461299 /* PopularCategoryModel.swift */; };
 		40EE67032A9E160900461299 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EE67022A9E160900461299 /* NetworkService.swift */; };
@@ -58,8 +59,9 @@
 		40569B432A9FF3F700C87666 /* UICollectionView + App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView + App.swift"; sourceTree = "<group>"; };
 		40569B452A9FFB5800C87666 /* UIButton + App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton + App.swift"; sourceTree = "<group>"; };
 		40569B472AA0B3F500C87666 /* UIView + App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + App.swift"; sourceTree = "<group>"; };
+		40569B4B2AA3547F00C87666 /* PopularCategoryModel2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularCategoryModel2.swift; sourceTree = "<group>"; };
+		40569B4D2AA3905500C87666 /* ReadyInMinutesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadyInMinutesModel.swift; sourceTree = "<group>"; };
 		4084C2262A9D2FE900842DEF /* SearchRecipeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecipeModel.swift; sourceTree = "<group>"; };
-		4084C2282A9D2FFA00842DEF /* TrendingNowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingNowModel.swift; sourceTree = "<group>"; };
 		4084C22C2A9D367100842DEF /* InformationAboutIngradientModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationAboutIngradientModel.swift; sourceTree = "<group>"; };
 		40EE66FE2A9DED9B00461299 /* PopularCategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularCategoryModel.swift; sourceTree = "<group>"; };
 		40EE67022A9E160900461299 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -130,9 +132,10 @@
 			isa = PBXGroup;
 			children = (
 				4084C2262A9D2FE900842DEF /* SearchRecipeModel.swift */,
-				4084C2282A9D2FFA00842DEF /* TrendingNowModel.swift */,
 				40EE66FE2A9DED9B00461299 /* PopularCategoryModel.swift */,
 				4084C22C2A9D367100842DEF /* InformationAboutIngradientModel.swift */,
+				40569B4B2AA3547F00C87666 /* PopularCategoryModel2.swift */,
+				40569B4D2AA3905500C87666 /* ReadyInMinutesModel.swift */,
 			);
 			path = APIModels;
 			sourceTree = "<group>";
@@ -475,6 +478,7 @@
 				40506C022A9E64030058332A /* TrendingNowCollectionViewCell.swift in Sources */,
 				40EE67032A9E160900461299 /* NetworkService.swift in Sources */,
 				40569B422A9FEA7F00C87666 /* SwitchPopularCategoryCollectionViewCell.swift in Sources */,
+				40569B4E2AA3905500C87666 /* ReadyInMinutesModel.swift in Sources */,
 				864AABBF2A9CC2E1001955C7 /* UILabel + App.swift in Sources */,
 				4CE0980F2A9E8034000D17F6 /* CastomTableViewCell.swift in Sources */,
 				864AAB992A9B45CD001955C7 /* AppDelegate.swift in Sources */,
@@ -482,8 +486,8 @@
 				4084C2272A9D2FE900842DEF /* SearchRecipeModel.swift in Sources */,
 				40EE67052A9E1CD500461299 /* URLGenerate.swift in Sources */,
 				522A7DDE2AA1F76700BE821F /* DetailModel.swift in Sources */,
-				4084C2292A9D2FFA00842DEF /* TrendingNowModel.swift in Sources */,
 				864AABD32A9CCCC5001955C7 /* HomeViewController.swift in Sources */,
+				40569B4C2AA3547F00C87666 /* PopularCategoryModel2.swift in Sources */,
 				40569B462A9FFB5800C87666 /* UIButton + App.swift in Sources */,
 				864AABB62A9B4A1D001955C7 /* UIColor+App.swift in Sources */,
 				40506C062A9E77160058332A /* RecentRecipeCollectionViewCell.swift in Sources */,

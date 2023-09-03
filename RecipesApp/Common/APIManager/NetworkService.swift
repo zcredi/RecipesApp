@@ -18,7 +18,9 @@ class NetworkManager {
             
             do {
                 let decodedObject = try JSONDecoder().decode(T.self, from: data)
-                completionHandler(.success(decodedObject))
+                DispatchQueue.main.async {
+                    completionHandler(.success(decodedObject))
+                }
             } catch let decodingError as DecodingError {
                 switch decodingError {
                 case .typeMismatch(let type, let context):
@@ -35,6 +37,7 @@ class NetworkManager {
                 completionHandler(.failure(decodingError))
             } catch {
                 print(error.localizedDescription)
+
                 completionHandler(.failure(error))
             }
 

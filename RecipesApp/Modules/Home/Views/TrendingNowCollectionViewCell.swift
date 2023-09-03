@@ -145,10 +145,10 @@ class TrendingNowCollectionViewCell: UICollectionViewCell {
         ])
     }
     
-    func configureCell(with recipe: InformationSearchRecipe) {
+    func configureCell(with recipe: Recipe) {
         guard let recipeImageUrl = URL(string: recipe.image) else { return }
         photoDish.kf.setImage(with: recipeImageUrl)
-        titleDishLabel.text = recipe.title
+        titleDishLabel.text = recipe.name
         
     }
 }

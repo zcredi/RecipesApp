@@ -15,7 +15,7 @@ struct Step: Codable {
 }
 
 // MARK: - Ingredient
-struct Ingredient: Codable {
+struct Ingredient: Codable, Hashable {
     var id: Int
     var name: String
     var localizedName: String

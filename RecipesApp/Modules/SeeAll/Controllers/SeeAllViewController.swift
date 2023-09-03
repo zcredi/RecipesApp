@@ -10,13 +10,13 @@ import UIKit
 class SeeAllViewController: UIViewController {
     
     
-    private let seeAllTableView = SeeAllTableView()
+    private lazy var seeAllTableView = SeeAllTableView()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        seeAllTableView.recipeSelectionDelegate = self
         setupUI()
-        setup()
         setupConstraints()
         
     }
@@ -26,18 +26,11 @@ class SeeAllViewController: UIViewController {
         seeAllTableView.layer.cornerRadius = 30
     }
 
-    
-
-
     private func setupUI() {
-        view.backgroundColor = .white
+        title = "Trending now"
+        view.backgroundColor = .systemBackground
         view.addSubview(seeAllTableView)
 
-    }
-    
-    private func setup() {
-        
-        
     }
     
     private func setupConstraints() {
@@ -56,3 +49,13 @@ class SeeAllViewController: UIViewController {
 }
 
 
+extension SeeAllViewController: SeeAllTableViewDelegate{
+    func didSelectRecipe(recipe: Recipe) {
+        let detailModel = DetailRecipeModel(nameRecipe: recipe.name, imageRecipe: recipe.image)
+        let vc = RecipeDetailViewController(model: detailModel, id: recipe.id)
+        navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
+    
+}
