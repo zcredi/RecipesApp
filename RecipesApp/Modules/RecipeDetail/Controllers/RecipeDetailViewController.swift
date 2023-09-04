@@ -1,9 +1,12 @@
+import AlertKit
 import Kingfisher
+import RealmSwift
 import UIKit
 
 // MARK: - RecipeDetailViewController
 
 final class RecipeDetailViewController: UIViewController {
+    private let realm = try! Realm()
     public var id: Int
     private let networkManager = NetworkManager()
     private let urlGenerator = URLGenerate()
@@ -84,13 +87,60 @@ final class RecipeDetailViewController: UIViewController {
     }
 
     // MARK: - Override Methods
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        setupNavigationBarWithBackButton()
+        createSaveRecipeBarButton()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         setupRecipeUI()
+        checkObjectInRealm(id: id)
+        navigationItem.title = "Preparation"
+    }
+    
+    private func createSaveRecipeBarButton() {
+        let saveRecipeButton = UIBarButtonItem(image: UIImage(systemName: "bookmark"), style: .plain, target: self, action: #selector(saveRecipeButtonTapped(_:)))
+        navigationItem.rightBarButtonItem = saveRecipeButton
+    }
+    
+    @IBAction func saveRecipeButtonTapped(_ sender: UIBarButtonItem) {
+        let savedRecipe = SavedRecipeModel()
+        
+        switch sender.image {
+        case UIImage(systemName: "bookmark"):
+            sender.image = UIImage(systemName: "bookmark.fill")
+            AlertKitAPI.present(title: "Saved to favorites", subtitle: nil, icon: .done, style: .iOS16AppleMusic, haptic: .success)
+            
+            savedRecipe.saveToRealm(id: id, image: detailRecipeModel.imageRecipe, title: detailRecipeModel.nameRecipe)
+            
+        case UIImage(systemName: "bookmark.fill"):
+            sender.image = UIImage(systemName: "bookmark")
+            AlertKitAPI.present(title: "Deleted from saved", subtitle: nil, icon: .error, style: .iOS16AppleMusic, haptic: .success)
+            
+            savedRecipe.deleteObjectFromRealm(id: id)
+        default: break
+        }
     }
   
+    private func checkObjectInRealm(id: Int) {
+        do {
+            let objects = realm.objects(SavedRecipeModel.self).filter("id == \(id)")
+            if !objects.isEmpty {
+                navigationItem.rightBarButtonItem!.image = UIImage(systemName: "bookmark.fill")
+            } else {
+                navigationItem.rightBarButtonItem!.image = UIImage(systemName: "bookmark")
+            }
+        } catch {
+            navigationItem.rightBarButtonItem!.image = UIImage(systemName: "bookmark")
+            print("Error checking object in Realm: \(error)")
+        }
+    }
+
+    
     private func setupRecipeUI() {
         guard let url = URL(string: detailRecipeModel.imageRecipe) else { return }
         
@@ -98,7 +148,6 @@ final class RecipeDetailViewController: UIViewController {
         self.recipeNameLabel.text = self.detailRecipeModel.nameRecipe
         
         let instructionRequest = urlGenerator.request(endpoint: "recipes/" + "\(id)/analyzedInstructions", queryItems: [URLQueryItem(name: "stepBreakdown", value: "true")])
-        print(instructionRequest)
         networkManager.request(generator: instructionRequest) { (result: Swift.Result<[InformationIngradient], Error>) in
             switch result {
             case .success(let searched):
@@ -137,11 +186,9 @@ final class RecipeDetailViewController: UIViewController {
                 print(failure.localizedDescription)
             }
         }
-
     }
 
     private func updateTableViewHeight() {
-        // Вычислите общую высоту таблицы
         var totalHeight: CGFloat = 0.0
         for section in 0..<tableView.numberOfSections {
             totalHeight += tableView.rectForHeader(inSection: section).height
@@ -151,13 +198,11 @@ final class RecipeDetailViewController: UIViewController {
             }
         }
 
-        // Установите эту высоту для tableView
         for constraint in tableView.constraints where constraint.firstAttribute == .height {
             constraint.isActive = false
         }
         tableView.heightAnchor.constraint(equalToConstant: totalHeight).isActive = true
 
-        // Обновите высоту contentView
         let totalContentHeight = totalHeight + recipeImage.frame.height + ratingStack.frame.height + recipeNameLabel.frame.height + 50
         for constraint in contentView.constraints where constraint.firstAttribute == .height {
             constraint.isActive = false
@@ -339,7 +384,7 @@ extension RecipeDetailViewController: UITableViewDelegate, UITableViewDataSource
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 1 { // Убедитесь, что это раздел с ингредиентами
+        if indexPath.section == 1 {
             let ingredient = allIngredients[indexPath.row]
             if selectedIngredients.contains(ingredient.id) {
                 selectedIngredients.remove(ingredient.id)
@@ -350,4 +395,3 @@ extension RecipeDetailViewController: UITableViewDelegate, UITableViewDataSource
         }
     }
 }
-

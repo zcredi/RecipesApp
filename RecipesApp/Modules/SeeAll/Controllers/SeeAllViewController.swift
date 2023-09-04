@@ -1,20 +1,14 @@
-//
-//  WelcomeViewController.swift
-//  RecipesApp
-//
-//  Created by Владислав on 28.08.2023.
-//
-
 import UIKit
-
+import RealmSwift
 class SeeAllViewController: UIViewController {
     
     
     private lazy var seeAllTableView = SeeAllTableView()
-    
+    private let realm = try! Realm()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigationBarWithBackButton()
         seeAllTableView.recipeSelectionDelegate = self
         setupUI()
         setupConstraints()
@@ -48,9 +42,16 @@ class SeeAllViewController: UIViewController {
     }
 }
 
+// I moved the logic here because we can't in the didSelectImem method in the view go to the next controller
+// by: @fullzoom
+
 
 extension SeeAllViewController: SeeAllTableViewDelegate{
     func didSelectRecipe(recipe: Recipe) {
+        
+        let recentRecipeModel = RecentRecipeModel()
+        recentRecipeModel.saveToRealm(id: recipe.id, imageURL: recipe.image, title: recipe.name)
+        
         let detailModel = DetailRecipeModel(nameRecipe: recipe.name, imageRecipe: recipe.image)
         let vc = RecipeDetailViewController(model: detailModel, id: recipe.id)
         navigationController?.pushViewController(vc, animated: true)
