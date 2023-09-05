@@ -54,4 +54,8 @@ final class MyProfileCell: UITableViewCell {
       photoImageView.widthAnchor.constraint(equalToConstant: 100),
     ])
   }
+    
+    public func updatePicture(picture: UIImage?) {
+        self.photoImageView.image = picture
+    }
 }
