@@ -39,16 +39,16 @@ class MainTabBarController : UITabBarController {
     
     func addSomeTabItems() {
         let home = UINavigationController(rootViewController: HomeViewController())
-        let discover = UINavigationController(rootViewController: DiscoverViewController()) 
-        let notification = UINavigationController(rootViewController: SearchRecipeViewController())
-        let profile = ProfileViewController()
+        let search = UINavigationController(rootViewController: SearchRecipeViewController())
+        let discover = UINavigationController(rootViewController: DiscoverViewController())
+        let profile = UINavigationController(rootViewController: ProfileViewController())
         
-        setViewControllers([home, notification, discover, profile], animated: true)
+        setViewControllers([home, search, discover, profile], animated: true)
         
         guard let items = tabBar.items else { return }
         
         items[0].image = UIImage(named: "home")
-        items[1].image = UIImage(named: "inactive")
+        items[1].image = UIImage(named: "magnifyingglass1")
         items[2].image = UIImage(named: "inactive")
         items[3].image = UIImage(named: "profile")
         items[0].imageInsets = UIEdgeInsets(top: 15, left: -5, bottom: -15, right: 0)
