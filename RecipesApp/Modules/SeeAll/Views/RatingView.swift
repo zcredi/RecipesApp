@@ -38,7 +38,6 @@ class RatingView: UIView {
         imageView.tintColor = .black
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        
         return imageView
     }()
     

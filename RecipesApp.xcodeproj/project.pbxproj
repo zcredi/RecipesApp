@@ -17,6 +17,14 @@
 		40569B482AA0B3F500C87666 /* UIView + App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40569B472AA0B3F500C87666 /* UIView + App.swift */; };
 		40569B4C2AA3547F00C87666 /* PopularCategoryModel2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40569B4B2AA3547F00C87666 /* PopularCategoryModel2.swift */; };
 		40569B4E2AA3905500C87666 /* ReadyInMinutesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40569B4D2AA3905500C87666 /* ReadyInMinutesModel.swift */; };
+		40569B512AA4970B00C87666 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 40569B502AA4970B00C87666 /* RealmSwift */; };
+		40569B542AA49F2600C87666 /* AlertKit in Frameworks */ = {isa = PBXBuildFile; productRef = 40569B532AA49F2600C87666 /* AlertKit */; };
+		40569B562AA4AD1800C87666 /* RecentRecipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40569B552AA4AD1800C87666 /* RecentRecipeModel.swift */; };
+		40569B592AA4F35200C87666 /* Extension HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40569B582AA4F35200C87666 /* Extension HomeViewController.swift */; };
+		40569B5B2AA5B8AB00C87666 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40569B5A2AA5B8AB00C87666 /* NavigationBar.swift */; };
+		40569B5E2AA5C24700C87666 /* SavedRecipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40569B5D2AA5C24700C87666 /* SavedRecipeModel.swift */; };
+		40569B612AA62F4000C87666 /* SearchRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40569B602AA62F4000C87666 /* SearchRecipeViewController.swift */; };
+		40569B632AA62FFF00C87666 /* SearchRecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40569B622AA62FFF00C87666 /* SearchRecipeTableViewCell.swift */; };
 		4084C2272A9D2FE900842DEF /* SearchRecipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4084C2262A9D2FE900842DEF /* SearchRecipeModel.swift */; };
 		4084C22D2A9D367100842DEF /* InformationAboutIngradientModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4084C22C2A9D367100842DEF /* InformationAboutIngradientModel.swift */; };
 		40EE66FF2A9DED9B00461299 /* PopularCategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EE66FE2A9DED9B00461299 /* PopularCategoryModel.swift */; };
@@ -65,6 +73,12 @@
 		40569B472AA0B3F500C87666 /* UIView + App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + App.swift"; sourceTree = "<group>"; };
 		40569B4B2AA3547F00C87666 /* PopularCategoryModel2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularCategoryModel2.swift; sourceTree = "<group>"; };
 		40569B4D2AA3905500C87666 /* ReadyInMinutesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadyInMinutesModel.swift; sourceTree = "<group>"; };
+		40569B552AA4AD1800C87666 /* RecentRecipeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentRecipeModel.swift; sourceTree = "<group>"; };
+		40569B582AA4F35200C87666 /* Extension HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension HomeViewController.swift"; sourceTree = "<group>"; };
+		40569B5A2AA5B8AB00C87666 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
+		40569B5D2AA5C24700C87666 /* SavedRecipeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRecipeModel.swift; sourceTree = "<group>"; };
+		40569B602AA62F4000C87666 /* SearchRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecipeViewController.swift; sourceTree = "<group>"; };
+		40569B622AA62FFF00C87666 /* SearchRecipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecipeTableViewCell.swift; sourceTree = "<group>"; };
 		4084C2262A9D2FE900842DEF /* SearchRecipeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecipeModel.swift; sourceTree = "<group>"; };
 		4084C22C2A9D367100842DEF /* InformationAboutIngradientModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationAboutIngradientModel.swift; sourceTree = "<group>"; };
 		40EE66FE2A9DED9B00461299 /* PopularCategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularCategoryModel.swift; sourceTree = "<group>"; };
@@ -107,6 +121,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40569B542AA49F2600C87666 /* AlertKit in Frameworks */,
+				40569B512AA4970B00C87666 /* RealmSwift in Frameworks */,
 				863B3D402A9D1B0400187864 /* Kingfisher in Frameworks */,
 				4CE0980D2A9E7FCE000D17F6 /* SnapKit in Frameworks */,
 			);
@@ -125,6 +141,31 @@
 				40569B412A9FEA7F00C87666 /* SwitchPopularCategoryCollectionViewCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		40569B572AA4AD2300C87666 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				40569B552AA4AD1800C87666 /* RecentRecipeModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		40569B5C2AA5C23800C87666 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				40569B5D2AA5C24700C87666 /* SavedRecipeModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		40569B5F2AA62ED500C87666 /* SearchRecipe */ = {
+			isa = PBXGroup;
+			children = (
+				40569B602AA62F4000C87666 /* SearchRecipeViewController.swift */,
+				40569B622AA62FFF00C87666 /* SearchRecipeTableViewCell.swift */,
+			);
+			path = SearchRecipe;
 			sourceTree = "<group>";
 		};
 		4084C21B2A9D2CDF00842DEF /* APIManager */ = {
@@ -223,6 +264,7 @@
 		864AABAD2A9B4808001955C7 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				40569B5F2AA62ED500C87666 /* SearchRecipe */,
 				C34A5FB62A9DE9BD00EBC15E /* SeeAll */,
 				864AABC12A9CC468001955C7 /* Welcome */,
 				864AABC02A9CC448001955C7 /* Home */,
@@ -239,6 +281,7 @@
 				864AABAF2A9B4828001955C7 /* UIKit */,
 				864AABB52A9B4A1D001955C7 /* UIColor+App.swift */,
 				864AABB72A9B4A31001955C7 /* UIFont+App.swift */,
+				40569B5A2AA5B8AB00C87666 /* NavigationBar.swift */,
 			);
 			path = UIConstants;
 			sourceTree = "<group>";
@@ -287,6 +330,7 @@
 		864AABC02A9CC448001955C7 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				40569B572AA4AD2300C87666 /* Model */,
 				40506C002A9E63CE0058332A /* Views */,
 				864AABC72A9CCC5F001955C7 /* Controllers */,
 			);
@@ -306,8 +350,7 @@
 		864AABC22A9CC59A001955C7 /* Discover */ = {
 			isa = PBXGroup;
 			children = (
-				864AABCC2A9CCC69001955C7 /* Models */,
-				864AABCB2A9CCC67001955C7 /* Views */,
+				40569B5C2AA5C23800C87666 /* Models */,
 				864AABCA2A9CCC65001955C7 /* Controllers */,
 			);
 			path = Discover;
@@ -351,6 +394,7 @@
 			isa = PBXGroup;
 			children = (
 				864AABD22A9CCCC5001955C7 /* HomeViewController.swift */,
+				40569B582AA4F35200C87666 /* Extension HomeViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -362,20 +406,6 @@
 				4CE0980E2A9E8034000D17F6 /* CastomTableViewCell.swift */,
 			);
 			path = Controllers;
-			sourceTree = "<group>";
-		};
-		864AABCB2A9CCC67001955C7 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		864AABCC2A9CCC69001955C7 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		864AABCD2A9CCC6A001955C7 /* Controllers */ = {
@@ -449,6 +479,8 @@
 			packageProductDependencies = (
 				863B3D3F2A9D1B0400187864 /* Kingfisher */,
 				4CE0980C2A9E7FCE000D17F6 /* SnapKit */,
+				40569B502AA4970B00C87666 /* RealmSwift */,
+				40569B532AA49F2600C87666 /* AlertKit */,
 			);
 			productName = RecipesApp;
 			productReference = 864AAB952A9B45CD001955C7 /* RecipesApp.app */;
@@ -481,6 +513,8 @@
 			packageReferences = (
 				863B3D3E2A9D1B0400187864 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				4CE0980B2A9E7FCE000D17F6 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				40569B4F2AA4970B00C87666 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				40569B522AA49F2600C87666 /* XCRemoteSwiftPackageReference "AlertKit" */,
 			);
 			productRefGroup = 864AAB962A9B45CD001955C7 /* Products */;
 			projectDirPath = "";
@@ -510,6 +544,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40569B562AA4AD1800C87666 /* RecentRecipeModel.swift in Sources */,
 				864AABD52A9CCCCF001955C7 /* DiscoverViewController.swift in Sources */,
 				40506C022A9E64030058332A /* TrendingNowCollectionViewCell.swift in Sources */,
 				40EE67032A9E160900461299 /* NetworkService.swift in Sources */,
@@ -519,6 +554,7 @@
 				52EC938D2AA5D982006A959C /* ProfileViewController.swift in Sources */,
 				4CE0980F2A9E8034000D17F6 /* CastomTableViewCell.swift in Sources */,
 				864AAB992A9B45CD001955C7 /* AppDelegate.swift in Sources */,
+				40569B592AA4F35200C87666 /* Extension HomeViewController.swift in Sources */,
 				864AABB82A9B4A31001955C7 /* UIFont+App.swift in Sources */,
 				52EC938F2AA5DE73006A959C /* MyProfileCell.swift in Sources */,
 				4084C2272A9D2FE900842DEF /* SearchRecipeModel.swift in Sources */,
@@ -526,6 +562,7 @@
 				522A7DDE2AA1F76700BE821F /* DetailModel.swift in Sources */,
 				864AABD32A9CCCC5001955C7 /* HomeViewController.swift in Sources */,
 				40569B4C2AA3547F00C87666 /* PopularCategoryModel2.swift in Sources */,
+				40569B612AA62F4000C87666 /* SearchRecipeViewController.swift in Sources */,
 				40569B462A9FFB5800C87666 /* UIButton + App.swift in Sources */,
 				864AABB62A9B4A1D001955C7 /* UIColor+App.swift in Sources */,
 				40506C062A9E77160058332A /* RecentRecipeCollectionViewCell.swift in Sources */,
@@ -535,6 +572,8 @@
 				C34A5FC32A9F7C8000EBC15E /* SeeAllTableView.swift in Sources */,
 				52EC93912AA5E885006A959C /* MyRecipesCell.swift in Sources */,
 				C34A5FBB2A9DE9F100EBC15E /* SeeAllViewController.swift in Sources */,
+				40569B632AA62FFF00C87666 /* SearchRecipeTableViewCell.swift in Sources */,
+				40569B5E2AA5C24700C87666 /* SavedRecipeModel.swift in Sources */,
 				52EC93932AA5EB35006A959C /* RecipeImageView.swift in Sources */,
 				C34A5FBF2A9F331C00EBC15E /* CustomCell.swift in Sources */,
 				79BD78E02AA0605A005D5900 /* OnboardingViewController.swift in Sources */,
@@ -549,6 +588,7 @@
 				864AABD12A9CCCB8001955C7 /* WelcomeViewController.swift in Sources */,
 				40EE66FF2A9DED9B00461299 /* PopularCategoryModel.swift in Sources */,
 				40506C082A9E79C50058332A /* PopularCreatorsCollectionViewCell.swift in Sources */,
+				40569B5B2AA5B8AB00C87666 /* NavigationBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -766,6 +806,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		40569B4F2AA4970B00C87666 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		40569B522AA49F2600C87666 /* XCRemoteSwiftPackageReference "AlertKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparrowcode/AlertKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		4CE0980B2A9E7FCE000D17F6 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -785,6 +841,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		40569B502AA4970B00C87666 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 40569B4F2AA4970B00C87666 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+		40569B532AA49F2600C87666 /* AlertKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 40569B522AA49F2600C87666 /* XCRemoteSwiftPackageReference "AlertKit" */;
+			productName = AlertKit;
+		};
 		4CE0980C2A9E7FCE000D17F6 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 4CE0980B2A9E7FCE000D17F6 /* XCRemoteSwiftPackageReference "SnapKit" */;

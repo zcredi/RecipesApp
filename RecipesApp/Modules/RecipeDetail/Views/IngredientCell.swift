@@ -2,8 +2,6 @@ import Foundation
 import UIKit
 import Kingfisher
 
-
-
 // MARK: - IngredientCell
 
 final class IngredientCell: UITableViewCell {

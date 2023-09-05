@@ -14,7 +14,7 @@ class RecentRecipeCollectionViewCell: UICollectionViewCell {
     }()
     
     private lazy var recipeLabel: UILabel = {
-        let label = UILabel(text: "Kelewele Ghanian Recipe", font: UIFont.poppinsBold14(), textColor: .black)
+        let label = UILabel(text: "Kelewele Ghanian Recipe", font: UIFont.poppinsBold12(), textColor: .black)
         label.numberOfLines = 0
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -28,8 +28,8 @@ class RecentRecipeCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    public func configureCell(with recipe: PopularCategoryInfo) {
-        guard let recipeImageUrl = URL(string: recipe.image) else { return }
+    public func configureCell(with recipe: RecentRecipeModel) {
+        guard let recipeImageUrl = URL(string: recipe.imageURL) else { return }
         recipeImage.kf.setImage(with: recipeImageUrl)
         recipeLabel.text = recipe.title
         creatorLabel.text = "By Zeelicious Foods"

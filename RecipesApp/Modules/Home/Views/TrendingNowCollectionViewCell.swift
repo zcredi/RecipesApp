@@ -35,20 +35,6 @@ class TrendingNowCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    private lazy var saveView: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = 16
-        view.backgroundColor = .white
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-
-    private lazy var saveImage: UIImageView = {
-        let image = UIImageView(image: UIImage(systemName: "bookmark")?.withTintColor(.lightGray, renderingMode: .alwaysOriginal))
-        image.translatesAutoresizingMaskIntoConstraints = false
-        return image
-    }()
-    
     private lazy var titleDishLabel: UILabel = {
         let label = UILabel(text: "How to sharwama at home", font: .poppinsBold16(), textColor: .black)
         label.numberOfLines = 0
@@ -94,10 +80,8 @@ class TrendingNowCollectionViewCell: UICollectionViewCell {
     private func setupUI() {
         addSubview(photoDish)
         photoDish.addSubview(ratingContainerView)
-        photoDish.addSubview(saveView)
         ratingContainerView.addSubview(ratingImageView)
         ratingContainerView.addSubview(ratingLabel)
-        saveView.addSubview(saveImage)
         addSubview(titleDishLabel)
         addSubview(creatorStackView)
         creatorStackView.addArrangedSubview(creatorImageView)
@@ -115,10 +99,6 @@ class TrendingNowCollectionViewCell: UICollectionViewCell {
             ratingContainerView.topAnchor.constraint(equalTo: photoDish.topAnchor, constant: 8),
             ratingContainerView.leadingAnchor.constraint(equalTo: photoDish.leadingAnchor, constant: 8),
             
-            saveView.heightAnchor.constraint(equalToConstant: 32),
-            saveView.widthAnchor.constraint(equalToConstant: 32),
-            saveView.trailingAnchor.constraint(equalTo: photoDish.trailingAnchor, constant: -8),
-            saveView.centerYAnchor.constraint(equalTo: ratingContainerView.centerYAnchor),
        
             ratingImageView.leadingAnchor.constraint(equalTo: ratingContainerView.leadingAnchor, constant: 8),
             ratingImageView.topAnchor.constraint(equalTo: ratingContainerView.topAnchor, constant: 6),
@@ -129,9 +109,6 @@ class TrendingNowCollectionViewCell: UICollectionViewCell {
             ratingLabel.trailingAnchor.constraint(equalTo: ratingContainerView.trailingAnchor, constant: -8),
             
             
-            saveImage.centerYAnchor.constraint(equalTo: saveView.centerYAnchor),
-            saveImage.centerXAnchor.constraint(equalTo: saveView.centerXAnchor),
-        
             titleDishLabel.topAnchor.constraint(equalTo: photoDish.bottomAnchor, constant: 12),
             titleDishLabel.leadingAnchor.constraint(equalTo: photoDish.leadingAnchor),
             titleDishLabel.trailingAnchor.constraint(equalTo: photoDish.trailingAnchor),

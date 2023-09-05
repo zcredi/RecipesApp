@@ -30,21 +30,6 @@ class PopularCategoryCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    private lazy var saveView: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = 12
-        view.backgroundColor = .white
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    private lazy var saveImage: UIImageView = {
-        let image = UIImageView.init(image: UIImage(systemName: "bookmark")?.withTintColor(.lightGray, renderingMode: .alwaysOriginal))
-        image.contentMode = .center
-        image.translatesAutoresizingMaskIntoConstraints = false
-        return image
-    }()
-    
     private lazy var currentTime: UILabel = {
         let label = UILabel(text: "5 Mins", font: UIFont.poppinsBold12(), textColor: .black)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -69,8 +54,6 @@ class PopularCategoryCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(categoryView)
-        categoryView.addSubview(saveView)
-        saveView.addSubview(saveImage)
         categoryView.addSubview(currentTime)
         categoryView.addSubview(timeLabel)
         categoryView.addSubview(recipeLabel)
@@ -82,13 +65,6 @@ class PopularCategoryCollectionViewCell: UICollectionViewCell {
             categoryView.leadingAnchor.constraint(equalTo: leadingAnchor),
             categoryView.trailingAnchor.constraint(equalTo: trailingAnchor),
             
-            saveView.widthAnchor.constraint(equalToConstant: 24),
-            saveView.heightAnchor.constraint(equalToConstant: 24),
-            saveView.bottomAnchor.constraint(equalTo: categoryView.bottomAnchor, constant: -10),
-            saveView.trailingAnchor.constraint(equalTo: categoryView.trailingAnchor, constant: -10),
-            
-            saveImage.centerYAnchor.constraint(equalTo: saveView.centerYAnchor),
-            saveImage.centerXAnchor.constraint(equalTo: saveView.centerXAnchor),
             
             currentTime.leadingAnchor.constraint(equalTo: categoryView.leadingAnchor, constant: 10),
             currentTime.bottomAnchor.constraint(equalTo: categoryView.bottomAnchor, constant: -10),

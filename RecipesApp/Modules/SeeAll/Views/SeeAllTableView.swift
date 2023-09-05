@@ -1,10 +1,3 @@
-//
-//  SeeAllTableView.swift
-//  RecipesApp
-//
-//  Created by Elshad Babaev on 30.08.2023.
-//
-
 import UIKit
 
 protocol SeeAllTableViewDelegate: NSObject {
