@@ -41,7 +41,7 @@ class MainTabBarController : UITabBarController {
         let home = UINavigationController(rootViewController: HomeViewController())
         let discover = UINavigationController(rootViewController: DiscoverViewController()) 
         let notification = UINavigationController(rootViewController: SearchRecipeViewController())
-        let profile = UIViewController()
+        let profile = ProfileViewController()
         
         setViewControllers([home, notification, discover, profile], animated: true)
         
