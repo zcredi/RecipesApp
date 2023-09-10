@@ -10,13 +10,15 @@ import UIKit
 class PagesViewController: UIViewController {
     
     var imageName: String
-    var titleText: String
+    var titleTextFirstPart: String
+    var titleTextSecondPart: String
     var subtitleText: String?
     
     
-    init(imageName: String, titleText: String, subtitleText: String) {
+    init(imageName: String, titleTextFirstPart: String, titleTextSecondPart: String, subtitleText: String) {
         self.imageName = imageName
-        self.titleText = titleText
+        self.titleTextFirstPart = titleTextFirstPart
+        self.titleTextSecondPart = titleTextSecondPart
         self.subtitleText? = subtitleText
         super.init(nibName: nil, bundle: nil)
         
@@ -36,12 +38,15 @@ class PagesViewController: UIViewController {
     
     lazy var onboardingTitle: UILabel = {
         let title = UILabel()
+        let text = NSMutableAttributedString()
+        text.append(NSAttributedString(string: titleTextFirstPart, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white]));
+        text.append(NSAttributedString(string: titleTextSecondPart, attributes: [NSAttributedString.Key.foregroundColor: UIColor.secondary20]))
+        
+        title.attributedText = text
         title.numberOfLines = 0
         title.translatesAutoresizingMaskIntoConstraints = false
-        title.text = titleText
         title.textAlignment = .center
         title.font = .poppinsBold40()
-        title.textColor = .secondary20
         
         return title
     }()
@@ -87,17 +92,17 @@ class PagesViewController: UIViewController {
         view.addSubview(textStack)
         
         NSLayoutConstraint.activate([
-    
+            
             textStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -162),
-        textStack.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
-        textStack.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20)
+            textStack.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
+            textStack.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20)
         ])
     }
-        
-        override func viewDidLoad() {
-            super.viewDidLoad()
-            // Do any additional setup after loading the view.
-        }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+    }
     
 }
 

@@ -14,11 +14,15 @@ class OnboardingViewController: UIPageViewController, UIPageViewControllerDataSo
     lazy var pageControl: UIPageControl = {
         let pageControlView = UIPageControl()
         pageControlView.translatesAutoresizingMaskIntoConstraints = false
-        pageControlView.frame = CGRect(x: 0, y: 0, width: 0, height: 80)
-        pageControlView.currentPageIndicatorTintColor = .primary30
-        pageControlView.pageIndicatorTintColor = .neutral20
+//        pageControlView.frame = CGRect(x: 0, y: 0, width: 140, height: 8)
+        pageControlView.widthAnchor.constraint(equalToConstant: 220).isActive = true
         pageControlView.numberOfPages = self.pages.count
         pageControlView.currentPage = initialPage
+        pageControlView.preferredIndicatorImage = UIImage(named: "default")
+        pageControlView.currentPageIndicatorTintColor = .primary30
+        pageControlView.pageIndicatorTintColor = .neutral20
+        
+      
         return pageControlView
     }()
     
@@ -67,9 +71,14 @@ class OnboardingViewController: UIPageViewController, UIPageViewControllerDataSo
         return bottomStackView
     }()
     
-    override init(transitionStyle style: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey : Any]? = nil) {
+    override init(transitionStyle style: UIPageViewController.TransitionStyle,
+                  navigationOrientation: UIPageViewController.NavigationOrientation,
+                  options: [UIPageViewController.OptionsKey : Any]? = nil) {
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
     }
+    
+    
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -79,14 +88,14 @@ class OnboardingViewController: UIPageViewController, UIPageViewControllerDataSo
         if continueButton.currentTitle == "Continue" {
             print ("handleContinueButton")
             continueAction()
-
+            
         } else {
             print ("startCookingButton")
             startAction()
         }
     }
-        
-       func continueAction() {
+    
+    func continueAction() {
         if pageControl.currentPage == pages.count - 2{
             continueButton.setTitle("Start Cooking", for: .normal)
             pageControl.currentPage += 1
@@ -96,8 +105,8 @@ class OnboardingViewController: UIPageViewController, UIPageViewControllerDataSo
         setViewControllers([pages[pageControl.currentPage]], direction: .forward, animated: true)
     }
     
-      func startAction() {
-        let vc = HomeViewController()
+    func startAction() {
+        let vc = MainTabBarController()
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .fullScreen
         
@@ -106,7 +115,7 @@ class OnboardingViewController: UIPageViewController, UIPageViewControllerDataSo
     }
     
     @objc func handleSkipButton() {
-        let vc = HomeViewController()
+        let vc = MainTabBarController()
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .fullScreen
         
@@ -133,7 +142,7 @@ class OnboardingViewController: UIPageViewController, UIPageViewControllerDataSo
                 return self.pages[viewControllerIndex + 1]
             } else {
                 continueButton.setTitle("Start Cooking", for: .normal)
-
+                
             }
             
         }
@@ -156,10 +165,9 @@ class OnboardingViewController: UIPageViewController, UIPageViewControllerDataSo
         self.dataSource = self
         self.delegate = self
         
-        
-        let page1 = PagesViewController(imageName: "Onboarding Page-1", titleText: "Recipes from all over the World", subtitleText: "")
-        let page2 = PagesViewController(imageName: "Onboarding Page-2", titleText: "Recipes with each and every detail", subtitleText: "")
-        let page3 = PagesViewController(imageName: "Onboarding Page-3", titleText: "Cook it now or save it for later", subtitleText: "")
+        let page1 = PagesViewController(imageName:  "Onboarding Page-1", titleTextFirstPart: "Recipes from all ", titleTextSecondPart: "over the World", subtitleText: "")
+        let page2 = PagesViewController(imageName: "Onboarding Page-2", titleTextFirstPart: "Recipes with ", titleTextSecondPart: "each and every detail", subtitleText: "")
+        let page3 = PagesViewController(imageName: "Onboarding Page-3", titleTextFirstPart: "Cook it now or ", titleTextSecondPart: "save it for later", subtitleText: "")
         
         
         self.pages.append(page1)
@@ -173,7 +181,7 @@ class OnboardingViewController: UIPageViewController, UIPageViewControllerDataSo
         bottomStack.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         bottomStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
         
-       
+        
         
     }
     

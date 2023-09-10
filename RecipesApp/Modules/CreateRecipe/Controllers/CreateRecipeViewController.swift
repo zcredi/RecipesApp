@@ -112,7 +112,7 @@ extension CreateRecipeViewController: CookTimeTableViewControllerDelegate {
     
     @objc
     private func createRecipeButtonTapped() {
-        print("createRecipeButtonTapped")
+        dismiss(animated: true)
     }
 }
 
