@@ -8,14 +8,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = LoginViewController()
+        window?.rootViewController = WelcomeViewController()
         
         //MARK: Показывает только при первом запуске:
         
-//        if UserDefaults.standard.bool(forKey: "didSee") == false {
-//            UserDefaults.standard.set(true, forKey: "didSee")
-//            window?.rootViewController = WelcomeViewController()
-//            } else { window?.rootViewController = HomeViewController()}
+        if UserDefaults.standard.bool(forKey: "didSee") == false {
+            UserDefaults.standard.set(true, forKey: "didSee")
+            window?.rootViewController = WelcomeViewController()
+            } else { window?.rootViewController = MainTabBarController()}
         window?.makeKeyAndVisible()
     }
         

@@ -9,19 +9,22 @@ class MainTabBarController : UITabBarController {
         btn.layer.shadowOpacity = 0.2
         btn.layer.shadowOffset = CGSize(width: 4, height: 4)
         btn.setBackgroundImage(UIImage(named: "plus"), for: .normal)
+        btn.addTarget(self, action: #selector(btnMidleTapped), for: .touchUpInside)
         return btn
     }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        addSomeTabItems()
-        btnMiddle.frame = CGRect(x: Int(self.tabBar.bounds.width)/2 - 30, y: -32, width: 60, height: 60)
+          addSomeTabItems()
+          self.view.addSubview(btnMiddle)
+          positionMiddleButton()
+          setupCustomTabBar()
     }
-    override func loadView() {
-        super.loadView()
-        self.tabBar.addSubview(btnMiddle)
-        setupCustomTabBar()
-    }
+//    override func loadView() {
+//        super.loadView()
+//        self.tabBar.addSubview(btnMiddle)
+//        setupCustomTabBar()
+//    }
     func setupCustomTabBar() {
         
         let path : UIBezierPath = getPathForTabBar()
@@ -35,6 +38,18 @@ class MainTabBarController : UITabBarController {
         self.tabBar.layer.insertSublayer(shape, at: 0)
         self.tabBar.unselectedItemTintColor = .neutral50
         self.tabBar.tintColor = .primary50
+    }
+    
+    func positionMiddleButton() {
+        let yOffset: CGFloat = 32
+           btnMiddle.center = CGPoint(x: self.tabBar.center.x, y: self.tabBar.frame.origin.y - yOffset)
+    }
+    
+    @objc func btnMidleTapped() {
+        let createRecipeViewController = CreateRecipeViewController()
+        createRecipeViewController.modalPresentationStyle = .fullScreen
+        present(createRecipeViewController, animated: true)
+//        navigationController?.pushViewController(createRecipeViewController, animated: true)
     }
     
     func addSomeTabItems() {

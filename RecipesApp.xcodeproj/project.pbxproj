@@ -32,7 +32,6 @@
 		40EE67052A9E1CD500461299 /* URLGenerate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EE67042A9E1CD500461299 /* URLGenerate.swift */; };
 		4CE0980D2A9E7FCE000D17F6 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4CE0980C2A9E7FCE000D17F6 /* SnapKit */; };
 		4CE0980F2A9E8034000D17F6 /* CastomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE0980E2A9E8034000D17F6 /* CastomTableViewCell.swift */; };
-		4CE098112AA906DA000D17F6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4CE098102AA906DA000D17F6 /* GoogleService-Info.plist */; };
 		4CE098142AA90788000D17F6 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 4CE098132AA90788000D17F6 /* FirebaseAuth */; };
 		4CE098162AA90788000D17F6 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 4CE098152AA90788000D17F6 /* FirebaseStorage */; };
 		4CE098182AA90A2D000D17F6 /* FireBaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE098172AA90A2D000D17F6 /* FireBaseAuthManager.swift */; };
@@ -45,6 +44,9 @@
 		52EC93932AA5EB35006A959C /* RecipeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EC93922AA5EB35006A959C /* RecipeImageView.swift */; };
 		79BD78DE2A9F8E2B005D5900 /* PagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BD78DD2A9F8E2B005D5900 /* PagesViewController.swift */; };
 		79BD78E02AA0605A005D5900 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BD78DF2AA0605A005D5900 /* OnboardingViewController.swift */; };
+		8622966A2AADB4B800C5672C /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862296692AADB4B800C5672C /* RealmManager.swift */; };
+		8622966C2AADB51700C5672C /* CreateRecipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8622966B2AADB51700C5672C /* CreateRecipeModel.swift */; };
+		8622966E2AADD08B00C5672C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8622966D2AADD08B00C5672C /* GoogleService-Info.plist */; };
 		863B3D402A9D1B0400187864 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 863B3D3F2A9D1B0400187864 /* Kingfisher */; };
 		864AAB992A9B45CD001955C7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864AAB982A9B45CD001955C7 /* AppDelegate.swift */; };
 		864AAB9B2A9B45CD001955C7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864AAB9A2A9B45CD001955C7 /* SceneDelegate.swift */; };
@@ -101,7 +103,6 @@
 		40EE67022A9E160900461299 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		40EE67042A9E1CD500461299 /* URLGenerate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLGenerate.swift; sourceTree = "<group>"; };
 		4CE0980E2A9E8034000D17F6 /* CastomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastomTableViewCell.swift; sourceTree = "<group>"; };
-		4CE098102AA906DA000D17F6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4CE098172AA90A2D000D17F6 /* FireBaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseAuthManager.swift; sourceTree = "<group>"; };
 		4CE098192AA90BB7000D17F6 /* UserAuthData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthData.swift; sourceTree = "<group>"; };
 		4CE0981C2AACED13000D17F6 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -112,6 +113,9 @@
 		52EC93922AA5EB35006A959C /* RecipeImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeImageView.swift; sourceTree = "<group>"; };
 		79BD78DD2A9F8E2B005D5900 /* PagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagesViewController.swift; sourceTree = "<group>"; };
 		79BD78DF2AA0605A005D5900 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		862296692AADB4B800C5672C /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		8622966B2AADB51700C5672C /* CreateRecipeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateRecipeModel.swift; sourceTree = "<group>"; };
+		8622966D2AADD08B00C5672C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		864AAB952A9B45CD001955C7 /* RecipesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecipesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		864AAB982A9B45CD001955C7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		864AAB9A2A9B45CD001955C7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -347,6 +351,7 @@
 				864AABB22A9B4876001955C7 /* MainTabBarController.swift */,
 				4CE098172AA90A2D000D17F6 /* FireBaseAuthManager.swift */,
 				4CE098192AA90BB7000D17F6 /* UserAuthData.swift */,
+				862296692AADB4B800C5672C /* RealmManager.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -354,7 +359,7 @@
 		864AABB42A9B4887001955C7 /* Applecation */ = {
 			isa = PBXGroup;
 			children = (
-				4CE098102AA906DA000D17F6 /* GoogleService-Info.plist */,
+				8622966D2AADD08B00C5672C /* GoogleService-Info.plist */,
 				864AABB92A9B5444001955C7 /* Fonts */,
 				864AAB982A9B45CD001955C7 /* AppDelegate.swift */,
 				864AAB9A2A9B45CD001955C7 /* SceneDelegate.swift */,
@@ -476,6 +481,7 @@
 		8682CC802AA7418800F7D078 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				8622966B2AADB51700C5672C /* CreateRecipeModel.swift */,
 				8695E0272AAA1B9F0093B18E /* IngredientsItemModel.swift */,
 			);
 			path = Models;
@@ -637,7 +643,7 @@
 			files = (
 				864AABBB2A9B5461001955C7 /* Poppins-Regular.ttf in Resources */,
 				864AABA52A9B45CE001955C7 /* LaunchScreen.storyboard in Resources */,
-				4CE098112AA906DA000D17F6 /* GoogleService-Info.plist in Resources */,
+				8622966E2AADD08B00C5672C /* GoogleService-Info.plist in Resources */,
 				864AABA22A9B45CE001955C7 /* Assets.xcassets in Resources */,
 				864AABBD2A9CBFA3001955C7 /* Poppins-Bold.ttf in Resources */,
 			);
@@ -657,6 +663,7 @@
 				40EE67032A9E160900461299 /* NetworkService.swift in Sources */,
 				40569B422A9FEA7F00C87666 /* SwitchPopularCategoryCollectionViewCell.swift in Sources */,
 				86FBB5612AA8C2DE00B370F2 /* ServesTableViewController.swift in Sources */,
+				8622966C2AADB51700C5672C /* CreateRecipeModel.swift in Sources */,
 				40569B4E2AA3905500C87666 /* ReadyInMinutesModel.swift in Sources */,
 				864AABBF2A9CC2E1001955C7 /* UILabel + App.swift in Sources */,
 				52EC938D2AA5D982006A959C /* ProfileViewController.swift in Sources */,
@@ -672,6 +679,7 @@
 				522A7DDE2AA1F76700BE821F /* DetailModel.swift in Sources */,
 				864AABD32A9CCCC5001955C7 /* HomeViewController.swift in Sources */,
 				86FBB5672AA8E90800B370F2 /* CookTimeTableViewController.swift in Sources */,
+				8622966A2AADB4B800C5672C /* RealmManager.swift in Sources */,
 				40569B4C2AA3547F00C87666 /* PopularCategoryModel2.swift in Sources */,
 				40569B612AA62F4000C87666 /* SearchRecipeViewController.swift in Sources */,
 				40569B462A9FFB5800C87666 /* UIButton + App.swift in Sources */,
