@@ -1,15 +1,15 @@
 import Foundation
 
-struct ReadyInMinutes: Codable {
-    var sourceName: String
-    var extendedIngredients: [ReadyInMinutesIngredient]
-    var id: Int
-    var title: String
-    var readyInMinutes: Int
+struct ReadyInMinutes: Decodable {
+    let sourceName: String
+    let extendedIngredients: [ReadyInMinutesIngredient]
+    let id: Int
+    let title: String
+    let readyInMinutes: Int
 }
 
-struct ReadyInMinutesIngredient: Codable {
-    var id: Int
-    var image: String
-    var name: String
+struct ReadyInMinutesIngredient: Decodable {
+    let id: Int
+    let image: String
+    let name: String
 }

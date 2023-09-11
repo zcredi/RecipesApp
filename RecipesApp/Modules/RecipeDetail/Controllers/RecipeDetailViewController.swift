@@ -9,7 +9,7 @@ final class RecipeDetailViewController: UIViewController {
     private let realm = try! Realm()
     public var id: Int
     private let networkManager = NetworkManager()
-    private let urlGenerator = URLGenerate()
+    private let urlGenerator = URLRequestGeneratore()
     public var detailRecipeModel: DetailRecipeModel
     
     private var instruction: [Step]

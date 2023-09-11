@@ -4,7 +4,7 @@ import RealmSwift
 
 class HomeViewController: UIViewController {
     private let networkManager = NetworkManager()
-    private let urlGenerator = URLGenerate()
+    private let urlGenerator = URLRequestGeneratore()
     var uiSetupCompleted = false
     private let realm = try! Realm()
     

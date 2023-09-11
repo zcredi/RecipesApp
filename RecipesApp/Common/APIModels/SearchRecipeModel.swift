@@ -1,13 +1,14 @@
 import Foundation
 
-struct SearchRecipe: Codable {
-    var results: [InformationSearchRecipe]
+struct SearchRecipe: Decodable {
+    let results: [InformationSearchRecipe]
 }
 
-struct InformationSearchRecipe: Codable {
-    var id: Int
-    var title: String
-    var image: String
+struct InformationSearchRecipe: Decodable {
+    let id: Int
+    let title: String
+    let image: String
 }
 
-
+// nsvlad7@gmail.com
+// NSfullzoombtw7

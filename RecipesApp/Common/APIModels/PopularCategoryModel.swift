@@ -1,12 +1,12 @@
 import Foundation
 
-struct PopularCategory: Codable {
+struct PopularCategory: Decodable {
     var results: [PopularCategoryInfo]
 }
 
-struct PopularCategoryInfo: Codable {
-    var id: Int
-    var title: String
-    var readyInMinutes: Int
-    var image: String
+struct PopularCategoryInfo: Decodable {
+    let id: Int
+    let title: String
+    let readyInMinutes: Int
+    let image: String
 }

@@ -3,7 +3,7 @@ import UIKit
 class SearchRecipeViewController: UIViewController {
     
     private let networkManager = NetworkManager()
-    private let urlGenerator = URLGenerate()
+    private let urlGenerator = URLRequestGeneratore()
     private var searchedRecipe: [InformationSearchRecipe] = []
     private var searchWorkItem: DispatchWorkItem?
     private lazy var searchRecipesTableView: UITableView = {

@@ -1,9 +1,8 @@
 import Foundation
-import UIKit
 
-class URLGenerate {
+class URLRequestGeneratore {
     private let baseURL = "https://api.spoonacular.com/"
-    private let apiKey = "ad8cb8199d9f446e83f63655800d91a7"
+    private let apiKey = "e91ba07811f54c309b4938171080ad0d"
 
     func request(endpoint: String, queryItems: [URLQueryItem] = []) -> URLRequest? {
         guard let baseURL = URL(string: baseURL) else { return nil }

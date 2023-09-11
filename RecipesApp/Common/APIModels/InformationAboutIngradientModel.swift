@@ -1,37 +1,37 @@
 import Foundation
 
 // MARK: - InformationIngradient
-struct InformationIngradient: Codable {
+struct InformationIngradient: Decodable {
     var steps: [Step]
 }
 
 // MARK: - Step
-struct Step: Codable {
-    var number: Int
-    var step: String
-    var ingredients: [Ingredient]
-    var equipment: [Equipment]
-    var length: Length?
+struct Step: Decodable {
+    let number: Int
+    let step: String
+    let ingredients: [Ingredient]
+    let equipment: [Equipment]
+    let length: Length?
 }
 
 // MARK: - Ingredient
-struct Ingredient: Codable, Hashable {
-    var id: Int
-    var name: String
-    var localizedName: String
-    var image: String
+struct Ingredient: Decodable, Hashable {
+    let id: Int
+    let name: String
+    let localizedName: String
+    let image: String
 }
 
 // MARK: - Equipment
-struct Equipment: Codable {
-    var id: Int?
-    var image: String
-    var name: String
-    var localizedName: String?
+struct Equipment: Decodable {
+    let id: Int?
+    let image: String
+    let name: String
+    let localizedName: String?
 }
 
 // MARK: - Length
-struct Length: Codable {
-    var number: Int
-    var unit: String
+struct Length: Decodable {
+    let number: Int
+    let unit: String
 }

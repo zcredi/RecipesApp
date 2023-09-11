@@ -1,15 +1,15 @@
 import Foundation
 
-struct SearchResponse: Codable {
-    var searchResults: [SearchResult]
+struct SearchResponse: Decodable {
+    let searchResults: [SearchResult]
 }
 
-struct SearchResult: Codable {
-    var results: [Recipe]
+struct SearchResult: Decodable {
+    let results: [Recipe]
 }
 
-struct Recipe: Codable {
-    var id: Int
-    var name: String
-    var image: String
+struct Recipe: Decodable {
+    let id: Int
+    let name: String
+    let image: String
 }

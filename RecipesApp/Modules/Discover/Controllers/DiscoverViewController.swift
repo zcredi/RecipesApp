@@ -5,7 +5,7 @@ import RealmSwift
 class DiscoverViewController: UIViewController {
     private let realm = try! Realm()
     private let networkManager = NetworkManager()
-    private let urlGenerator = URLGenerate()
+    private let urlGenerator = URLRequestGeneratore()
     private var savedRecipe: [SavedRecipeModel] = []
     lazy var tableView = UITableView()
     

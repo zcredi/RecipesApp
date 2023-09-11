@@ -6,7 +6,7 @@ protocol SeeAllTableViewDelegate: NSObject {
 
 class SeeAllTableView: UITableView {
     private let networkManager = NetworkManager()
-    private let urlGenerator = URLGenerate()
+    private let urlGenerator = URLRequestGeneratore()
     private var trendingNow: [Recipe] = []
     private var trendingNowIngradientAndTime: [ReadyInMinutes]
     weak var recipeSelectionDelegate: SeeAllTableViewDelegate?
