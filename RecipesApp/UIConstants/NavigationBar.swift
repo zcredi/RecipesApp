@@ -5,9 +5,9 @@ extension UIViewController {
         let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(goBack))
         backButton.tintColor = .black
         navigationItem.leftBarButtonItem = backButton
-        
     }
-    @objc private func goBack() {
+    
+    @IBAction private func goBack() {
         navigationController?.popViewController(animated: true)
     }
 }

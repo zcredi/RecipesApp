@@ -1,42 +1,9 @@
 import UIKit
-import RealmSwift
 
-
-class HomeViewController: UIViewController {
-    private let networkManager = NetworkManager()
-    private let urlGenerator = URLRequestGeneratore()
-    var uiSetupCompleted = false
-    private let realm = try! Realm()
-    
-    private var trendingNow: [Recipe] = []
-    private var popularCategoryTagArray: [PopularCategoryInfo] = []
-    var recentRecipes: [RecentRecipeModel] = []
-    private let popularCategoryArray = ["Breakfast", "Dessert", "Salad", "Appetizer", "Soup", "Drink", "Beverage", "Sauce", "Bread", "Marinade", "Fingerfood", "Snack"]
+final class HomeViewController: UIViewController {
+    let viewModel = HomeViewModel()
     private var selectedIndexPathForButtonCollectionTag: IndexPath?
-    private var popularCreatorsArray = [
-        "Jamie Oliver",
-        "Yotam Ottolenghi",
-        "Anthony Bourdain",
-        "Nusret Gökçe",
-        "Gordon Ramsay",
-        "Massimo Bottura",
-        "Christina Tosi",
-        "Sanjeev Kapoor",
-        "Joël Robuchon",
-        "Alain Ducasse",
-        "Ferran Adrià",
-        "Thomas Keller",
-        "Daniel Humm",
-        "Martha Stewart"
-    ]
-    
-//    private lazy var searchRecipe: UISearchController = {
-//        let sc = UISearchController(searchResultsController: nil)
-//        sc.definesPresentationContext = true
-//        sc.searchBar.placeholder = "Search Recipes"
-//        sc.searchBar.delegate = self
-//        return sc
-//    }()
+    var uiSetupCompleted = false
     
     lazy var homeScrollView: UIScrollView = {
         let sv = UIScrollView()
@@ -54,77 +21,46 @@ class HomeViewController: UIViewController {
         return button
     }()
     
-    lazy var popularCategoryLabel: UILabel = {
-        let label = UILabel(text: "Popular Category", font: UIFont.poppinsBold20(), textColor: .black)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    lazy var recentRecipeLabel: UILabel = {
-        let label = UILabel(text: "Recent Recipe", font: UIFont.poppinsBold20(), textColor: .black)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    lazy var trendingNowLabel: UILabel = {
-        let label = UILabel(text: "Trending now 🔥", font: UIFont.poppinsBold20(), textColor: .black)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    lazy var popularCreatorsLabel: UILabel = {
-        let label = UILabel(text: "Popular Creators", font: UIFont.poppinsBold20(), textColor: .black)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    lazy var popularCategoryLabel = UILabel(text: "Popular Category", font: UIFont.poppinsBold20(), textColor: .black, numberOfLines: 1)
+    lazy var recentRecipeLabel = UILabel(text: "Recent Recipe", font: UIFont.poppinsBold20(), textColor: .black, numberOfLines: 1)
+    lazy var trendingNowLabel = UILabel(text: "Trending now 🔥", font: UIFont.poppinsBold20(), textColor: .black, numberOfLines: 1)
+    lazy var popularCreatorsLabel = UILabel(text: "Popular Creators", font: UIFont.poppinsBold20(), textColor: .black, numberOfLines: 1)
     
     lazy var trendingNowCollectionView: UICollectionView = {
-        let collectionView = UICollectionView(itemWidth: 320, itemHeight: 250)
+        let collectionView = UICollectionView(itemWidth: 320, itemHeight: 250, delegate: self, dataSource: self)
         collectionView.register(TrendingNowCollectionViewCell.self, forCellWithReuseIdentifier: TrendingNowCollectionViewCell.identifier)
-        collectionView.dataSource = self
-        collectionView.delegate = self
         return collectionView
     }()
     
     lazy var popularCategoryTagCollectionView: UICollectionView = {
-        let collectionView = UICollectionView(itemWidth: 90, itemHeight: 40)
+        let collectionView = UICollectionView(itemWidth: 90, itemHeight: 40, delegate: self, dataSource: self)
         collectionView.register(SwitchPopularCategoryCollectionViewCell.self, forCellWithReuseIdentifier: SwitchPopularCategoryCollectionViewCell.identifier)
-        collectionView.dataSource = self
-        collectionView.delegate = self
         return collectionView
     }()
     
     lazy var popularCategoryCollectionView: UICollectionView = {
-        let collectionView = UICollectionView(itemWidth: 170, itemHeight: 200)
+        let collectionView = UICollectionView(itemWidth: 170, itemHeight: 200, delegate: self, dataSource: self)
         collectionView.register(PopularCategoryCollectionViewCell.self, forCellWithReuseIdentifier: PopularCategoryCollectionViewCell.identifier)
-        collectionView.dataSource = self
-        collectionView.delegate = self
         return collectionView
     }()
     
     lazy var recentRecipeCollectionView: UICollectionView = {
-        let collectionView = UICollectionView(itemWidth: 150, itemHeight: 250)
+        let collectionView = UICollectionView(itemWidth: 150, itemHeight: 250, delegate: self, dataSource: self)
         collectionView.register(RecentRecipeCollectionViewCell.self, forCellWithReuseIdentifier: RecentRecipeCollectionViewCell.identifier)
-        collectionView.dataSource = self
-        collectionView.delegate = self
         return collectionView
     }()
     
     lazy var popularCreatorsCollectionView: UICollectionView = {
-        let collectionView = UICollectionView(itemWidth: 120, itemHeight: 150)
+        let collectionView = UICollectionView(itemWidth: 120, itemHeight: 150, delegate: self, dataSource: self)
         collectionView.register(PopularCreatorsCollectionViewCell.self, forCellWithReuseIdentifier: PopularCreatorsCollectionViewCell.identifier)
-        collectionView.dataSource = self
-        collectionView.delegate = self
         return collectionView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-//        navigationItem.searchController = searchRecipe
-        callNetworking()
-        loadRecentRecipesFromRealm()
         selectedIndexPathForButtonCollectionTag = IndexPath(row: 0, section: 0)
+        callNetworking()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -139,9 +75,7 @@ class HomeViewController: UIViewController {
     }
     
     private func setupNavigationBar() {
-        let titleLabel = UILabel(text: "Get amazing recipe for cooking", font: UIFont.poppinsRegular20(), textColor: .black)
-        titleLabel.numberOfLines = 0
-        titleLabel.textAlignment = .center
+        let titleLabel = UILabel(text: "Get amazing recipe for cooking", font: UIFont.poppinsRegular20(), textColor: .black, textAligment: .center , numberOfLines: 0)
         navigationItem.titleView = titleLabel
     }
     
@@ -153,37 +87,20 @@ class HomeViewController: UIViewController {
     // MARK: - CallNetworking Method
 
     private func callNetworking() {
-        let trendingNowRequest = urlGenerator.request(endpoint: "food/search", queryItems: [URLQueryItem(name: "limitLicense", value: "true"), URLQueryItem(name: "limit", value: "10")])
-        let popularCategoryRequest = urlGenerator.request(endpoint: "recipes/complexSearch", queryItems: [URLQueryItem(name: "type", value: "breakfast"), URLQueryItem(name: "addRecipeInformation", value: "true")])
-        
-        networkManager.request(generator: trendingNowRequest) { (result: Swift.Result<SearchResponse, Error>) in
+        viewModel.fetchTrendingNow {
             DispatchQueue.main.async {
-                switch result {
-                case .success(let searched):
-                    self.trendingNow = searched.searchResults[0].results
-                    self.trendingNowCollectionView.reloadData()
-                case .failure(let failure):
-                    print(failure.localizedDescription)
-                }
+                self.trendingNowCollectionView.reloadData()
             }
         }
-        
-        networkManager.request(generator: popularCategoryRequest) { (result: Swift.Result<PopularCategory, Error>) in
+        viewModel.fetchPopularCategory(for: "breakfast") {
             DispatchQueue.main.async {
-                switch result {
-                case .success(let searched):
-                    self.popularCategoryTagArray = searched.results
-                    self.popularCategoryCollectionView.reloadData()
-                case .failure(let failure):
-                    print(failure.localizedDescription)
-                }
+                self.popularCategoryCollectionView.reloadData()
             }
         }
     }
     
-    private func loadRecentRecipesFromRealm(){
-        let recipes = realm.objects(RecentRecipeModel.self)
-        recentRecipes = Array(recipes).reversed()
+    private func loadRecentRecipesFromRealm() {
+        viewModel.loadRecentRecipesFromRealm()
     }
 }
 
@@ -192,11 +109,11 @@ class HomeViewController: UIViewController {
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
-        case trendingNowCollectionView: return trendingNow.count
-        case popularCategoryCollectionView: return popularCategoryTagArray.count
-        case popularCategoryTagCollectionView: return popularCategoryArray.count
-        case recentRecipeCollectionView: return recentRecipes.count
-        case popularCreatorsCollectionView: return popularCreatorsArray.count
+        case trendingNowCollectionView: return viewModel.trendingNow.count
+        case popularCategoryCollectionView: return viewModel.popularCategoryTagArray.count
+        case popularCategoryTagCollectionView: return viewModel.popularCategoryArray.count
+        case recentRecipeCollectionView: return viewModel.recentRecipes.count
+        case popularCreatorsCollectionView: return viewModel.popularCreatorsArray.count
         default: return 0
         }
     }
@@ -205,18 +122,18 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         switch collectionView {
         case trendingNowCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrendingNowCollectionViewCell.identifier, for: indexPath) as! TrendingNowCollectionViewCell
-            let correctIndexPath = trendingNow[indexPath.row]
+            let correctIndexPath = viewModel.trendingNow[indexPath.row]
             cell.configureCell(with: correctIndexPath)
             return cell
         case popularCategoryCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PopularCategoryCollectionViewCell.identifier, for: indexPath) as! PopularCategoryCollectionViewCell
-            let correctIndexPath = popularCategoryTagArray[indexPath.row]
+            let correctIndexPath = viewModel.popularCategoryTagArray[indexPath.row]
             cell.configureCell(with: correctIndexPath)
             return cell
         case popularCategoryTagCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SwitchPopularCategoryCollectionViewCell.identifier, for: indexPath) as! SwitchPopularCategoryCollectionViewCell
             cell.delegate = self
-            let category = popularCategoryArray[indexPath.row]
+            let category = viewModel.popularCategoryArray[indexPath.row]
             cell.configureCell(with: category)
             
             if indexPath == selectedIndexPathForButtonCollectionTag {
@@ -228,13 +145,13 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             return cell
         case recentRecipeCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecentRecipeCollectionViewCell.identifier, for: indexPath) as! RecentRecipeCollectionViewCell
-            let correctIndexPath = recentRecipes[indexPath.row]
+            let correctIndexPath = viewModel.recentRecipes[indexPath.row]
             cell.configureCell(with: correctIndexPath)
             return cell
             
         case popularCreatorsCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PopularCreatorsCollectionViewCell.identifier, for: indexPath) as! PopularCreatorsCollectionViewCell
-            let correctIndexPath = popularCreatorsArray[indexPath.row]
+            let correctIndexPath = viewModel.popularCreatorsArray[indexPath.row]
             cell.configureCell(with: correctIndexPath)
             return cell
         default: break
@@ -248,28 +165,29 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         let recipeName: String
         
         switch collectionView {
-            case trendingNowCollectionView:
-                currentCellID = trendingNow[indexPath.row].id
-                recipeName = trendingNow[indexPath.row].name
-                recipeImage = trendingNow[indexPath.row].image
-            case popularCategoryCollectionView:
-                currentCellID = popularCategoryTagArray[indexPath.row].id
-                recipeName = popularCategoryTagArray[indexPath.row].title
-                recipeImage = popularCategoryTagArray[indexPath.row].image
-            case recentRecipeCollectionView:
-                currentCellID = recentRecipes[indexPath.row].id
-                recipeName = recentRecipes[indexPath.row].title
-                recipeImage = recentRecipes[indexPath.row].imageURL
-            default:
-                return
-            }
+        case trendingNowCollectionView:
+            currentCellID = viewModel.trendingNow[indexPath.row].id
+            recipeName = viewModel.trendingNow[indexPath.row].name
+            recipeImage = viewModel.trendingNow[indexPath.row].image
+        case popularCategoryCollectionView:
+            currentCellID = viewModel.popularCategoryTagArray[indexPath.row].id
+            recipeName = viewModel.popularCategoryTagArray[indexPath.row].title
+            recipeImage = viewModel.popularCategoryTagArray[indexPath.row].image
+        case recentRecipeCollectionView:
+            currentCellID = viewModel.recentRecipes[indexPath.row].id
+            recipeName = viewModel.recentRecipes[indexPath.row].title
+            recipeImage = viewModel.recentRecipes[indexPath.row].imageURL
+        default:
+            return
+        }
         
         // Saving data to the database
-        let recentRecipeModel = RecentRecipeModel()
-        recentRecipeModel.saveToRealm(id: currentCellID, imageURL: recipeImage, title: recipeName)
+       
+        viewModel.saveRecipeToRealm(id: currentCellID, imageURL: recipeImage, title: recipeName)
+
         
         // Push to RecipeDetailViewControler
-        let detailRecipeModel: DetailRecipeModel = DetailRecipeModel(nameRecipe: recipeName, imageRecipe: recipeImage)
+        let detailRecipeModel = DetailRecipeModel(nameRecipe: recipeName, imageRecipe: recipeImage)
         let vc = RecipeDetailViewController(model: detailRecipeModel, id: currentCellID)
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -288,17 +206,9 @@ extension HomeViewController: SwitchPopularCategoryCellDelegate {
         if let currentSelectedIndexPath = popularCategoryTagCollectionView.indexPath(for: cell) {
             selectedIndexPathForButtonCollectionTag = currentSelectedIndexPath
             cell.toggleButtonState()
-            let request = urlGenerator.request(endpoint: "recipes/complexSearch", queryItems: [URLQueryItem(name: "type", value: popularCategoryArray[currentSelectedIndexPath.row].lowercased()), URLQueryItem(name: "addRecipeInformation", value: "true")])
-            
-            networkManager.request(generator: request) { (result: Swift.Result<PopularCategory, Error>) in
+            viewModel.fetchPopularCategory(for: viewModel.popularCategoryArray[currentSelectedIndexPath.row].lowercased()) {
                 DispatchQueue.main.async {
-                    switch result {
-                    case .success(let searched):
-                        self.popularCategoryTagArray = searched.results
                         self.popularCategoryCollectionView.reloadData()
-                    case .failure(let failure):
-                        print(failure.localizedDescription)
-                    }
                 }
             }
         }
@@ -306,7 +216,6 @@ extension HomeViewController: SwitchPopularCategoryCellDelegate {
 }
 
 extension HomeViewController: UISearchBarDelegate {
-    
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         let vc = SearchRecipeViewController()
         navigationController?.pushViewController(vc, animated: true)

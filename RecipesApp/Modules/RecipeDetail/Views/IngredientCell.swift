@@ -1,38 +1,22 @@
 import Foundation
-import UIKit
 import Kingfisher
-
-// MARK: - IngredientCell
+import UIKit
 
 final class IngredientCell: UITableViewCell {
     static let identifier = "IngredientCell"
     
     var choiceIngredientImage = false
   
-    lazy var ingredientImage: UIImageView = {
-        let ingredientImage = UIImageView()
-        ingredientImage.contentMode = .scaleAspectFill
-        ingredientImage.layer.cornerRadius = 10
-        ingredientImage.clipsToBounds = true
-        ingredientImage.image = UIImage(named: "recipeImage")
-        return ingredientImage
-    }()
-  
-    private lazy var ingredientName: UILabel = {
-        let label = UILabel(text: "Fish", font: UIFont.poppinsBold12(), textColor: UIColor.neutral100)
-        label.numberOfLines = 0
-        return label
-    }()
-
-    lazy var ingredientWeight = UILabel(text: "250g", font: UIFont.poppinsRegular14(), textColor: UIColor.neutral50)
+    lazy var ingredientImage = UIImageView(image: "recipeImage", cornerRadius: 10)
+    
+    private lazy var ingredientName = UILabel(text: "Fish", font: UIFont.poppinsBold12(), textColor: UIColor.neutral100, numberOfLines: 0)
+    lazy var ingredientWeight = UILabel(text: "250g", font: UIFont.poppinsRegular14(), textColor: UIColor.neutral50, numberOfLines: 1)
   
     lazy var ingredientSelectButton: UIButton = {
         let ingredientSelectButton = UIButton()
         ingredientSelectButton.setImage(UIImage(named: "notSelected"), for: .normal)
         return ingredientSelectButton
     }()
-  
-    // MARK: - Initializers
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -46,17 +30,11 @@ final class IngredientCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-  
     override func layoutSubviews() {
         super.layoutSubviews()
-    
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
     }
-  
     
-  
-    // MARK: - Private Methods
-
     private func setupCell() {
         selectionStyle = .none
     
@@ -110,5 +88,4 @@ final class IngredientCell: UITableViewCell {
         }
         self.ingredientName.text = ingredient.name
     }
-
 }

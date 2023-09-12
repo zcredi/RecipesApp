@@ -1,9 +1,3 @@
-//
-//  FooterView.swift
-//  RecipesApp
-//
-//  Created by Владислав on 06.09.2023.
-//
 
 import UIKit
 
@@ -13,15 +7,9 @@ class CookTimeView: UIView {
     
     private lazy var whiteViewCookTime = UIView(backgroundColor: .neutral0, cornerRadius: 10)
     
-    private lazy var timeImageView: UIImageView = {
-       let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        imageView.image = UIImage(named: "clock")
-        return imageView
-    }()
+    private lazy var timeImageView = UIImageView(image: "clock", cornerRadius: 0)
     
-    private lazy var cookTimeLabel = UILabel(text: "Cook time", font: .poppinsBold16(), textColor: .neutral100)
+    private lazy var cookTimeLabel = UILabel(text: "Cook time", font: .poppinsBold16(), textColor: .neutral100, numberOfLines: 1)
     
     public lazy var cookTimeButton: UIButton = {
         let button = UIButton(type: .system)
@@ -30,7 +18,7 @@ class CookTimeView: UIView {
         return button
     }()
     
-    public lazy var timeLabel = UILabel(text: "5 min", font: .poppinsRegular14(), textColor: .neutral50)
+    public lazy var timeLabel = UILabel(text: "5 min", font: .poppinsRegular14(), textColor: .neutral50, numberOfLines: 1)
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -44,11 +32,8 @@ class CookTimeView: UIView {
     
     private func setupViews() {
         addSubview(backViewCookTime)
-        backViewCookTime.addSubview(whiteViewCookTime)
+        backViewCookTime.addSubviews(whiteViewCookTime, cookTimeLabel, cookTimeButton, timeLabel)
         whiteViewCookTime.addSubview(timeImageView)
-        backViewCookTime.addSubview(cookTimeLabel)
-        backViewCookTime.addSubview(cookTimeButton)
-        backViewCookTime.addSubview(timeLabel)
     }
 
 }

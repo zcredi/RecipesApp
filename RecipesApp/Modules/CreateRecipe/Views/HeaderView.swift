@@ -1,10 +1,3 @@
-//
-//  HeaderView.swift
-//  RecipesApp
-//
-//  Created by Владислав on 30.08.2023.
-//
-
 import UIKit
 
 class HeaderView: UIView {
@@ -19,32 +12,13 @@ class HeaderView: UIView {
 
     //MARK: - Create UI
     
-    private lazy var titleLabel = UILabel(text: "Create recipe", font: .poppinsBold24(), textColor: .neutral100)
-    
-    private lazy var recipeImageView: UIImageView = {
-       let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.layer.cornerRadius = 10
-        imageView.clipsToBounds = true
-        imageView.image = UIImage(named: "sex")
-        return imageView
-    }()
-    
+    private lazy var titleLabel = UILabel(text: "Create recipe", font: .poppinsBold24(), textColor: .neutral100, numberOfLines: 1)
+    private lazy var recipeImageView = UIImageView(image: "sex", cornerRadius: 10)
     private lazy var nameRecipeTextField = CreateRecipeTextField()
-    
     private lazy var backViewServes = UIView(backgroundColor: .neutral10, cornerRadius: 12)
-    
     private lazy var whiteViewServes = UIView(backgroundColor: .neutral0, cornerRadius: 10)
-    
-    private lazy var usersImageView: UIImageView = {
-       let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        imageView.image = UIImage(named: "user2")
-        return imageView
-    }()
-    
-    private lazy var servesLabel = UILabel(text: "Serves", font: .poppinsBold16(), textColor: .neutral100)
+    private lazy var usersImageView = UIImageView(image: "user2", cornerRadius: 0)
+    private lazy var servesLabel = UILabel(text: "Serves", font: .poppinsBold16(), textColor: .neutral100, numberOfLines: 1)
     
     public lazy var servesButton: UIButton = {
         let button = UIButton(type: .system)
@@ -53,7 +27,7 @@ class HeaderView: UIView {
         return button
     }()
     
-    public lazy var servesNumberLabel = UILabel(text: "01", font: .poppinsRegular14(), textColor: .neutral50)
+    public lazy var servesNumberLabel = UILabel(text: "01", font: .poppinsRegular14(), textColor: .neutral50, numberOfLines: 1)
     
     //MARK: - Lifecycle
     
@@ -69,17 +43,10 @@ class HeaderView: UIView {
     }
     
     private func setupViews() {
-        addSubview(titleLabel)
-        addSubview(recipeImageView)
-        addSubview(nameRecipeTextField)
-        addSubview(backViewServes)
-        backViewServes.addSubview(whiteViewServes)
+        addSubviews(titleLabel, recipeImageView, nameRecipeTextField, backViewServes)
+        backViewServes.addSubviews(whiteViewServes, servesLabel, servesButton, servesNumberLabel)
         whiteViewServes.addSubview(usersImageView)
-        backViewServes.addSubview(servesLabel)
-        backViewServes.addSubview(servesButton)
-        backViewServes.addSubview(servesNumberLabel)
     }
-    
     public func getNameTextFieldText() -> String {
         guard let text = nameRecipeTextField.text else { return "" }
         return text
@@ -100,7 +67,6 @@ extension HeaderView: ServesTableViewControllerDelegate {
 
 extension HeaderView {
     private func setConstraints() {
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: Constants.titleLabelTopSpacing),
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.titleLabelLeadingSpacing)
@@ -137,20 +103,17 @@ extension HeaderView {
             whiteViewServes.heightAnchor.constraint(equalToConstant: 36)
         ])
         
-        usersImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             usersImageView.centerYAnchor.constraint(equalTo: whiteViewServes.centerYAnchor),
             usersImageView.centerXAnchor.constraint(equalTo: whiteViewServes.centerXAnchor),
             usersImageView.heightAnchor.constraint(equalToConstant: 18)
         ])
         
-        servesLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             servesLabel.centerYAnchor.constraint(equalTo: backViewServes.centerYAnchor),
             servesLabel.leadingAnchor.constraint(equalTo: whiteViewServes.trailingAnchor, constant: 16)
         ])
         
-        servesNumberLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             servesNumberLabel.centerYAnchor.constraint(equalTo: backViewServes.centerYAnchor),
             servesNumberLabel.trailingAnchor.constraint(equalTo: servesButton.leadingAnchor, constant: -8)

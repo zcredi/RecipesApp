@@ -1,21 +1,11 @@
-//
-//  FireBaseAuthManager.swift
-//  RecipesApp
-//
-//  Created by Maria on 06.09.2023.
-//
-
 import Foundation
 import FirebaseAuth
 import Firebase
 
-protocol FireBaseAuthProtocol: AnyObject
-{
-    
+protocol FireBaseAuthProtocol: AnyObject {
     func createUser(userName: String, eMail: String, pwd: String, completionBlock: @escaping(Result<UserAuthData,Error>) -> Void)
     func signIn(eMail: String, pwd: String, completionBlock: @escaping(Result<UserAuthData,Error>) -> Void)
     func signOut(completionBlock: @escaping(Result<Bool,Error>) -> Void)
-    
 }
 
 class FireBaseAuthManager: FireBaseAuthProtocol {

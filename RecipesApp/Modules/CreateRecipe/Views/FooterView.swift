@@ -1,10 +1,3 @@
-//
-//  FooterView.swift
-//  RecipesApp
-//
-//  Created by Владислав on 07.09.2023.
-//
-
 import UIKit
 
 class FooterView: UIView {
@@ -23,7 +16,7 @@ class FooterView: UIView {
         IngredientsItemModel(itemName: "Green Beans", quantity: "150gr"),
     ]
     
-    private lazy var ingredientsLabel = UILabel(text: "Ingredients", font: .poppinsBold20(), textColor: .neutral100)
+    private lazy var ingredientsLabel = UILabel(text: "Ingredients", font: .poppinsBold20(), textColor: .neutral100, numberOfLines: 1)
     
     private lazy var itemTextField = CreateRecipeTextField()
     
@@ -69,14 +62,9 @@ class FooterView: UIView {
     }
     
     private func setupViews() {
-        addSubview(ingredientsLabel)
-        addSubview(itemTextField)
+        addSubviews(ingredientsLabel, itemTextField, quantityTextField, addNewItemButton, itemCollectionView, ingredientsNewItem)
         itemTextField.layer.borderColor = UIColor.neutral20.cgColor
-        addSubview(quantityTextField)
         quantityTextField.layer.borderColor = UIColor.neutral20.cgColor
-        addSubview(addNewItemButton)
-        addSubview(itemCollectionView)
-        addSubview(ingredientsNewItem)
     }
     
     private func setDelegates() {
@@ -127,7 +115,6 @@ class FooterView: UIView {
 
 extension FooterView {
     private func setConstraints() {
-        ingredientsLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             ingredientsLabel.topAnchor.constraint(equalTo: topAnchor, constant: 0),
             ingredientsLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 2),

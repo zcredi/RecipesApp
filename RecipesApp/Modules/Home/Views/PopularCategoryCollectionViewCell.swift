@@ -4,44 +4,13 @@ import Kingfisher
 class PopularCategoryCollectionViewCell: UICollectionViewCell {
     static let identifier = "PopularCategoryCell"
     
-    private lazy var categoryView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 1)
-        view.layer.cornerRadius = 10
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+    private lazy var categoryView = UIView(withBackgroundColor: UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 1), cornerRadius: 10)
     
-    private lazy var recipeImage: UIImageView = {
-        let image = UIImageView.init(image: UIImage(named: "sex"))
-        image.layer.masksToBounds = true
-        image.layer.cornerRadius = 50
-        image.contentMode = .scaleAspectFill
-        image.translatesAutoresizingMaskIntoConstraints = false
-        return image
-    }()
-    
-    
-    private lazy var recipeLabel: UILabel = {
-        let label = UILabel(text: "Chicken and Vegetable wrap", font: UIFont.poppinsBold14(), textColor: .black)
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private lazy var currentTime: UILabel = {
-        let label = UILabel(text: "5 Mins", font: UIFont.poppinsBold12(), textColor: .black)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private lazy var timeLabel: UILabel = {
-        let label = UILabel(text: "Time", font: UIFont.poppinsRegular12(), textColor: .systemGray)
-        label.textAlignment = .left
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    private lazy var recipeImage = UIImageView(image: "sex", cornerRadius: 50)
+    private lazy var recipeLabel = UILabel(text: "Chicken and Vegetable wrap", font: .poppinsBold14(), textColor: .black, numberOfLines: 0)
+    private lazy var currentTime = UILabel(text: "5 Mins", font: .poppinsBold12(), textColor: .black, numberOfLines: 1)
+    private lazy var timeLabel = UILabel(text: "Time", font: .poppinsRegular12(), textColor: .systemGray, textAligment: .left, numberOfLines: 1)
+        
     
     public func configureCell(with recipe: PopularCategoryInfo) {
         guard let recipeImageUrl = URL(string: recipe.image) else { return }
@@ -54,10 +23,7 @@ class PopularCategoryCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(categoryView)
-        categoryView.addSubview(currentTime)
-        categoryView.addSubview(timeLabel)
-        categoryView.addSubview(recipeLabel)
-        addSubview(recipeImage)
+        addSubviews(currentTime, timeLabel, recipeLabel, recipeImage)
         
         NSLayoutConstraint.activate([
             categoryView.topAnchor.constraint(equalTo: topAnchor),

@@ -4,86 +4,40 @@ import Kingfisher
 class TrendingNowCollectionViewCell: UICollectionViewCell {
     static let identifier = "TrendingNowCell"
     
-    private lazy var photoDish: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "sending_m"))
-        imageView.contentMode = .scaleAspectFill
-        imageView.layer.masksToBounds = true
-        imageView.layer.cornerRadius = 16
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
+    private lazy var photoDish = UIImageView(image: "sending_m", cornerRadius: 16)
     
+    private lazy var ratingContainerView = UIView(withBackgroundColor: UIColor(red: 0.19, green: 0.19, blue: 0.19, alpha: 0.5), cornerRadius: 8)
     
-    private lazy var ratingContainerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(red: 0.19, green: 0.19, blue: 0.19, alpha: 0.5)
-        view.layer.cornerRadius = 8
-        view.layer.cornerCurve = .continuous
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-
     private lazy var ratingImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(systemName: "star.fill")?.withTintColor(.systemYellow, renderingMode: .alwaysOriginal))
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
-    private lazy var ratingLabel: UILabel = {
-        let label = UILabel(text: "4,5", font: UIFont(name: "Poppins-Bold", size: 14), textColor: .white)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    private lazy var ratingLabel = UILabel(text: "4,5", font: UIFont(name: "Poppins-Bold", size: 14), textColor: .white, numberOfLines: 1)
     
-    private lazy var titleDishLabel: UILabel = {
-        let label = UILabel(text: "How to sharwama at home", font: .poppinsBold16(), textColor: .black)
-        label.numberOfLines = 0
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    private lazy var titleDishLabel = UILabel(text: "How to sharwama at home", font: .poppinsBold16(), textColor: .black, numberOfLines: 0)
     
-    private lazy var creatorStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.alignment = .center
-        stackView.spacing = 8
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
-
+    private lazy var creatorStackView = UIStackView(axis: .horizontal, aligment: .center, spacing: 8)
     
-    private lazy var creatorImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "sex"))
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.layer.cornerRadius = 16
-        imageView.contentMode = .scaleAspectFill
-        imageView.layer.masksToBounds = true
-        return imageView
-    }()
-
+    private lazy var creatorImageView = UIImageView(image: "sex", cornerRadius: 16)
     
-    private lazy var creatorLabel: UILabel = {
-        let label = UILabel(text: "By Zeelicious foods", font: .poppinsRegular12(), textColor: UIColor(red: 0.57, green: 0.57, blue: 0.57, alpha: 1))
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    private lazy var creatorLabel = UILabel(text: "By Zeelicious foods", font: .poppinsRegular12(), textColor: UIColor(red: 0.57, green: 0.57, blue: 0.57, alpha: 1), numberOfLines: 1)
         
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupUI()
-    }
+        
+   
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    func configureCell(with recipe: Recipe) {
+        guard let recipeImageUrl = URL(string: recipe.image) else { return }
+        photoDish.kf.setImage(with: recipeImageUrl)
+        titleDishLabel.text = recipe.name
+        
     }
     
     private func setupUI() {
-        addSubview(photoDish)
+        addSubviews(photoDish, titleDishLabel, creatorStackView)
         photoDish.addSubview(ratingContainerView)
-        ratingContainerView.addSubview(ratingImageView)
-        ratingContainerView.addSubview(ratingLabel)
-        addSubview(titleDishLabel)
-        addSubview(creatorStackView)
+        ratingContainerView.addSubviews(ratingImageView, ratingLabel)
         creatorStackView.addArrangedSubview(creatorImageView)
         creatorStackView.addArrangedSubview(creatorLabel)
         setupConstraints()
@@ -122,10 +76,15 @@ class TrendingNowCollectionViewCell: UICollectionViewCell {
         ])
     }
     
-    func configureCell(with recipe: Recipe) {
-        guard let recipeImageUrl = URL(string: recipe.image) else { return }
-        photoDish.kf.setImage(with: recipeImageUrl)
-        titleDishLabel.text = recipe.name
-        
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupUI()
     }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
 }

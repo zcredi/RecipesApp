@@ -3,16 +3,16 @@ import UIKit
 extension HomeViewController {
     
     func importantUIDownload(){
-        if recentRecipes.isEmpty && !uiSetupCompleted {
+        if viewModel.recentRecipes.isEmpty && !uiSetupCompleted {
             setupUIWithoutRecentRecipe()
             uiSetupCompleted = true
-        }else if !recentRecipes.isEmpty && !uiSetupCompleted{
+        }else if !viewModel.recentRecipes.isEmpty && !uiSetupCompleted{
             setupAllUI()
             uiSetupCompleted = true
         }
         
         if uiSetupCompleted {
-            if !recentRecipes.isEmpty {
+            if !viewModel.recentRecipes.isEmpty {
                 setupAllUI()
                 recentRecipeCollectionView.reloadData()
             }

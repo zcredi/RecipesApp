@@ -4,29 +4,10 @@ import Kingfisher
 class RecentRecipeCollectionViewCell: UICollectionViewCell {
     static let identifier = "RecentRecipeCell"
     
-    private lazy var recipeImage: UIImageView = {
-        let image = UIImageView(image: UIImage(named: "sex"))
-        image.contentMode = .scaleAspectFill
-        image.layer.cornerRadius = 10
-        image.clipsToBounds = true
-        image.translatesAutoresizingMaskIntoConstraints = false
-        return image
-    }()
-    
-    private lazy var recipeLabel: UILabel = {
-        let label = UILabel(text: "Kelewele Ghanian Recipe", font: UIFont.poppinsBold12(), textColor: .black)
-        label.numberOfLines = 0
-        label.textAlignment = .left
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private lazy var creatorLabel: UILabel = {
-        let label = UILabel(text: "By Zeelicious Foods", font: UIFont.poppinsRegular10(), textColor: .lightGray)
-        label.textAlignment = .left
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    private lazy var recipeImage = UIImageView(image: "sex", cornerRadius: 10)
+    private lazy var recipeLabel = UILabel(text: "Kelewele Ghanian Recipe", font: UIFont.poppinsBold12(), textColor: .black, textAligment: .left, numberOfLines: 0)
+    private lazy var creatorLabel = UILabel(text: "By Zeelicious Foods", font: UIFont.poppinsRegular10(), textColor: .lightGray, textAligment: .left, numberOfLines: 1)
+      
     
     public func configureCell(with recipe: RecentRecipeModel) {
         guard let recipeImageUrl = URL(string: recipe.imageURL) else { return }
@@ -37,9 +18,7 @@ class RecentRecipeCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubview(recipeImage)
-        addSubview(recipeLabel)
-        addSubview(creatorLabel)
+        addSubviews(recipeImage, recipeLabel, creatorLabel)
         
         NSLayoutConstraint.activate([
             recipeImage.heightAnchor.constraint(equalToConstant: 150),

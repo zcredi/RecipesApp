@@ -31,16 +31,11 @@ final class RecipeDetailViewController: UIViewController {
         return contentView
     }()
   
-    private var recipeNameLabel = UILabel(font: UIFont.poppinsBold24(), textColor: UIColor.neutral100)
-  
-    private lazy var recipeImage: UIImageView = {
-        let recipeImage = UIImageView()
-        recipeImage.contentMode = .scaleAspectFill
-        recipeImage.image = UIImage(named: "recipeImage")
-        recipeImage.layer.cornerRadius = 20
-        recipeImage.clipsToBounds = true
-        return recipeImage
-    }()
+    private var recipeNameLabel = UILabel(font: UIFont.poppinsBold24(), textColor: UIColor.neutral100, numberOfLines: 1)
+    
+    private lazy var recipeImage = UIImageView(image: "recipeImage", cornerRadius: 20)
+    
+    
   
     private lazy var ratingImage: UIImageView = {
         let ratingImage = UIImageView()
@@ -50,8 +45,8 @@ final class RecipeDetailViewController: UIViewController {
         return ratingImage
     }()
   
-    private lazy var ratingLabel = UILabel(text: "4.5", font: UIFont.poppinsBold14(), textColor: UIColor.neutral100)
-    private lazy var reviewsLabel = UILabel(text: "(300 reviews)", font: UIFont.poppinsRegular14(), textColor: UIColor.neutral50)
+    private lazy var ratingLabel = UILabel(text: "4.5", font: UIFont.poppinsBold14(), textColor: UIColor.neutral100, numberOfLines: 1)
+    private lazy var reviewsLabel = UILabel(text: "(300 reviews)", font: UIFont.poppinsRegular14(), textColor: UIColor.neutral50, numberOfLines: 1)
   
     private lazy var ratingStack: UIStackView = {
         let ratingStack = UIStackView(arrangedSubviews: [ratingImage, ratingLabel, reviewsLabel])
@@ -348,7 +343,7 @@ extension RecipeDetailViewController: UITableViewDelegate, UITableViewDataSource
             return label
         case 1:
             label.text = "Ingredients"
-            let ingredientLabel = UILabel(text: "\(allIngredients.count) items", font: UIFont.poppinsRegular14(), textColor: UIColor.neutral50)
+            let ingredientLabel = UILabel(text: "\(allIngredients.count) items", font: UIFont.poppinsRegular14(), textColor: UIColor.neutral50, numberOfLines: 1)
             ingredientLabel.textAlignment = .right
             let stackView = UIStackView(arrangedSubviews: [label, ingredientLabel])
             stackView.spacing = 2

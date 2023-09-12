@@ -1,10 +1,11 @@
 import UIKit
 
 extension UIView {
-    func addSubviews(_ views: UIView...) {
-        for view in views {
-            addSubview(view)
-        }
+    convenience init(withBackgroundColor backgroundColor: UIColor, cornerRadius: CGFloat) {
+        self.init()
+        self.backgroundColor = backgroundColor
+        self.layer.cornerRadius = cornerRadius
+        self.layer.cornerCurve = .continuous
+        self.translatesAutoresizingMaskIntoConstraints = false
     }
 }
-

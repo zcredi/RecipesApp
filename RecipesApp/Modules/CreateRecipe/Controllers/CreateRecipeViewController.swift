@@ -1,10 +1,3 @@
-//
-//  CreateRecipeViewController.swift
-//  RecipesApp
-//
-//  Created by Владислав on 30.08.2023.
-//
-
 import UIKit
 
 class CreateRecipeViewController: UIViewController {
@@ -35,7 +28,6 @@ class CreateRecipeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupViews()
         setConstraints()
         setupServesGestures()
@@ -44,10 +36,7 @@ class CreateRecipeViewController: UIViewController {
     
     private func setupViews() {
         view.backgroundColor = .white
-        view.addSubview(headerView)
-        view.addSubview(cookTimeView)
-        view.addSubview(footerView)
-        view.addSubview(createRecipeButton)
+        view.addSubviews(headerView, cookTimeView, footerView, createRecipeButton)
     }
     
     private func setupServesGestures() {

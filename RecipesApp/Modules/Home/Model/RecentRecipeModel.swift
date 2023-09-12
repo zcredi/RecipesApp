@@ -1,6 +1,3 @@
-// This is my first time trying to work with databases in programming. In this file, I created a model that we will use to store an object in the database so that we can display a picture, its title and id in recent recipes
-// by: @fullzoom
-
 import Foundation
 import RealmSwift
 
@@ -8,20 +5,23 @@ class RecentRecipeModel: Object {
     @Persisted var id: Int = 0
     @Persisted var imageURL: String = ""
     @Persisted var title: String = ""
+}
 
-    func saveToRealm(id: Int, imageURL: String, title: String) {
-        self.id = id
-        self.imageURL = imageURL
-        self.title = title
+class RealmService {
+    private let realm = try! Realm()
 
-        let realm = try! Realm()
-
+    func saveRecipeToRealm(recipe: RecentRecipeModel) {
         do {
             try realm.write {
-                realm.add(self)
+                realm.add(recipe)
             }
         } catch {
-            print("Error saving to Realm: (error)")
+            print("Error saving to Realm: \(error)")
         }
+    }
+
+    func loadRecentRecipesFromRealm() -> [RecentRecipeModel] {
+        let recipes = realm.objects(RecentRecipeModel.self)
+        return Array(recipes).reversed()
     }
 }

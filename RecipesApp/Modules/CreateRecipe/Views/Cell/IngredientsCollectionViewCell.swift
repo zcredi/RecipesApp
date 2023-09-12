@@ -1,10 +1,3 @@
-//
-//  IngredientsCollectionViewCell.swift
-//  RecipesApp
-//
-//  Created by Владислав on 07.09.2023.
-//
-
 import UIKit
 
 class IngredientsCollectionViewCell: UICollectionViewCell {
@@ -15,12 +8,6 @@ class IngredientsCollectionViewCell: UICollectionViewCell {
         static let itemLabelWidth: CGFloat = 164.0
         static let quantityLabelWidth: CGFloat = 115.0
     }
-    
-    //MARK: - Create UI
-    
-//    private lazy var itemLabel = UILabel(font: .poppinsRegular14(), textColor: .neutral100)
-//    
-//    private lazy var quantityLabel = UILabel(font: .poppinsRegular14(), textColor: .neutral100)
     
     private lazy var itemLabel = CreateRecipeTextField()
     
@@ -45,11 +32,9 @@ class IngredientsCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupViews() {
-        addSubview(itemLabel)
+        addSubviews(itemLabel, quantityLabel, deleteItemButton)
         itemLabel.layer.borderColor = UIColor.neutral20.cgColor
-        addSubview(quantityLabel)
         quantityLabel.layer.borderColor = UIColor.neutral20.cgColor
-        addSubview(deleteItemButton)
     }
     
     func configureCell(model: IngredientsItemModel) {

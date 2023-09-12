@@ -12,14 +12,14 @@ class PagesViewController: UIViewController {
     var imageName: String
     var titleTextFirstPart: String
     var titleTextSecondPart: String
-    var subtitleText: String?
+    var subtitleText: String
     
     
     init(imageName: String, titleTextFirstPart: String, titleTextSecondPart: String, subtitleText: String) {
         self.imageName = imageName
         self.titleTextFirstPart = titleTextFirstPart
         self.titleTextSecondPart = titleTextSecondPart
-        self.subtitleText? = subtitleText
+        self.subtitleText = subtitleText
         super.init(nibName: nil, bundle: nil)
         
     }
@@ -37,31 +37,17 @@ class PagesViewController: UIViewController {
     }()
     
     lazy var onboardingTitle: UILabel = {
-        let title = UILabel()
+        let title = UILabel(text: "", font: .poppinsBold40(), textColor: .white, numberOfLines: 0)
         let text = NSMutableAttributedString()
         text.append(NSAttributedString(string: titleTextFirstPart, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white]));
         text.append(NSAttributedString(string: titleTextSecondPart, attributes: [NSAttributedString.Key.foregroundColor: UIColor.secondary20]))
         
         title.attributedText = text
-        title.numberOfLines = 0
-        title.translatesAutoresizingMaskIntoConstraints = false
-        title.textAlignment = .center
-        title.font = .poppinsBold40()
-        
         return title
     }()
     
-    lazy var onboardingSubtitle: UILabel = {
-        let title = UILabel()
-        title.translatesAutoresizingMaskIntoConstraints = false
-        title.text = subtitleText
-        title.textAlignment = .center
-        title.font = .poppinsRegular16()
-        title.textColor = .white
-        title.numberOfLines = 0
-        
-        return title
-    }()
+    lazy var onboardingSubtitle = UILabel(text: subtitleText, font: .poppinsRegular16(), textColor: .white, numberOfLines: 0)
+       
     
     lazy var textStack: UIStackView = {
         let textStackView = UIStackView(arrangedSubviews: [onboardingTitle, onboardingSubtitle])
@@ -78,7 +64,7 @@ class PagesViewController: UIViewController {
     override func loadView() {
         super.loadView()
         
-        view.addSubview(onboardingImage)
+        view.addSubviews(onboardingImage, textStack)
         onboardingImage.translatesAutoresizingMaskIntoConstraints = false
         onboardingImage.sizeToFit()
         
@@ -88,8 +74,6 @@ class PagesViewController: UIViewController {
             onboardingImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             onboardingImage.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-        
-        view.addSubview(textStack)
         
         NSLayoutConstraint.activate([
             

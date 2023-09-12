@@ -3,26 +3,17 @@ import UIKit
 class PopularCreatorsCollectionViewCell: UICollectionViewCell {
     static let identifier = "PopularCreatorsCell"
     
-    private lazy var creatorImage: UIImageView = {
-        let image = UIImageView(image: UIImage(named: "sex"))
-        image.contentMode = .scaleAspectFill
-        image.layer.masksToBounds = true
-        image.layer.cornerRadius = 60
-        image.translatesAutoresizingMaskIntoConstraints = false
-        return image
-    }()
+    private lazy var creatorImage = UIImageView(image: "sex", cornerRadius: 60)
+    private lazy var creatorLabel = UILabel(text: "Ify’s Kitchen", font: UIFont.poppinsBold12(), textColor: .black, numberOfLines: 1)
     
-    private lazy var creatorLabel: UILabel = {
-        let label = UILabel(text: "Ify’s Kitchen", font: UIFont.poppinsBold12(), textColor: .black)
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    public func configureCell(with creator: String){
+        creatorImage.image = UIImage(named: creator)
+        creatorLabel.text = creator
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.addSubview(creatorImage)
-        contentView.addSubview(creatorLabel)
+        addSubviews(creatorImage, creatorLabel)
         
         NSLayoutConstraint.activate([
             creatorImage.heightAnchor.constraint(equalToConstant: 120),
@@ -34,11 +25,6 @@ class PopularCreatorsCollectionViewCell: UICollectionViewCell {
             creatorLabel.topAnchor.constraint(equalTo: creatorImage.bottomAnchor, constant: 10),
             creatorLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
-    }
-    
-    public func configureCell(with creator: String){
-        creatorImage.image = UIImage(named: creator)
-        creatorLabel.text = creator
     }
     
     required init?(coder: NSCoder) {
