@@ -10,7 +10,6 @@ class RatingView: UIView {
         return blurredEffectView
     }()
     
-    
     private lazy var ratingLabel = UILabel(text: "5.0", font: .boldSystemFont(ofSize: 16), textColor: .white, textAligment: .left, numberOfLines: 0)
         
     
@@ -22,16 +21,6 @@ class RatingView: UIView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-    
-    init() {
-        super.init(frame: .zero)
-        setupUI()
-        setupConstraints()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     func setupUI() {
         addSubviews(blurView, starImageView, ratingLabel)
@@ -56,5 +45,15 @@ class RatingView: UIView {
             ratingLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5)
             
         ])
+    }
+    
+    init() {
+        super.init(frame: .zero)
+        setupUI()
+        setupConstraints()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

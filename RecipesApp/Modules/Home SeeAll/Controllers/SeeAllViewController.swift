@@ -1,34 +1,35 @@
 import UIKit
 import RealmSwift
+
 class SeeAllViewController: UIViewController {
-    
-    
-    private lazy var seeAllTableView = SeeAllTableView()
-    private let realm = try! Realm()
+    private lazy var seeAllViewModel = SeeAllViewModel()
+    private lazy var seeAllTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = .systemBackground
+        tableView.layer.cornerRadius = 30
+        tableView.register(CustomCell.self, forCellReuseIdentifier: CustomCell.identifier)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchTrendingNow()
         setupNavigationBarWithBackButton()
-        seeAllTableView.recipeSelectionDelegate = self
         setupUI()
         setupConstraints()
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        seeAllTableView.layer.cornerRadius = 30
     }
 
     private func setupUI() {
-        title = "Trending now"
+        navigationItem.title = "Trending now"
         view.backgroundColor = .systemBackground
         view.addSubview(seeAllTableView)
-
     }
     
     private func setupConstraints() {
-        seeAllTableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             seeAllTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -40,26 +41,40 @@ class SeeAllViewController: UIViewController {
         ])
         
     }
+    private func fetchTrendingNow() {
+        seeAllViewModel.fetchTrendingNow {
+            self.seeAllTableView.reloadData()
+        }
+    }
 }
 
-// I moved the logic here because we can't in the didSelectImem method in the view go to the next controller
-// by: @fullzoom
-
-
-extension SeeAllViewController: SeeAllTableViewDelegate{
-    func didSelectRecipe(recipe: Recipe) {
-        
-        let recentRecipeModel = RecentRecipeModel()
-        recentRecipeModel.id = recipe.id
-        recentRecipeModel.imageURL = recipe.image
-        recentRecipeModel.title = recipe.name
+extension SeeAllViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return seeAllViewModel.trendingNow.count
+    }
     
-        
-        let detailModel = DetailRecipeModel(nameRecipe: recipe.name, imageRecipe: recipe.image)
-        let vc = RecipeDetailViewController(model: detailModel, id: recipe.id)
-        navigationController?.pushViewController(vc, animated: true)
-        
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.identifier, for: indexPath) as? CustomCell else {
+            return UITableViewCell()
+        }
+        cell.selectionStyle = .none
+        cell.configure(withModelRecipe: seeAllViewModel.trendingNow[indexPath.row])
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 230
     }
     
     
+}
+
+
+extension SeeAllViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let currentIndexPath = seeAllViewModel.trendingNow[indexPath.row]
+        let detailModel = DetailRecipeModel(nameRecipe: currentIndexPath.name, imageRecipe: currentIndexPath.image)
+        let vc = RecipeDetailViewController(model: detailModel, id: currentIndexPath.id)
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }

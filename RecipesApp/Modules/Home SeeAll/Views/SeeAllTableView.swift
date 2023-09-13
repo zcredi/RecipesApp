@@ -1,44 +1,22 @@
 import UIKit
 
-protocol SeeAllTableViewDelegate: NSObject {
-    func didSelectRecipe(recipe: Recipe)
-}
-
 class SeeAllTableView: UITableView {
-    private let networkManager = NetworkManager()
-    private let urlGenerator = URLRequestGeneratore()
-    private var trendingNow: [Recipe] = []
-    private var trendingNowIngradientAndTime: [ReadyInMinutes]
-    weak var recipeSelectionDelegate: SeeAllTableViewDelegate?
+    var seeAllViewModel: SeeAllViewModel? {
+        didSet{
+            guard let viewModel = seeAllViewModel else { return}
+            self.reloadData()
+        }
+    }
     
     override init(frame: CGRect, style: UITableView.Style) {
-        self.trendingNowIngradientAndTime = []
         super.init(frame: frame, style: style)
-        callNetworking()
-        configureTable()
-        
-    }
-    
-    // https://api.spoonacular.com/food/search?apiKey=3ddda5e4a8a64560a72989de5ff7a8a4&limitLicense=true&limit=14
-    
-    func callNetworking(){
-        let trendingNowRequest = urlGenerator.request(endpoint: "food/search", queryItems: [URLQueryItem(name: "limitLicense", value: "true"), URLQueryItem(name: "limit", value: "14")])
-        
-        networkManager.request(generator: trendingNowRequest) { (result: Swift.Result<SearchResponse, Error>) in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let searched):
-                    self.trendingNow = searched.searchResults[0].results
-                    self.reloadData()
-                case .failure(let failure):
-                    print(failure.localizedDescription)
-                }
-            }
+        self.layer.cornerRadius = 30
+        seeAllViewModel?.fetchTrendingNow {
+            self.configureTable()
+            self.reloadData()
         }
-        
     }
-
-     
+    
     func configureTable() {
         backgroundColor = .white
         separatorStyle = .none
@@ -55,23 +33,23 @@ class SeeAllTableView: UITableView {
 extension SeeAllTableView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return trendingNow.count
+        return seeAllViewModel?.trendingNow.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.identifier, for: indexPath) as? CustomCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.identifier, for: indexPath) as? CustomCell,
+        let recipe = seeAllViewModel?.trendingNow[indexPath.row] else {
             return UITableViewCell()
         }
         cell.selectionStyle = .none
-        cell.configure(withModelRecipe: trendingNow[indexPath.row])
+        cell.configure(withModelRecipe: recipe)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let currentIndexPath = trendingNow[indexPath.row]
-        recipeSelectionDelegate?.didSelectRecipe(recipe: currentIndexPath)
+        let currentIndexPath = seeAllViewModel?.trendingNow[indexPath.row]
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

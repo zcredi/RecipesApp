@@ -21,6 +21,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "My profile"
         setupView()
     }
     

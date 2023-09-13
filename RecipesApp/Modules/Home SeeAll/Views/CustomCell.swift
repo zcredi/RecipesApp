@@ -11,13 +11,10 @@ class CustomCell: UITableViewCell {
     private let ingredientsLabel = UILabel(text: "9 Ingredients | 25 min", font: .poppinsRegular14(), textColor: .white, textAligment: .left,  numberOfLines: 0)
     
     
-   
-    
     // MARK: - Private Methods
     
     private func setupViews() {
         contentView.addSubviews(mealImageView, mealNameLabel, ingredientsLabel, ratingView)
-        
         setupConstraints()
     }
     
