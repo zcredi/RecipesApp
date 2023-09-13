@@ -1,92 +1,58 @@
 import UIKit
 
-class MainTabBarController : UITabBarController {
-    
-    let btnMiddle : UIButton = {
-        let btn = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
-        btn.setTitle("", for: .normal)
-        btn.layer.cornerRadius = 30
-        btn.layer.shadowColor = UIColor.black.cgColor
-        btn.layer.shadowOpacity = 0.2
-        btn.layer.shadowOffset = CGSize(width: 4, height: 4)
-        btn.setBackgroundImage(UIImage(named: "plus"), for: .normal)
-        btn.addTarget(self, action: #selector(btnMidleTapped), for: .touchUpInside)
-        return btn
-    }()
+class MainTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-          addSomeTabItems()
-          self.view.addSubview(btnMiddle)
-          positionMiddleButton()
-          setupCustomTabBar()
+        addSomeTabItems()
+        setupCustomTabBar()
     }
-    
+
     func setupCustomTabBar() {
-        let path : UIBezierPath = getPathForTabBar()
-        let shape = CAShapeLayer()
-        shape.path = path.cgPath
-        shape.lineWidth = 1
-        shape.strokeColor = UIColor.neutral40.cgColor
-        shape.fillColor = UIColor.neutral0.cgColor
-        self.tabBar.layer.insertSublayer(shape, at: 0)
-        self.tabBar.itemWidth = 40
-        self.tabBar.layer.insertSublayer(shape, at: 0)
-        self.tabBar.unselectedItemTintColor = .neutral50
         self.tabBar.tintColor = .primary50
+        self.tabBar.unselectedItemTintColor = .neutral50
+
+        self.tabBar.backgroundColor = .systemBackground
+        self.tabBar.shadowImage = UIImage()
+        self.tabBar.backgroundImage = UIImage()
+
+        let separator = CALayer()
+        separator.frame = CGRect(x: 0, y: 0, width: self.tabBar.bounds.width, height: 0.5)
+        separator.backgroundColor = UIColor.separator.cgColor
+        self.tabBar.layer.addSublayer(separator)
     }
-    
-    func positionMiddleButton() {
-        let yOffset: CGFloat = 32
-           btnMiddle.center = CGPoint(x: self.tabBar.center.x, y: self.tabBar.frame.origin.y - yOffset)
-    }
-    
-    @objc func btnMidleTapped() {
-        let createRecipeViewController = CreateRecipeViewController()
-        createRecipeViewController.modalPresentationStyle = .fullScreen
-        present(createRecipeViewController, animated: true)
-    }
-    
+
     func addSomeTabItems() {
         let home = UINavigationController(rootViewController: HomeViewController())
+        let homeImage = UIImage(systemName: "house")
+        let houseImageSelected = UIImage(systemName: "house.fill")
+        home.tabBarItem = UITabBarItem(title: "Home", image: homeImage, selectedImage: houseImageSelected)
+
+        
         let search = UINavigationController(rootViewController: SearchRecipeViewController())
+        search.tabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "magnifyingglass"), tag: 0)
+        
+        
+        let plusImage = UIImage(systemName: "plus.circle")
+        let plusImageSelected = UIImage(systemName: "plus.circle.fill")
+        let createRecipe = UINavigationController(rootViewController: CreateRecipeViewController())
+        createRecipe.tabBarItem = UITabBarItem(title: "Create", image: plusImage, selectedImage: plusImageSelected)
+        
+        
+        
+        let discoverImage = UIImage(systemName: "bookmark")
+        let discoverImageSelected = UIImage(systemName: "bookmark.fill")
         let discover = UINavigationController(rootViewController: DiscoverViewController())
+        discover.tabBarItem = UITabBarItem(title: "Discover", image: discoverImage, selectedImage: discoverImageSelected)
+
+        
+        let profileImage = UIImage(systemName: "person")
+        let profileImageSelected = UIImage(systemName: "person.fill")
         let profile = UINavigationController(rootViewController: ProfileViewController())
+        profile.tabBarItem = UITabBarItem(title: "Profile", image:  profileImage, selectedImage: profileImageSelected)
         
-        setViewControllers([home, search, discover, profile], animated: true)
-        
-        guard let items = tabBar.items else { return }
-        
-        items[0].image = UIImage(named: "home")
-        items[1].image = UIImage(named: "magnifyingglass")
-        items[2].image = UIImage(named: "inactive")
-        items[3].image = UIImage(named: "profile")
-        items[0].imageInsets = UIEdgeInsets(top: 15, left: -5, bottom: -15, right: 0)
-        items[1].imageInsets = UIEdgeInsets(top: 15, left: -55, bottom: -15, right: 0)
-        items[2].imageInsets = UIEdgeInsets(top: 15, left: 0, bottom: -15, right: -55)
-        items[3].imageInsets = UIEdgeInsets(top: 15, left: 0, bottom: -15, right: -5)
-    }
+        setViewControllers([home, search, createRecipe, discover, profile], animated: true)
     
-    func getPathForTabBar() -> UIBezierPath {
-        let frameWidth = self.tabBar.bounds.width
-        let frameHeight = UIScreen.main.bounds.height - self.view.safeAreaInsets.bottom
-        let holeWidth = 145
-        let holeHeight = 34
-        let leftXUntilHole = Int(frameWidth/2) - Int(holeWidth/2)
-        
-        let path : UIBezierPath = UIBezierPath()
-        path.move(to: CGPoint(x: 0, y: 0))
-        path.addLine(to: CGPoint(x: leftXUntilHole , y: 0))
-        path.addCurve(to: CGPoint(x: leftXUntilHole + (holeWidth/3), y: holeHeight/2), controlPoint1: CGPoint(x: leftXUntilHole + ((holeWidth/3)/8)*6,y: 0), controlPoint2: CGPoint(x: leftXUntilHole + ((holeWidth/3)/8)*8, y: holeHeight/2))
-        
-        path.addCurve(to: CGPoint(x: leftXUntilHole + (2*holeWidth)/3, y: holeHeight/2), controlPoint1: CGPoint(x: leftXUntilHole + (holeWidth/3) + (holeWidth/3)/3*2/5, y: (holeHeight/2)*6/4), controlPoint2: CGPoint(x: leftXUntilHole + (holeWidth/3) + (holeWidth/3)/3*2 + (holeWidth/3)/3*3/5, y: (holeHeight/2)*6/4))
-        
-        path.addCurve(to: CGPoint(x: leftXUntilHole + holeWidth, y: 0), controlPoint1: CGPoint(x: leftXUntilHole + (2*holeWidth)/3,y: holeHeight/2), controlPoint2: CGPoint(x: leftXUntilHole + (2*holeWidth)/3 + (holeWidth/3)*2/8, y: 0))
-        path.addLine(to: CGPoint(x: frameWidth, y: 0))
-        path.addLine(to: CGPoint(x: frameWidth, y: frameHeight))
-        path.addLine(to: CGPoint(x: 0, y: frameHeight))
-        path.addLine(to: CGPoint(x: 0, y: 0))
-        path.close()
-        return path
     }
 }
+

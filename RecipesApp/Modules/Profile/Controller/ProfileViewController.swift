@@ -9,6 +9,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             updateCellImage()
         }
     }
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.estimatedRowHeight = UITableView.automaticDimension

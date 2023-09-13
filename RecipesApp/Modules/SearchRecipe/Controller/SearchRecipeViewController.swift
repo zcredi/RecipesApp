@@ -66,6 +66,7 @@ extension SearchRecipeViewController: UITableViewDataSource, UITableViewDelegate
         let currentIndexPath = searchedRecipe[indexPath.row]
         let detailRecipeModel: DetailRecipeModel = DetailRecipeModel(nameRecipe: currentIndexPath.title, imageRecipe: currentIndexPath.image)
         let vc = RecipeDetailViewController(model: detailRecipeModel, id: currentIndexPath.id)
+        vc.hidesBottomBarWhenPushed = true 
         navigationController?.pushViewController(vc, animated: true)
     }
 }

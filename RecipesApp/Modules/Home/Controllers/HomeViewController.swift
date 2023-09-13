@@ -58,6 +58,7 @@ final class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "Get amazing recipe for cooking"
         view.backgroundColor = .systemBackground
         selectedIndexPathForButtonCollectionTag = IndexPath(row: 0, section: 0)
         callNetworking()
@@ -69,19 +70,11 @@ final class HomeViewController: UIViewController {
         importantUIDownload()
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        setupNavigationBar()
-    }
-    
-    private func setupNavigationBar() {
-        let titleLabel = UILabel(text: "Get amazing recipe for cooking", font: UIFont.poppinsRegular20(), textColor: .black, textAligment: .center , numberOfLines: 0)
-        navigationItem.titleView = titleLabel
-    }
-    
     @IBAction func trendingNowSeeAllButtonPressed(_ sender: UIButton) {
         let seeAllViewController = SeeAllViewController()
+        seeAllViewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(seeAllViewController, animated: true)
+        
     }
     
     // MARK: - CallNetworking Method
@@ -189,6 +182,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         // Push to RecipeDetailViewControler
         let detailRecipeModel = DetailRecipeModel(nameRecipe: recipeName, imageRecipe: recipeImage)
         let vc = RecipeDetailViewController(model: detailRecipeModel, id: currentCellID)
+        vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -212,12 +206,5 @@ extension HomeViewController: SwitchPopularCategoryCellDelegate {
                 }
             }
         }
-    }
-}
-
-extension HomeViewController: UISearchBarDelegate {
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        let vc = SearchRecipeViewController()
-        navigationController?.pushViewController(vc, animated: true)
     }
 }
