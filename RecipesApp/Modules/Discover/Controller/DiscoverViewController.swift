@@ -1,56 +1,33 @@
 import SnapKit
 import UIKit
-import RealmSwift
 
 class DiscoverViewController: UIViewController {
-    private let realm = try! Realm()
-    private let networkManager = NetworkManager()
-    private let urlGenerator = URLRequestGeneratore()
-    private var savedRecipe: [SavedRecipeModel] = []
-    lazy var tableView = UITableView()
+    let discoverViewModel = DiscoverViewModel()
+    lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.rowHeight = 270
+        tableView.separatorStyle = .none
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(CustomViewTableCell.self, forCellReuseIdentifier: "cell")
+        return tableView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Saved Recipe"
-        createTable()
         view.addSubview(tableView)
         setupConstrains()
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        let recipes = realm.objects(SavedRecipeModel.self)
-        savedRecipe = Array(recipes).reversed()
+        discoverViewModel.fetchSavedRecipe()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         animateTableView()
-    }
-}
-
-extension DiscoverViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return savedRecipe.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        guard let newCell = cell as? CustomViewTableCell else {
-            return cell
-        }
-        newCell.selectionStyle = .none
-        newCell.createCell(recipe: savedRecipe[indexPath.row])
-        return newCell
-    }
-    
-    func createTable() {
-        view.addSubview(tableView)
-        tableView.register(CustomViewTableCell.self, forCellReuseIdentifier: "cell")
-        tableView.separatorStyle = .none
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.rowHeight = 270
     }
     
     func setupConstrains() {
@@ -58,18 +35,9 @@ extension DiscoverViewController: UITableViewDelegate, UITableViewDataSource {
             make.top.trailing.leading.bottom.equalToSuperview()
         }
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let currentIndexPath = savedRecipe[indexPath.row]
-        
-        let detailModel = DetailRecipeModel(nameRecipe: currentIndexPath.title, imageRecipe: currentIndexPath.image)
-        let vc = RecipeDetailViewController(model: detailModel, id: currentIndexPath.id)
-        navigationController?.pushViewController(vc, animated: true)
-    }
-    
     private func animateTableView() {
         tableView.reloadData()
-        if !savedRecipe.isEmpty{
+        if !discoverViewModel.savedRecipe.isEmpty{
             let cells = tableView.visibleCells
             let tableViewHeight = tableView.bounds.height
             var delay: Double = 0
@@ -88,5 +56,32 @@ extension DiscoverViewController: UITableViewDelegate, UITableViewDataSource {
                 delay += 1
             }
         }
+    }
+    
+}
+
+extension DiscoverViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return discoverViewModel.savedRecipe.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        guard let newCell = cell as? CustomViewTableCell else {
+            return cell
+        }
+        newCell.selectionStyle = .none
+        newCell.createCell(recipe: discoverViewModel.savedRecipe[indexPath.row])
+        return newCell
+    }
+}
+
+extension DiscoverViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let currentIndexPath = discoverViewModel.savedRecipe[indexPath.row]
+        
+        let detailModel = DetailRecipeModel(nameRecipe: currentIndexPath.title, imageRecipe: currentIndexPath.image)
+        let vc = RecipeDetailViewController(model: detailModel, id: currentIndexPath.id)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

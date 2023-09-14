@@ -36,6 +36,8 @@
 		40C8D0252AB0655E00C442D0 /* UIView + App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C8D0242AB0655E00C442D0 /* UIView + App.swift */; };
 		40C8D0272AB06B6900C442D0 /* UIStackView + App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C8D0262AB06B6900C442D0 /* UIStackView + App.swift */; };
 		40C8D0292AB259CF00C442D0 /* SeeAllViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C8D0282AB259CF00C442D0 /* SeeAllViewModel.swift */; };
+		40C8D02B2AB30A9900C442D0 /*  SearchRecipeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C8D02A2AB30A9900C442D0 /*  SearchRecipeViewModel.swift */; };
+		40C8D02E2AB30E1300C442D0 /* DiscoverViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C8D02D2AB30E1300C442D0 /* DiscoverViewModel.swift */; };
 		40EE66FF2A9DED9B00461299 /* PopularCategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EE66FE2A9DED9B00461299 /* PopularCategoryModel.swift */; };
 		40EE67032A9E160900461299 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EE67022A9E160900461299 /* NetworkService.swift */; };
 		40EE67052A9E1CD500461299 /* URLRequestGeneratore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EE67042A9E1CD500461299 /* URLRequestGeneratore.swift */; };
@@ -113,6 +115,8 @@
 		40C8D0242AB0655E00C442D0 /* UIView + App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + App.swift"; sourceTree = "<group>"; };
 		40C8D0262AB06B6900C442D0 /* UIStackView + App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView + App.swift"; sourceTree = "<group>"; };
 		40C8D0282AB259CF00C442D0 /* SeeAllViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SeeAllViewModel.swift; path = RecipesApp/UIConstants/UIKit/SeeAllViewModel.swift; sourceTree = SOURCE_ROOT; };
+		40C8D02A2AB30A9900C442D0 /*  SearchRecipeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " SearchRecipeViewModel.swift"; sourceTree = "<group>"; };
+		40C8D02D2AB30E1300C442D0 /* DiscoverViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewModel.swift; sourceTree = "<group>"; };
 		40EE66FE2A9DED9B00461299 /* PopularCategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularCategoryModel.swift; sourceTree = "<group>"; };
 		40EE67022A9E160900461299 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		40EE67042A9E1CD500461299 /* URLRequestGeneratore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestGeneratore.swift; sourceTree = "<group>"; };
@@ -209,9 +213,9 @@
 		40569B5F2AA62ED500C87666 /* SearchRecipe */ = {
 			isa = PBXGroup;
 			children = (
-				40C8D0152AAFA1B300C442D0 /* Model */,
-				40C8D0172AAFA1BF00C442D0 /* Controller */,
+				40C8D0152AAFA1B300C442D0 /* ViewModel */,
 				40C8D0162AAFA1BB00C442D0 /* View */,
+				40C8D0172AAFA1BF00C442D0 /* Controller */,
 			);
 			path = SearchRecipe;
 			sourceTree = "<group>";
@@ -257,11 +261,12 @@
 			path = MainTabBar;
 			sourceTree = "<group>";
 		};
-		40C8D0152AAFA1B300C442D0 /* Model */ = {
+		40C8D0152AAFA1B300C442D0 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				40C8D02A2AB30A9900C442D0 /*  SearchRecipeViewModel.swift */,
 			);
-			path = Model;
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		40C8D0162AAFA1BB00C442D0 /* View */ = {
@@ -295,6 +300,14 @@
 				40C8D01E2AAFABAF00C442D0 /* PopularCreator.swift */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		40C8D02C2AB30DDC00C442D0 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				40C8D02D2AB30E1300C442D0 /* DiscoverViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		522A7DDC2AA1F75100BE821F /* Model */ = {
@@ -464,6 +477,7 @@
 			isa = PBXGroup;
 			children = (
 				40569B5C2AA5C23800C87666 /* Model */,
+				40C8D02C2AB30DDC00C442D0 /* ViewModel */,
 				40C8D0182AAFA20000C442D0 /* View */,
 				864AABCA2A9CCC65001955C7 /* Controller */,
 			);
@@ -708,12 +722,14 @@
 				40C8D0292AB259CF00C442D0 /* SeeAllViewModel.swift in Sources */,
 				40506C022A9E64030058332A /* TrendingNowCollectionViewCell.swift in Sources */,
 				40EE67032A9E160900461299 /* NetworkService.swift in Sources */,
+				40C8D02E2AB30E1300C442D0 /* DiscoverViewModel.swift in Sources */,
 				40569B422A9FEA7F00C87666 /* SwitchPopularCategoryCollectionViewCell.swift in Sources */,
 				86FBB5612AA8C2DE00B370F2 /* ServesTableViewController.swift in Sources */,
 				40569B4E2AA3905500C87666 /* ReadyInMinutesModel.swift in Sources */,
 				864AABBF2A9CC2E1001955C7 /* UILabel + App.swift in Sources */,
 				52EC938D2AA5D982006A959C /* ProfileViewController.swift in Sources */,
 				4CE0980F2A9E8034000D17F6 /* CastomTableViewCell.swift in Sources */,
+				40C8D02B2AB30A9900C442D0 /*  SearchRecipeViewModel.swift in Sources */,
 				864AAB992A9B45CD001955C7 /* AppDelegate.swift in Sources */,
 				40569B592AA4F35200C87666 /* Extension HomeViewController.swift in Sources */,
 				864AABB82A9B4A31001955C7 /* UIFont+App.swift in Sources */,

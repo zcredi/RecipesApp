@@ -56,7 +56,5 @@ extension CustomViewTableCell {
         guard let url = URL(string: recipe.image) else { return }
         recipeImage.kf.setImage(with: url)
         recipeNameLabel.text = recipe.title
-        
-        
     }
 }

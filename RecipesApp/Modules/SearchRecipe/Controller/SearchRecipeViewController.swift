@@ -2,10 +2,7 @@ import UIKit
 
 class SearchRecipeViewController: UIViewController {
     
-    private let networkManager = NetworkManager()
-    private let urlGenerator = URLRequestGeneratore()
-    private var searchedRecipe: [InformationSearchRecipe] = []
-    private var searchWorkItem: DispatchWorkItem?
+    let searchViewModel = SearchRecipeViewModel()
     private lazy var searchRecipesTableView: UITableView = {
         let tableView = UITableView()
         tableView.register(SearchRecipeTableViewCell.self, forCellReuseIdentifier: SearchRecipeTableViewCell.identifier)
@@ -52,18 +49,19 @@ class SearchRecipeViewController: UIViewController {
 
 extension SearchRecipeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchedRecipe.count
+        return searchViewModel.searchedRecipe.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let currentIndexPath = searchViewModel.searchedRecipe[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchRecipeTableViewCell.identifier, for: indexPath) as! SearchRecipeTableViewCell
         cell.selectionStyle = .none
-        cell.configure(image: searchedRecipe[indexPath.row].image, title: searchedRecipe[indexPath.row].title)
+        cell.configure(image: currentIndexPath.image, title: currentIndexPath.title)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let currentIndexPath = searchedRecipe[indexPath.row]
+        let currentIndexPath = searchViewModel.searchedRecipe[indexPath.row]
         let detailRecipeModel: DetailRecipeModel = DetailRecipeModel(nameRecipe: currentIndexPath.title, imageRecipe: currentIndexPath.image)
         let vc = RecipeDetailViewController(model: detailRecipeModel, id: currentIndexPath.id)
         vc.hidesBottomBarWhenPushed = true 
@@ -72,30 +70,11 @@ extension SearchRecipeViewController: UITableViewDataSource, UITableViewDelegate
 }
 
 extension SearchRecipeViewController: UISearchBarDelegate {
-    
-    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        searchWorkItem?.cancel()
-        
-        let workItem = DispatchWorkItem { [weak self] in
-            guard let self = self else { return }
-            
-            if let text = searchBar.text, !text.isEmpty {
-                let request = self.urlGenerator.request(endpoint: "recipes/complexSearch", queryItems: [URLQueryItem(name: "query", value: text), URLQueryItem(name: "addRecipeInformation", value: "true")])
-                self.networkManager.request(generator: request) { (result: Swift.Result<SearchRecipe, Error>) in
-                    DispatchQueue.main.async {
-                        switch result {
-                        case .success(let searched):
-                            self.searchedRecipe = searched.results
-                            self.searchRecipesTableView.reloadData()
-                        case .failure(let failure):
-                            print(failure.localizedDescription)
-                        }
-                    }
-                }
+        if let text = searchBar.text, !text.isEmpty {
+            searchViewModel.fetchSearchRecipes(text: text) {
+                self.searchRecipesTableView.reloadData()
             }
         }
-        searchWorkItem = workItem
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: workItem)
     }
 }

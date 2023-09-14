@@ -73,6 +73,7 @@ extension SeeAllViewController: UITableViewDataSource {
 extension SeeAllViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let currentIndexPath = seeAllViewModel.trendingNow[indexPath.row]
+        seeAllViewModel.saveRecipeToRealm(id: currentIndexPath.id, imageURL: currentIndexPath.image, title: currentIndexPath.name) 
         let detailModel = DetailRecipeModel(nameRecipe: currentIndexPath.name, imageRecipe: currentIndexPath.image)
         let vc = RecipeDetailViewController(model: detailModel, id: currentIndexPath.id)
         navigationController?.pushViewController(vc, animated: true)

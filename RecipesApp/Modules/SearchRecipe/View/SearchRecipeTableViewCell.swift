@@ -7,18 +7,7 @@ class SearchRecipeTableViewCell: UITableViewCell {
     private lazy var recipeImage = UIImageView(image: "sex", cornerRadius: 10)
     
     private lazy var recipeName = UILabel(text: "How to sharwama at home", font: .poppinsBold14(), textColor: .black, numberOfLines: 0)
-        
     
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupUI()
-        
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     public func configure(image: String, title: String) {
         guard let urlString = URL(string: image) else { return }
@@ -41,4 +30,13 @@ class SearchRecipeTableViewCell: UITableViewCell {
         ])
     }
     
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupUI()
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
