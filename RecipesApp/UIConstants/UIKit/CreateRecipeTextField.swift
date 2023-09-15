@@ -19,7 +19,7 @@ class CreateRecipeTextField: UITextField {
         textColor = .neutral100
         font = .poppinsRegular14()
         layer.borderWidth = 1
-        layer.borderColor = UIColor.primary50.cgColor
+        layer.borderColor = UIColor(named: "redBlue")?.cgColor
         borderStyle = .none
         leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: 0))
         leftViewMode = .always

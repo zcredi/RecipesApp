@@ -5,7 +5,7 @@ class RecentRecipeCollectionViewCell: UICollectionViewCell {
     static let identifier = "RecentRecipeCell"
     
     private lazy var recipeImage = UIImageView(image: "sex", cornerRadius: 10)
-    private lazy var recipeLabel = UILabel(text: "Kelewele Ghanian Recipe", font: UIFont.poppinsBold12(), textColor: .black, textAligment: .left, numberOfLines: 0)
+    private lazy var recipeLabel = UILabel(text: "Kelewele Ghanian Recipe", font: UIFont.poppinsBold12(), textColor: UIColor(named: "blackWhite")!, textAligment: .left, numberOfLines: 0)
     private lazy var creatorLabel = UILabel(text: "By Zeelicious Foods", font: UIFont.poppinsRegular10(), textColor: .lightGray, textAligment: .left, numberOfLines: 1)
       
     

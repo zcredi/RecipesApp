@@ -9,8 +9,8 @@ final class IngredientCell: UITableViewCell {
   
     lazy var ingredientImage = UIImageView(image: "recipeImage", cornerRadius: 10)
     
-    private lazy var ingredientName = UILabel(text: "Fish", font: UIFont.poppinsBold12(), textColor: UIColor.neutral100, numberOfLines: 0)
-    lazy var ingredientWeight = UILabel(text: "250g", font: UIFont.poppinsRegular14(), textColor: UIColor.neutral50, numberOfLines: 1)
+    private lazy var ingredientName = UILabel(text: "Fish", font: UIFont.poppinsBold12(), textColor: UIColor(named: "blackWhite")!, numberOfLines: 0)
+    lazy var ingredientWeight = UILabel(text: "250g", font: UIFont.poppinsRegular14(), textColor: UIColor(named: "blackWhite")!, numberOfLines: 1)
   
     lazy var ingredientSelectButton: UIButton = {
         let ingredientSelectButton = UIButton()
@@ -21,7 +21,7 @@ final class IngredientCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.layer.cornerRadius = 10
-        contentView.backgroundColor = UIColor.neutral10
+        contentView.backgroundColor = .clear
         setupCell()
         layoutUI()
     }
@@ -45,7 +45,7 @@ final class IngredientCell: UITableViewCell {
     }
   
     func checkmark(isSelected: Bool) {
-        let image = isSelected ? UIImage(named: "selected") : UIImage(named: "notSelected")
+        let image = isSelected ? UIImage(systemName: "checkmark.circle.fill")?.withTintColor(.systemBlue, renderingMode: .alwaysOriginal) : UIImage(systemName: "circle")?.withTintColor(.systemBlue, renderingMode: .alwaysOriginal)
         ingredientSelectButton.setImage(image, for: .normal)
     }
     

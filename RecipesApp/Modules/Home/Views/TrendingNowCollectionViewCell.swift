@@ -16,7 +16,7 @@ class TrendingNowCollectionViewCell: UICollectionViewCell {
     
     private lazy var ratingLabel = UILabel(text: "4,5", font: UIFont(name: "Poppins-Bold", size: 14), textColor: .white, numberOfLines: 1)
     
-    private lazy var titleDishLabel = UILabel(text: "How to sharwama at home", font: .poppinsBold16(), textColor: .black, numberOfLines: 0)
+    private lazy var titleDishLabel = UILabel(text: "How to sharwama at home", font: .poppinsBold16(), textColor: UIColor(named: "blackWhite")!, numberOfLines: 0)
     
     private lazy var creatorStackView = UIStackView(axis: .horizontal, aligment: .center, spacing: 8)
     

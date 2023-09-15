@@ -4,11 +4,11 @@ import Kingfisher
 class PopularCategoryCollectionViewCell: UICollectionViewCell {
     static let identifier = "PopularCategoryCell"
     
-    private lazy var categoryView = UIView(withBackgroundColor: UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 1), cornerRadius: 10)
+    private lazy var categoryView = UIView(withBackgroundColor: UIColor(named: "categoryColor")!, cornerRadius: 10)
     
     private lazy var recipeImage = UIImageView(image: "sex", cornerRadius: 50)
-    private lazy var recipeLabel = UILabel(text: "Chicken and Vegetable wrap", font: .poppinsBold14(), textColor: .black, numberOfLines: 0)
-    private lazy var currentTime = UILabel(text: "5 Mins", font: .poppinsBold12(), textColor: .black, numberOfLines: 1)
+    private lazy var recipeLabel = UILabel(text: "Chicken and Vegetable wrap", font: .poppinsBold14(), textColor: UIColor(named: "blackWhite")!, numberOfLines: 0)
+    private lazy var currentTime = UILabel(text: "5 Mins", font: .poppinsBold12(), textColor: UIColor(named: "blackWhite")!, numberOfLines: 1)
     private lazy var timeLabel = UILabel(text: "Time", font: .poppinsRegular12(), textColor: .systemGray, textAligment: .left, numberOfLines: 1)
         
     

@@ -20,11 +20,7 @@ class WelcomeViewController: UIViewController {
     
     
     lazy var buttonView: UIButton = {
-        var button = UIButton()
-        button.setTitle("Get started", for: .normal)
-        button.titleLabel?.font = .poppinsBold16()
-        button.backgroundColor = .primary50
-        button.setTitleColor(.white, for: .normal)
+        var button = UIButton(name: "Get started", backgroundColor: .primary50, font: .poppinsBold16(), titleColor: .white)
         button.clipsToBounds = true
         button.layer.cornerRadius = 10
         button.heightAnchor.constraint(equalToConstant: 56).isActive = true

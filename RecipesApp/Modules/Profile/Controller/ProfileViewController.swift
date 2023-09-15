@@ -14,7 +14,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.estimatedRowHeight = UITableView.automaticDimension
         tableView.separatorStyle = .none
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = .systemBackground
         tableView.showsVerticalScrollIndicator = false
         return tableView
     }()
@@ -76,7 +76,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
 private extension ProfileViewController {
     func setupView() {
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = .systemBackground
         addSubviews()
         setupLayout()
         configureTableView()
@@ -134,14 +134,14 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let label = UILabel()
         label.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        label.textColor = UIColor.neutral100
+        label.textColor = UIColor(named: "blackWhite")!
         label.font = UIFont.poppinsBold24()
     
         switch section {
         case 0:
             label.text = "My profile"
             let editButton = UIButton(type: .system)
-            editButton.tintColor = .black
+            editButton.tintColor = UIColor(named: "blackWhite")!
             editButton.setImage(UIImage(systemName: "ellipsis"), for: .normal)
             editButton.addTarget(self, action: #selector(buttonTap), for: .touchUpInside)
             let stackView = UIStackView(arrangedSubviews: [label, editButton])
@@ -160,9 +160,11 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.section {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: MyProfileCell.identifier, for: indexPath) as! MyProfileCell
+            cell.backgroundColor = .clear
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: MyRecipesCell.identifier, for: indexPath) as! MyRecipesCell
+            cell.backgroundColor = .clear
             return cell
         default:
             return UITableViewCell()

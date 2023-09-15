@@ -17,7 +17,9 @@ class CookTimeTableViewController: UITableViewController {
                                 "10 min",
                                 "15 min",
                                 "20 min",
-                                "25 min"]
+                                "25 min",
+                                "30 min"
+    ]
     
     weak var delegate: CookTimeTableViewControllerDelegate?
     

@@ -2,24 +2,24 @@
 import UIKit
 
 class CookTimeView: UIView {
+    private lazy var cookTimeView = UIView(backgroundColor: UIColor(named: "categoryColor")!, cornerRadius: 12)
+    private lazy var clockView = UIView(backgroundColor: .systemBackground, cornerRadius: 10)
+    private lazy var cookTimeLabel = UILabel(text: "Cook time", font: .poppinsBold16(), textColor: UIColor(named: "blackWhite")!, numberOfLines: 1)
+    public lazy var timeLabel = UILabel(text: "5 min", font: .poppinsRegular14(), textColor: UIColor(named: "blackWhite")!, numberOfLines: 1)
     
-    private lazy var backViewCookTime = UIView(backgroundColor: .neutral10, cornerRadius: 12)
-    
-    private lazy var whiteViewCookTime = UIView(backgroundColor: .neutral0, cornerRadius: 10)
-    
-    private lazy var timeImageView = UIImageView(image: "clock", cornerRadius: 0)
-    
-    private lazy var cookTimeLabel = UILabel(text: "Cook time", font: .poppinsBold16(), textColor: .neutral100, numberOfLines: 1)
+    private lazy var timeImageView: UIImageView = {
+        let image = UIImageView(image: UIImage(systemName: "clock.fill")?.withTintColor(UIColor(named: "blackWhite")!, renderingMode: .alwaysOriginal))
+        image.translatesAutoresizingMaskIntoConstraints = false
+        return image
+    }()
     
     public lazy var cookTimeButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "arrow.right"), for: .normal)
-        button.tintColor = .neutral100
+        button.tintColor = UIColor(named: "blackWhite")!
         return button
     }()
     
-    public lazy var timeLabel = UILabel(text: "5 min", font: .poppinsRegular14(), textColor: .neutral50, numberOfLines: 1)
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -31,9 +31,9 @@ class CookTimeView: UIView {
     }
     
     private func setupViews() {
-        addSubview(backViewCookTime)
-        backViewCookTime.addSubviews(whiteViewCookTime, cookTimeLabel, cookTimeButton, timeLabel)
-        whiteViewCookTime.addSubview(timeImageView)
+        addSubview(cookTimeView)
+        cookTimeView.addSubviews(clockView, cookTimeLabel, cookTimeButton, timeLabel)
+        clockView.addSubview(timeImageView)
     }
 
 }
@@ -46,45 +46,45 @@ extension CookTimeView: CookTimeTableViewControllerDelegate {
 
 extension CookTimeView {
     private func setConstraints() {
-        backViewCookTime.translatesAutoresizingMaskIntoConstraints = false
+        cookTimeView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            backViewCookTime.topAnchor.constraint(equalTo: topAnchor, constant: 0),
-            backViewCookTime.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            backViewCookTime.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            backViewCookTime.heightAnchor.constraint(equalToConstant: 60)
+            cookTimeView.topAnchor.constraint(equalTo: topAnchor),
+            cookTimeView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            cookTimeView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            cookTimeView.heightAnchor.constraint(equalToConstant: 60)
         ])
         
-        whiteViewCookTime.translatesAutoresizingMaskIntoConstraints = false
+        clockView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            whiteViewCookTime.centerYAnchor.constraint(equalTo: backViewCookTime.centerYAnchor),
-            whiteViewCookTime.leadingAnchor.constraint(equalTo: backViewCookTime.leadingAnchor, constant: 16),
-            whiteViewCookTime.widthAnchor.constraint(equalToConstant: 36),
-            whiteViewCookTime.heightAnchor.constraint(equalToConstant: 36)
+            clockView.centerYAnchor.constraint(equalTo: cookTimeView.centerYAnchor),
+            clockView.leadingAnchor.constraint(equalTo: cookTimeView.leadingAnchor, constant: 16),
+            clockView.widthAnchor.constraint(equalToConstant: 36),
+            clockView.heightAnchor.constraint(equalToConstant: 36)
         ])
         
         timeImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            timeImageView.centerYAnchor.constraint(equalTo: whiteViewCookTime.centerYAnchor),
-            timeImageView.centerXAnchor.constraint(equalTo: whiteViewCookTime.centerXAnchor),
+            timeImageView.centerYAnchor.constraint(equalTo: clockView.centerYAnchor),
+            timeImageView.centerXAnchor.constraint(equalTo: clockView.centerXAnchor),
             timeImageView.heightAnchor.constraint(equalToConstant: 18)
         ])
         
         cookTimeLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            cookTimeLabel.centerYAnchor.constraint(equalTo: backViewCookTime.centerYAnchor),
-            cookTimeLabel.leadingAnchor.constraint(equalTo: whiteViewCookTime.trailingAnchor, constant: 16)
+            cookTimeLabel.centerYAnchor.constraint(equalTo: cookTimeView.centerYAnchor),
+            cookTimeLabel.leadingAnchor.constraint(equalTo: clockView.trailingAnchor, constant: 15)
         ])
         
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            timeLabel.centerYAnchor.constraint(equalTo: backViewCookTime.centerYAnchor),
-            timeLabel.trailingAnchor.constraint(equalTo: cookTimeButton.leadingAnchor, constant: -8)
+            timeLabel.centerYAnchor.constraint(equalTo: cookTimeView.centerYAnchor),
+            timeLabel.trailingAnchor.constraint(equalTo: cookTimeButton.leadingAnchor, constant: -10)
         ])
         
         cookTimeButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            cookTimeButton.centerYAnchor.constraint(equalTo: backViewCookTime.centerYAnchor),
-            cookTimeButton.trailingAnchor.constraint(equalTo: backViewCookTime.trailingAnchor, constant: -16)
+            cookTimeButton.centerYAnchor.constraint(equalTo: cookTimeView.centerYAnchor),
+            cookTimeButton.trailingAnchor.constraint(equalTo: cookTimeView.trailingAnchor, constant: -15)
         ])
     }
 }

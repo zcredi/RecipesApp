@@ -10,13 +10,9 @@ class SwitchPopularCategoryCollectionViewCell: UICollectionViewCell {
     weak var delegate: SwitchPopularCategoryCellDelegate?
     
     private lazy var categoryButton: UIButton = {
-        let button = UIButton()
-        button.titleLabel?.font = UIFont.poppinsRegular14()
+        let button = UIButton(name: "", backgroundColor: UIColor(named: "whiteBlack"), font: .poppinsRegular14(), titleColor: UIColor(named: "redBlue"))
         button.layer.cornerRadius = 10
-        button.setTitleColor(.red, for: .normal)
-        button.backgroundColor = .white
         button.addTarget(self, action: #selector(categoryButtonPressed(_:)), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -29,21 +25,21 @@ class SwitchPopularCategoryCollectionViewCell: UICollectionViewCell {
     }
     
     public func resetButtonState(){
-        categoryButton.setTitleColor(.red, for: .normal)
-        categoryButton.backgroundColor = .white
+        categoryButton.setTitleColor(UIColor(named: "redBlue"), for: .normal)
+        categoryButton.backgroundColor = UIColor(named: "whiteBlack")
     }
     
     public func toggleButtonState(){
-        if categoryButton.backgroundColor == .white{
+        if categoryButton.backgroundColor == UIColor(named: "whiteBlack"){
             categoryButton.setTitleColor(.white, for: .normal)
-            categoryButton.backgroundColor = .red
+            categoryButton.backgroundColor = UIColor(named: "redBlue")
         }else {
             resetButtonState()
         }
     }
     
     public func isButtonSelected() -> Bool {
-        return categoryButton.backgroundColor == .red
+        return categoryButton.backgroundColor == UIColor(named: "redBlue")
     }
 
     

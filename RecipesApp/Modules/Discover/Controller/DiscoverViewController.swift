@@ -80,8 +80,8 @@ extension DiscoverViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let currentIndexPath = discoverViewModel.savedRecipe[indexPath.row]
         
-        let detailModel = DetailRecipeModel(nameRecipe: currentIndexPath.title, imageRecipe: currentIndexPath.image)
-        let vc = RecipeDetailViewController(model: detailModel, id: currentIndexPath.id)
+        
+        let vc = RecipeDetailViewController(recipe: currentIndexPath.title, image: currentIndexPath.image, id: currentIndexPath.id)
         navigationController?.pushViewController(vc, animated: true)
     }
 }

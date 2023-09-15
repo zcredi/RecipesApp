@@ -7,7 +7,7 @@ final class InstructionCell: UITableViewCell {
   
     lazy var stepLabel = UILabel(text: "Place eggs in a saucepan and cover with cold water. Bring water to a boil and immediately remove from heat. Cover and let eggs stand in hot water for 10 to 12 minutes. Remove from hot water, cool, peel, and chop.",
                                  font: .poppinsRegular16(),
-                                 textColor: .black,
+                                 textColor: UIColor(named: "blackWhite")!,
                                  numberOfLines: 1)
 
     // MARK: - Initializers
@@ -32,7 +32,7 @@ final class InstructionCell: UITableViewCell {
 
     private func setupCell() {
         contentView.addSubview(stepLabel)
-    
+        backgroundColor = .clear
         isUserInteractionEnabled = false
     
         stepLabel.adjustsFontSizeToFitWidth = false

@@ -1,22 +1,11 @@
 import AlertKit
 import Kingfisher
-import RealmSwift
 import UIKit
 
 // MARK: - RecipeDetailViewController
 
 final class RecipeDetailViewController: UIViewController {
-    private let realm = try! Realm()
-    public var id: Int
-    private let networkManager = NetworkManager()
-    private let urlGenerator = URLRequestGeneratore()
-    public var detailRecipeModel: DetailRecipeModel
-    
-    private var instruction: [Step]
-    private var ingredients: [Ingredient]
-    private var allIngredients: [Ingredient] = []
-    private var selectedIngredients: Set<Int> = []
-    
+    let recipeDetailViewModel = RecipeDetailViewModel()
     // MARK: - Private Property
 
     private lazy var scrollView: UIScrollView = {
@@ -31,22 +20,21 @@ final class RecipeDetailViewController: UIViewController {
         return contentView
     }()
   
-    private var recipeNameLabel = UILabel(font: UIFont.poppinsBold24(), textColor: UIColor.neutral100, numberOfLines: 1)
+    private var recipeNameLabel = UILabel(font: UIFont.poppinsBold24(), textColor: UIColor(named: "blackWhite")!, numberOfLines: 2)
     
     private lazy var recipeImage = UIImageView(image: "recipeImage", cornerRadius: 20)
     
     
-  
     private lazy var ratingImage: UIImageView = {
         let ratingImage = UIImageView()
         ratingImage.contentMode = .scaleAspectFill
         ratingImage.image = UIImage(systemName: "star.fill")
-        ratingImage.tintColor = .black
+        ratingImage.tintColor = UIColor(named: "blackWhite")!
         return ratingImage
     }()
   
-    private lazy var ratingLabel = UILabel(text: "4.5", font: UIFont.poppinsBold14(), textColor: UIColor.neutral100, numberOfLines: 1)
-    private lazy var reviewsLabel = UILabel(text: "(300 reviews)", font: UIFont.poppinsRegular14(), textColor: UIColor.neutral50, numberOfLines: 1)
+    private lazy var ratingLabel = UILabel(text: "4.5", font: UIFont.poppinsBold14(), textColor: UIColor(named: "blackWhite")!, numberOfLines: 1)
+    private lazy var reviewsLabel = UILabel(text: "(300 reviews)", font: UIFont.poppinsRegular14(), textColor: UIColor(named: "blackWhite")!, textAligment: .left, numberOfLines: 2)
   
     private lazy var ratingStack: UIStackView = {
         let ratingStack = UIStackView(arrangedSubviews: [ratingImage, ratingLabel, reviewsLabel])
@@ -60,19 +48,22 @@ final class RecipeDetailViewController: UIViewController {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.estimatedRowHeight = UITableView.automaticDimension
         tableView.separatorStyle = .none
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = .systemBackground
         tableView.isScrollEnabled = false
         tableView.showsVerticalScrollIndicator = false
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(InstructionCell.self, forCellReuseIdentifier: InstructionCell.identifier)
+        tableView.register(IngredientCell.self, forCellReuseIdentifier: IngredientCell.identifier)
         return tableView
     }()
     
     private var ingredientCount = 0
   
-    init(model: DetailRecipeModel, id: Int) {
-        self.detailRecipeModel = model
-        self.id = id
-        self.ingredients = []
-        self.instruction = []
+    init(recipe: String, image: String, id: Int) {
+        self.recipeDetailViewModel.recipeName = recipe
+        self.recipeDetailViewModel.recipeImage = image
+        self.recipeDetailViewModel.id = id
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -85,6 +76,7 @@ final class RecipeDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
         setupView()
         setupNavigationBarWithBackButton()
         createSaveRecipeBarButton()
@@ -93,7 +85,7 @@ final class RecipeDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupRecipeUI()
-        checkObjectInRealm(id: id)
+        checkObjectInRealm()
         navigationItem.title = "Preparation"
     }
     
@@ -103,86 +95,49 @@ final class RecipeDetailViewController: UIViewController {
     }
     
     @IBAction func saveRecipeButtonTapped(_ sender: UIBarButtonItem) {
-        let savedRecipe = SavedRecipeModel()
-        
+        let imageRecipe = recipeDetailViewModel.recipeImage
+        let titleRecipe = recipeDetailViewModel.recipeName
         switch sender.image {
         case UIImage(systemName: "bookmark"):
             sender.image = UIImage(systemName: "bookmark.fill")
             AlertKitAPI.present(title: "Saved to favorites", subtitle: nil, icon: .done, style: .iOS16AppleMusic, haptic: .success)
             
-            savedRecipe.saveToRealm(id: id, image: detailRecipeModel.imageRecipe, title: detailRecipeModel.nameRecipe)
+            recipeDetailViewModel.saveToRealm(id: recipeDetailViewModel.id, image: imageRecipe, title: titleRecipe)
             
         case UIImage(systemName: "bookmark.fill"):
             sender.image = UIImage(systemName: "bookmark")
             AlertKitAPI.present(title: "Deleted from saved", subtitle: nil, icon: .error, style: .iOS16AppleMusic, haptic: .success)
             
-            savedRecipe.deleteObjectFromRealm(id: id)
+            recipeDetailViewModel.deleteObjectFromRealm(id: recipeDetailViewModel.id)
         default: break
         }
     }
   
-    private func checkObjectInRealm(id: Int) {
-        do {
-            let objects = realm.objects(SavedRecipeModel.self).filter("id == \(id)")
-            if !objects.isEmpty {
-                navigationItem.rightBarButtonItem!.image = UIImage(systemName: "bookmark.fill")
-            } else {
-                navigationItem.rightBarButtonItem!.image = UIImage(systemName: "bookmark")
-            }
-        } catch {
-            navigationItem.rightBarButtonItem!.image = UIImage(systemName: "bookmark")
-            print("Error checking object in Realm: \(error)")
+    private func checkObjectInRealm() {
+        recipeDetailViewModel.checkObjectInRealm {
+            self.navigationItem.rightBarButtonItem!.image = UIImage(systemName: "bookmark.fill")
+        } failureCompletion: {
+            self.navigationItem.rightBarButtonItem!.image = UIImage(systemName: "bookmark")
         }
     }
 
-    
     private func setupRecipeUI() {
-        guard let url = URL(string: detailRecipeModel.imageRecipe) else { return }
+        guard let url = URL(string: recipeDetailViewModel.recipeImage) else { return }
         
         self.recipeImage.kf.setImage(with: url)
-        self.recipeNameLabel.text = self.detailRecipeModel.nameRecipe
+        self.recipeNameLabel.text = self.recipeDetailViewModel.recipeName
         
-        let instructionRequest = urlGenerator.request(endpoint: "recipes/" + "\(id)/analyzedInstructions", queryItems: [URLQueryItem(name: "stepBreakdown", value: "true")])
-        networkManager.request(generator: instructionRequest) { (result: Swift.Result<[InformationIngradient], Error>) in
-            switch result {
-            case .success(let searched):
-                guard !searched.isEmpty else {
-                    let alert = UIAlertController(title: "Internet data did not arrive", message: "The API creators didn't take care of all the requests ", preferredStyle: .alert)
-                    let okAction = UIAlertAction(title: "ОК", style: .default)
-                    
-                    alert.addAction(okAction)
-                    self.present(alert, animated: true)
-                    return
-                }
-                
-                let instruction = searched[0].steps
-                let ingredients = instruction[0].ingredients
-                self.instruction = instruction
-                self.ingredients = ingredients
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                    self.updateTableViewHeight()
-                }
-                
-                for info in searched {
-                    for step in info.steps {
-                        self.allIngredients.append(contentsOf: step.ingredients)
-                    }
-                }
-
-                self.allIngredients = self.allIngredients.reduce([]) { acc, ingredient -> [Ingredient] in
-                    if acc.contains(where: { $0.id == ingredient.id }) {
-                        return acc
-                    } else {
-                        return acc + [ingredient]
-                    }
-                }
-            case .failure(let failure):
-                print(failure.localizedDescription)
-            }
+        recipeDetailViewModel.fetchRecipe {
+            self.tableView.reloadData()
+            self.updateTableViewHeight()
+        } failureCompletion: {
+            let alert = UIAlertController(title: "Internet data did not arrive", message: "API KEY", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default)
+            alert.addAction(okAction)
+            self.present(alert, animated: true)
         }
     }
-
+    
     private func updateTableViewHeight() {
         var totalHeight: CGFloat = 0.0
         for section in 0..<tableView.numberOfSections {
@@ -210,13 +165,8 @@ final class RecipeDetailViewController: UIViewController {
 
 private extension RecipeDetailViewController {
     func setupView() {
-        view.backgroundColor = UIColor.white
         addSubviews()
         setupLayout()
-        configureRecipeNameLabel()
-        configureRatingLabel()
-        configureReviewsLabel()
-        configureTableView()
     }
 }
 
@@ -226,34 +176,7 @@ private extension RecipeDetailViewController {
     func addSubviews() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
-        contentView.addSubview(recipeNameLabel)
-        contentView.addSubview(recipeImage)
-        contentView.addSubview(ratingStack)
-        contentView.addSubview(tableView)
-    }
-  
-    func configureRecipeNameLabel() {
-        recipeNameLabel.text = """
-        How to make Tasty Fish
-        (point & Kill)
-        """
-        recipeNameLabel.numberOfLines = 2
-    }
-  
-    func configureRatingLabel() {
-        ratingLabel.adjustsFontSizeToFitWidth = false
-    }
-  
-    func configureReviewsLabel() {
-        reviewsLabel.textAlignment = .left
-        reviewsLabel.adjustsFontSizeToFitWidth = false
-    }
-  
-    func configureTableView() {
-        tableView.register(InstructionCell.self, forCellReuseIdentifier: InstructionCell.identifier)
-        tableView.register(IngredientCell.self, forCellReuseIdentifier: IngredientCell.identifier)
-        tableView.delegate = self
-        tableView.dataSource = self
+        contentView.addSubviews(recipeNameLabel, recipeImage, ratingStack, tableView)
     }
 }
 
@@ -314,9 +237,9 @@ extension RecipeDetailViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return instruction.count
+            return recipeDetailViewModel.instruction.count
         case 1:
-            return allIngredients.count
+            return recipeDetailViewModel.allIngredients.count
         default: break
         }
         return 0
@@ -330,11 +253,13 @@ extension RecipeDetailViewController: UITableViewDelegate, UITableViewDataSource
             return 100
         }
     }
+    
+    
   
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let label = UILabel()
         label.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        label.textColor = UIColor.neutral100
+        label.textColor = UIColor(named: "blackWhite")!
         label.font = UIFont.poppinsBold20()
     
         switch section {
@@ -343,7 +268,7 @@ extension RecipeDetailViewController: UITableViewDelegate, UITableViewDataSource
             return label
         case 1:
             label.text = "Ingredients"
-            let ingredientLabel = UILabel(text: "\(allIngredients.count) items", font: UIFont.poppinsRegular14(), textColor: UIColor.neutral50, numberOfLines: 1)
+            let ingredientLabel = UILabel(text: "\(recipeDetailViewModel.allIngredients.count) items", font: UIFont.poppinsRegular14(), textColor: UIColor.neutral50, numberOfLines: 1)
             ingredientLabel.textAlignment = .right
             let stackView = UIStackView(arrangedSubviews: [label, ingredientLabel])
             stackView.spacing = 2
@@ -362,15 +287,16 @@ extension RecipeDetailViewController: UITableViewDelegate, UITableViewDataSource
         switch indexPath.section {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: InstructionCell.identifier, for: indexPath) as! InstructionCell
-            let step = instruction[indexPath.row].step
+            let step = recipeDetailViewModel.instruction[indexPath.row].step
             cell.stepLabel.text = step
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: IngredientCell.identifier, for: indexPath) as! IngredientCell
-            let ingredient = allIngredients[indexPath.row]
-            let isSelected = selectedIngredients.contains(ingredient.id)
+            let ingredient = recipeDetailViewModel.allIngredients[indexPath.row]
+            let isSelected = recipeDetailViewModel.selectedIngredients.contains(ingredient.id)
             cell.checkmark(isSelected: isSelected)
             cell.configure(ingredient: ingredient)
+            cell.backgroundColor = UIColor(named: "categoryColor")
             return cell
 
         default:
@@ -380,11 +306,11 @@ extension RecipeDetailViewController: UITableViewDelegate, UITableViewDataSource
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 1 {
-            let ingredient = allIngredients[indexPath.row]
-            if selectedIngredients.contains(ingredient.id) {
-                selectedIngredients.remove(ingredient.id)
+            let ingredient = recipeDetailViewModel.allIngredients[indexPath.row]
+            if recipeDetailViewModel.selectedIngredients.contains(ingredient.id) {
+                recipeDetailViewModel.selectedIngredients.remove(ingredient.id)
             } else {
-                selectedIngredients.insert(ingredient.id)
+                recipeDetailViewModel.selectedIngredients.insert(ingredient.id)
             }
             tableView.reloadRows(at: [indexPath], with: .automatic)
         }

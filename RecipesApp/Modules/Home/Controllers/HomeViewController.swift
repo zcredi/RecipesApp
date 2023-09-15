@@ -12,19 +12,15 @@ final class HomeViewController: UIViewController {
     }()
     
     lazy var seeAllButton: UIButton = {
-        let button = UIButton()
-        button.setTitleColor(.red, for: .normal)
-        button.titleLabel?.font = UIFont.poppinsBold14()
-        button.setTitle("See All →", for: .normal)
+        let button = UIButton(name: "See All →", backgroundColor: .clear, font: .poppinsBold14(), titleColor: UIColor(named: "redBlue"))
         button.addTarget(self, action: #selector(trendingNowSeeAllButtonPressed(_:)), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
-    lazy var popularCategoryLabel = UILabel(text: "Popular Category", font: UIFont.poppinsBold20(), textColor: .black, numberOfLines: 1)
-    lazy var recentRecipeLabel = UILabel(text: "Recent Recipe", font: UIFont.poppinsBold20(), textColor: .black, numberOfLines: 1)
-    lazy var trendingNowLabel = UILabel(text: "Trending now 🔥", font: UIFont.poppinsBold20(), textColor: .black, numberOfLines: 1)
-    lazy var popularCreatorsLabel = UILabel(text: "Popular Creators", font: UIFont.poppinsBold20(), textColor: .black, numberOfLines: 1)
+    lazy var popularCategoryLabel = UILabel(text: "Popular Category", font: UIFont.poppinsBold20(), textColor: UIColor(named: "blackWhite")!, numberOfLines: 1)
+    lazy var recentRecipeLabel = UILabel(text: "Recent Recipe", font: UIFont.poppinsBold20(), textColor: UIColor(named: "blackWhite")!, numberOfLines: 1)
+    lazy var trendingNowLabel = UILabel(text: "Trending now 🔥", font: UIFont.poppinsBold20(), textColor: UIColor(named: "blackWhite")!, numberOfLines: 1)
+    lazy var popularCreatorsLabel = UILabel(text: "Popular Creators", font: UIFont.poppinsBold20(), textColor: UIColor(named: "blackWhite")!, numberOfLines: 1)
     
     lazy var trendingNowCollectionView: UICollectionView = {
         let collectionView = UICollectionView(itemWidth: 320, itemHeight: 250, delegate: self, dataSource: self)
@@ -180,8 +176,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
 
         
         // Push to RecipeDetailViewControler
-        let detailRecipeModel = DetailRecipeModel(nameRecipe: recipeName, imageRecipe: recipeImage)
-        let vc = RecipeDetailViewController(model: detailRecipeModel, id: currentCellID)
+        let vc = RecipeDetailViewController(recipe: recipeName, image: recipeImage, id: currentCellID)
         vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }

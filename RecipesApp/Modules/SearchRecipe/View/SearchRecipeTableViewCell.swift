@@ -6,7 +6,7 @@ class SearchRecipeTableViewCell: UITableViewCell {
     static let identifier = "SearchRecipeTableViewCell"
     private lazy var recipeImage = UIImageView(image: "sex", cornerRadius: 10)
     
-    private lazy var recipeName = UILabel(text: "How to sharwama at home", font: .poppinsBold14(), textColor: .black, numberOfLines: 0)
+    private lazy var recipeName = UILabel(text: "How to sharwama at home", font: .poppinsBold14(), textColor: UIColor(named: "blackWhite")!, numberOfLines: 0)
     
     
     public func configure(image: String, title: String) {

@@ -14,12 +14,8 @@ class CreateRecipeViewController: UIViewController {
     private lazy var footerView = FooterView()
     
     private lazy var createRecipeButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.backgroundColor = .primary50
+        let button = UIButton(name: "Create recipe", backgroundColor: UIColor(named: "redBlue"), font: .poppinsBold16(), titleColor: .white)
         button.layer.cornerRadius = 8
-        button.setTitle("Create recipe", for: .normal)
-        button.tintColor = .neutral0
-        button.titleLabel?.font = .poppinsBold16()
         button.addTarget(self, action: #selector(createRecipeButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -33,6 +29,7 @@ class CreateRecipeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Create Recipe"
+        setupNavigationBarWithBackButton()
         setupViews()
         setConstraints()
         setupServesGestures()
@@ -41,7 +38,7 @@ class CreateRecipeViewController: UIViewController {
 
     
     private func setupViews() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         view.addSubviews(headerView, cookTimeView, footerView, createRecipeButton)
     }
     
@@ -107,7 +104,7 @@ extension CreateRecipeViewController: CookTimeTableViewControllerDelegate {
     
     @objc
     private func createRecipeButtonTapped() {
-        dismiss(animated: true)
+        navigationController?.popViewController(animated: true)
     }
 }
 

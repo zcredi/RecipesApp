@@ -27,31 +27,19 @@ class OnboardingViewController: UIPageViewController, UIPageViewControllerDataSo
     }()
     
     lazy var continueButton: UIButton = {
-        var button = UIButton()
-        
-        button.setTitle("Continue", for: .normal)
-        button.titleLabel?.font = .poppinsRegular20()
-        button.backgroundColor = .primary50
-        button.setTitleColor(.white, for: .normal)
+        let button = UIButton(name: "Continue", backgroundColor: .primary50, font: .poppinsRegular20(), titleColor: .white)
         button.clipsToBounds = true
         button.layer.cornerRadius = 20
         button.heightAnchor.constraint(equalToConstant: 44).isActive = true
         button.widthAnchor.constraint(equalToConstant: 193).isActive = true
-        button.translatesAutoresizingMaskIntoConstraints = false
         
         button.addTarget(self, action: #selector(handlerContinueButton), for: .touchUpInside)
         return button
     }()
     
     lazy var skipButton: UIButton = {
-        var button = UIButton()
-        
-        button.setTitle("Skip", for: .normal)
-        button.titleLabel?.font = .poppinsRegular10()
-        button.setTitleColor(.white, for: .normal)
-        
+        let button = UIButton(name: "Skip", backgroundColor: .clear, font: .poppinsRegular10(), titleColor: .white)
         button.addTarget(self, action: #selector(handleSkipButton), for: .touchUpInside)
-        
         return button
     }()
     

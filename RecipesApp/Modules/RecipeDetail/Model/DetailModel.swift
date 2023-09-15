@@ -1,8 +1,11 @@
 import Foundation
 
 struct DetailRecipeModel {
-    let nameRecipe: String
-    let imageRecipe: String
-    
+    var nameRecipe: String = ""
+    var imageRecipe: String = ""
+//    init?(name: String, image: String) {
+//        self.nameRecipe = name
+//        self.imageRecipe = image
+//    }
 }
 

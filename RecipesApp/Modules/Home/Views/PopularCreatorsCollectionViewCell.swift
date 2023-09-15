@@ -4,7 +4,7 @@ class PopularCreatorsCollectionViewCell: UICollectionViewCell {
     static let identifier = "PopularCreatorsCell"
     
     private lazy var creatorImage = UIImageView(image: "sex", cornerRadius: 60)
-    private lazy var creatorLabel = UILabel(text: "Ify’s Kitchen", font: UIFont.poppinsBold12(), textColor: .black, numberOfLines: 1)
+    private lazy var creatorLabel = UILabel(text: "Ify’s Kitchen", font: UIFont.poppinsBold12(), textColor: UIColor(named: "blackWhite")!, numberOfLines: 1)
     
     public func configureCell(with creator: String){
         creatorImage.image = UIImage(named: creator)

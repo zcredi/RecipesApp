@@ -56,14 +56,14 @@ extension SearchRecipeViewController: UITableViewDataSource, UITableViewDelegate
         let currentIndexPath = searchViewModel.searchedRecipe[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchRecipeTableViewCell.identifier, for: indexPath) as! SearchRecipeTableViewCell
         cell.selectionStyle = .none
+        
         cell.configure(image: currentIndexPath.image, title: currentIndexPath.title)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let currentIndexPath = searchViewModel.searchedRecipe[indexPath.row]
-        let detailRecipeModel: DetailRecipeModel = DetailRecipeModel(nameRecipe: currentIndexPath.title, imageRecipe: currentIndexPath.image)
-        let vc = RecipeDetailViewController(model: detailRecipeModel, id: currentIndexPath.id)
+        let vc = RecipeDetailViewController(recipe: currentIndexPath.title, image: currentIndexPath.image, id: currentIndexPath.id)
         vc.hidesBottomBarWhenPushed = true 
         navigationController?.pushViewController(vc, animated: true)
     }

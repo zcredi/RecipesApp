@@ -5,34 +5,35 @@ class SavedRecipeModel: Object {
     @Persisted var id: Int = 0
     @Persisted var title: String = ""
     @Persisted var image: String = ""
-
+    
+    
     func deleteObjectFromRealm(id: Int) {
         do {
             let realm = try Realm()
-            let objectsToDelete = realm.objects(SavedRecipeModel.self).filter("id == \(id)")
-            
-            try realm.write {
-                realm.delete(objectsToDelete)
+            if let objectToDelete = realm.objects(SavedRecipeModel.self).filter("id == \(id)").first {
+                try realm.write {
+                    realm.delete(objectToDelete)
+                }
             }
         } catch {
             print("Error deleting object: \(error)")
         }
     }
 
+    
     func saveToRealm(id: Int, image: String, title: String) {
-        self.id = id
-        self.image = image
-        self.title = title
-
-        let realm = try! Realm()
+        let savedRecipe = SavedRecipeModel()
+        savedRecipe.id = id
+        savedRecipe.image = image
+        savedRecipe.title = title
 
         do {
+            let realm = try Realm()
             try realm.write {
-                realm.add(self)
+                realm.add(savedRecipe)
             }
         } catch {
-            print("Error saving to Realm: (error)")
+            print("Error saving to Realm: \(error)")
         }
     }
 }
-
