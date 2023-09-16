@@ -78,7 +78,7 @@ extension HeaderView {
         
         servesView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            servesView.topAnchor.constraint(equalTo: recipeNameTextField.bottomAnchor, constant: 20),
+            servesView.topAnchor.constraint(equalTo: recipeNameTextField.bottomAnchor, constant: 25),
             servesView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             servesView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             servesView.heightAnchor.constraint(equalToConstant: 60)

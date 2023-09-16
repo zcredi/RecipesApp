@@ -122,7 +122,7 @@ extension CreateRecipeViewController {
         
         cookTimeView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            cookTimeView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 8),
+            cookTimeView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 5),
             cookTimeView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.headerViewLeadingSpacing),
             cookTimeView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.headerViewLeadingSpacing),
             cookTimeView.heightAnchor.constraint(equalToConstant: 60)
