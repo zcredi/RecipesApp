@@ -1,5 +1,5 @@
+import FirebaseAuth
 import UIKit
-
 final class HomeViewController: UIViewController {
     let viewModel = HomeViewModel()
     private var selectedIndexPathForButtonCollectionTag: IndexPath?
@@ -62,6 +62,12 @@ final class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        do {
+            try Auth.auth().signOut()
+        } catch let signOutError as NSError {
+            print("Error signing out: %@", signOutError)
+        }
+
         loadRecentRecipesFromRealm()
         importantUIDownload()
     }
@@ -70,7 +76,6 @@ final class HomeViewController: UIViewController {
         let seeAllViewController = SeeAllViewController()
         seeAllViewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(seeAllViewController, animated: true)
-        
     }
     
     // MARK: - CallNetworking Method
@@ -174,7 +179,6 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
        
         viewModel.saveRecipeToRealm(id: currentCellID, imageURL: recipeImage, title: recipeName)
 
-        
         // Push to RecipeDetailViewControler
         let vc = RecipeDetailViewController(recipe: recipeName, image: recipeImage, id: currentCellID)
         vc.hidesBottomBarWhenPushed = true
@@ -197,7 +201,7 @@ extension HomeViewController: SwitchPopularCategoryCellDelegate {
             cell.toggleButtonState()
             viewModel.fetchPopularCategory(for: viewModel.popularCategoryArray[currentSelectedIndexPath.row].lowercased()) {
                 DispatchQueue.main.async {
-                        self.popularCategoryCollectionView.reloadData()
+                    self.popularCategoryCollectionView.reloadData()
                 }
             }
         }

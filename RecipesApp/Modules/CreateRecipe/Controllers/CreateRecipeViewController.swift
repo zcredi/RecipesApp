@@ -1,14 +1,8 @@
+import AlertKit
 import UIKit
 
 class CreateRecipeViewController: UIViewController {
-    
-    enum Constants {
-        static let headerViewTopSpacing: CGFloat = 4.0
-        static let headerViewLeadingSpacing: CGFloat = 16.0
-    }
-    
-    //MARK: - Create UI
-    
+    private var createRecipeViewModel = CreateRecipeViewModel()
     private lazy var headerView = HeaderView()
     private lazy var cookTimeView = CookTimeView()
     private lazy var footerView = FooterView()
@@ -19,123 +13,79 @@ class CreateRecipeViewController: UIViewController {
         button.addTarget(self, action: #selector(createRecipeButtonTapped), for: .touchUpInside)
         return button
     }()
-        
-    //MARK: - Lifecycle
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        tabBarController?.tabBar.isHidden = true
+    @IBAction private func createRecipeButtonTapped() {
+        guard let recipeName = headerView.recipeNameTextField.text, !recipeName.isEmpty,
+              let serves = headerView.servesNumberLabel.text,
+              let cookTime = cookTimeView.timeLabel.text,
+              !footerView.ingredientsArray.isEmpty
+        else {
+            errorAlert()
+            return
+        }
+        print(footerView.ingredientsArray)
+        completeAlert()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
+    
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Create Recipe"
-        setupNavigationBarWithBackButton()
-        setupViews()
-        setConstraints()
-        setupServesGestures()
-        setupCookTimeGestures()
-    }
-
-    
-    private func setupViews() {
         view.backgroundColor = .systemBackground
-        view.addSubviews(headerView, cookTimeView, footerView, createRecipeButton)
+        navigationItem.title = "Create Recipe"
+        setupNavigationBarWithBackButton()
+        setupUI()
+        subcribeDelegate()
     }
     
-    private func setupServesGestures() {
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(servesTapped))
-        tapGesture.numberOfTapsRequired = 1
-        headerView.servesButton.addGestureRecognizer(tapGesture)
-    }
-
-    @objc
-    private func servesTapped() {
-        let popVC = ServesTableViewController()
-        popVC.delegate = self
-            popVC.modalPresentationStyle = .popover
-        
-        popVC.modalPresentationStyle = .popover
-        
-        let popOverVC = popVC.popoverPresentationController
-        popOverVC?.delegate = self
-        popOverVC?.sourceView = headerView.servesButton
-        popOverVC?.sourceRect = CGRect(x: headerView.servesButton.bounds.midX, y: headerView.servesButton.bounds.midY, width: 0, height: 0)
-        popVC.preferredContentSize = CGSize(width: 250, height: 250)
-        
-        self.present(popVC, animated: true)
+    private func subcribeDelegate() {
+        headerView.delegate = self
+        headerView.imageDelegate = self
+        cookTimeView.delegate = self
     }
     
-    private func setupCookTimeGestures() {
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(cookTimeTapped))
-        tapGesture.numberOfTapsRequired = 1
-        cookTimeView.cookTimeButton.addGestureRecognizer(tapGesture)
+    private func completeAlert() {
+        AlertKitAPI.present(title: "Complete", subtitle: "You've created your recipe!", icon: .done, style: .iOS16AppleMusic, haptic: .success)
     }
-
-    @objc
-    private func cookTimeTapped() {
-        let popVC = CookTimeTableViewController()
-        popVC.delegate = self
-        popVC.modalPresentationStyle = .popover
-        
-        popVC.modalPresentationStyle = .popover
-        
-        let popOverVC = popVC.popoverPresentationController
-        popOverVC?.delegate = self
-        popOverVC?.sourceView = cookTimeView.cookTimeButton
-        popOverVC?.sourceRect = CGRect(x: cookTimeView.cookTimeButton.bounds.midX, y: cookTimeView.cookTimeButton.bounds.midY, width: 0, height: 0)
-        popVC.preferredContentSize = CGSize(width: 250, height: 250)
-        
-        self.present(popVC, animated: true)
+    
+    private func errorAlert() {
+        AlertKitAPI.present(title: "Error", subtitle: "You have not entered all the required parameters for creating a recipe", icon: .error, style: .iOS16AppleMusic, haptic: .error)
     }
 }
 
-extension CreateRecipeViewController: ServesTableViewControllerDelegate {
-    func didSelectServesNumber(_ number: String) {
-        headerView.servesNumberLabel.text = number
-    }
-}
-
-extension CreateRecipeViewController: CookTimeTableViewControllerDelegate {
-    func didSelectCookTimeNumber(_ number: String) {
-        cookTimeView.timeLabel.text = number
-    }
-    
-    @objc
-    private func createRecipeButtonTapped() {
-        navigationController?.popViewController(animated: true)
-    }
-}
-
-//MARK: - setConstraints
+// MARK: - setConstraints
 
 extension CreateRecipeViewController {
-    private func setConstraints() {
+    private func setupUI() {
+        view.addSubviews(headerView, cookTimeView, footerView, createRecipeButton)
+
         headerView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.headerViewTopSpacing),
-            headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.headerViewLeadingSpacing),
-            headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.headerViewLeadingSpacing),
+            headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 4),
+            headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             headerView.heightAnchor.constraint(equalToConstant: 370)
         ])
-        
+
         cookTimeView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             cookTimeView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 5),
-            cookTimeView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.headerViewLeadingSpacing),
-            cookTimeView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.headerViewLeadingSpacing),
+            cookTimeView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            cookTimeView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             cookTimeView.heightAnchor.constraint(equalToConstant: 60)
         ])
-        
+
         footerView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             footerView.topAnchor.constraint(equalTo: cookTimeView.bottomAnchor, constant: 16),
             footerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-            footerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.headerViewLeadingSpacing),
+            footerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             footerView.heightAnchor.constraint(equalToConstant: 270)
         ])
-        
+
         createRecipeButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             createRecipeButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
@@ -146,8 +96,80 @@ extension CreateRecipeViewController {
     }
 }
 
-extension CreateRecipeViewController: UIPopoverPresentationControllerDelegate {
-    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
-        return .none
+extension CreateRecipeViewController: ServesButtonPressedDelegate {
+    func servesButtonPressed(_ sender: UIButton) {
+        let viewControllerToPresent = PickerViewController(dataSource: createRecipeViewModel.servesCount, pickerType: .serves)
+        viewControllerToPresent.delegate = self
+        viewControllerToPresent.isModalInPresentation = true
+        if #available(iOS 15.0, *) {
+            if let sheet = viewControllerToPresent.sheetPresentationController {
+                sheet.detents = [.medium()]
+            }
+        }
+        present(viewControllerToPresent, animated: true)
+    }
+}
+
+extension CreateRecipeViewController: CookTimeButtonPressedDelegate {
+    func cookTimeButtonPressed(_ sender: UIButton) {
+        let viewControllerToPresent = PickerViewController(dataSource: createRecipeViewModel.cookTime, pickerType: .cookTime)
+        viewControllerToPresent.delegate = self
+        viewControllerToPresent.isModalInPresentation = true
+        if #available(iOS 15.0, *) {
+            if let sheet = viewControllerToPresent.sheetPresentationController {
+                sheet.detents = [.medium()]
+            }
+        }
+        present(viewControllerToPresent, animated: true)
+    }
+}
+
+extension CreateRecipeViewController: SelectButtonTappedDelegate {
+    func selectButtonPressed(title: String, pickerType: PickerType) {
+        switch pickerType {
+            case .serves: headerView.servesNumberLabel.text = title
+            case .cookTime: cookTimeView.timeLabel.text = title
+        }
+    }
+}
+
+extension CreateRecipeViewController: RecipeImagePressedDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func recipeImagePressed(_ sender: UIImageView) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        let alertController = UIAlertController(title: "Choose Image Source", message: nil, preferredStyle: .actionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alertController.addAction(cancelAction)
+        
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            let cameraAction = UIAlertAction(title: "Camera", style: .default) { [weak self] _ in
+                imagePicker.sourceType = .camera
+                self?.present(imagePicker, animated: true)
+            }
+            alertController.addAction(cameraAction)
+        }
+        
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            let photoLibraryAction = UIAlertAction(title: "Photo Library", style: .default) { [weak self] _ in
+                imagePicker.sourceType = .photoLibrary
+                self?.present(imagePicker, animated: true)
+            }
+            alertController.addAction(photoLibraryAction)
+        }
+        
+        if let popoverController = alertController.popoverPresentationController {
+            popoverController.sourceView = sender
+            popoverController.sourceRect = sender.bounds
+        }
+        
+        present(alertController, animated: true)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        guard let selectedImage = info[.originalImage] as? UIImage else { return }
+        headerView.recipeImage.image = selectedImage
+        picker.dismiss(animated: true)
     }
 }

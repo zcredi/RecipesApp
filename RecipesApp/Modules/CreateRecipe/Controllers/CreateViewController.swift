@@ -19,7 +19,6 @@ class CreateViewController: UIViewController {
     
     
     @IBAction func createRecipeButtonPressed(_ sender: UIButton) {
-        print("Create recipe button pressed!!!")
         let vc = CreateRecipeViewController()
         vc.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(vc, animated: true)

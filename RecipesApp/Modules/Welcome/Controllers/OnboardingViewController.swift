@@ -1,10 +1,3 @@
-//
-//  OnboardingViewController.swift
-//  RecipesApp
-//
-//  Created by Anna Zaitsava on 31.08.23.
-//
-
 import UIKit
 
 class OnboardingViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
@@ -94,7 +87,8 @@ class OnboardingViewController: UIPageViewController, UIPageViewControllerDataSo
     }
     
     func startAction() {
-        let vc = MainTabBarController()
+        
+        let vc = AuthorizationViewController()
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .fullScreen
         
@@ -103,7 +97,7 @@ class OnboardingViewController: UIPageViewController, UIPageViewControllerDataSo
     }
     
     @objc func handleSkipButton() {
-        let vc = MainTabBarController()
+        let vc = AuthorizationViewController()
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .fullScreen
         
@@ -168,10 +162,5 @@ class OnboardingViewController: UIPageViewController, UIPageViewControllerDataSo
         view.addSubview(bottomStack)
         bottomStack.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         bottomStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
-        
-        
-        
     }
-    
 }
-

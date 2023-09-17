@@ -1,5 +1,5 @@
 import UIKit
-
+import FirebaseAuth
 class WelcomeViewController: UIViewController {
     
     let backgroundImageView = UIImageView(image: "background", cornerRadius: 0)

@@ -1,7 +1,12 @@
 
 import UIKit
 
+protocol CookTimeButtonPressedDelegate: NSObject {
+    func cookTimeButtonPressed(_ sender: UIButton)
+}
+
 class CookTimeView: UIView {
+    weak var delegate: CookTimeButtonPressedDelegate?
     private lazy var cookTimeView = UIView(backgroundColor: UIColor(named: "categoryColor")!, cornerRadius: 12)
     private lazy var clockView = UIView(backgroundColor: .systemBackground, cornerRadius: 10)
     private lazy var cookTimeLabel = UILabel(text: "Cook time", font: .poppinsBold16(), textColor: UIColor(named: "blackWhite")!, numberOfLines: 1)
@@ -17,6 +22,7 @@ class CookTimeView: UIView {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "arrow.right"), for: .normal)
         button.tintColor = UIColor(named: "blackWhite")!
+        button.addTarget(self, action: #selector(cookTimeArrowButtonPressed(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -30,6 +36,10 @@ class CookTimeView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    @IBAction func cookTimeArrowButtonPressed(_ sender: UIButton) {
+        delegate?.cookTimeButtonPressed(sender)
+    }
+    
     private func setupViews() {
         addSubview(cookTimeView)
         cookTimeView.addSubviews(clockView, cookTimeLabel, cookTimeButton, timeLabel)
@@ -37,13 +47,6 @@ class CookTimeView: UIView {
     }
 
 }
-
-extension CookTimeView: CookTimeTableViewControllerDelegate {
-    func didSelectCookTimeNumber(_ number: String) {
-        timeLabel.text = number
-    }
-}
-
 extension CookTimeView {
     private func setConstraints() {
         cookTimeView.translatesAutoresizingMaskIntoConstraints = false

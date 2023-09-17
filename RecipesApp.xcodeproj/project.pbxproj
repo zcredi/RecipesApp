@@ -40,13 +40,21 @@
 		40C8D02E2AB30E1300C442D0 /* DiscoverViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C8D02D2AB30E1300C442D0 /* DiscoverViewModel.swift */; };
 		40C8D0312AB36EF100C442D0 /* RecipeDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C8D0302AB36EF100C442D0 /* RecipeDetailViewModel.swift */; };
 		40C8D0332AB4D77700C442D0 /* CreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C8D0322AB4D77700C442D0 /* CreateViewController.swift */; };
+		40C8D0372AB5FE1500C442D0 /* UIPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C8D0362AB5FE1500C442D0 /* UIPickerView.swift */; };
+		40C8D04C2AB60CA300C442D0 /* AutorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C8D04B2AB60CA300C442D0 /* AutorizationViewController.swift */; };
+		40C8D0602AB620ED00C442D0 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 40C8D05F2AB620ED00C442D0 /* FirebaseAuth */; };
+		40C8D0652AB621E000C442D0 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 40C8D0642AB621E000C442D0 /* GoogleSignIn */; };
+		40C8D0672AB621E000C442D0 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 40C8D0662AB621E000C442D0 /* GoogleSignInSwift */; };
+		40C8D06F2AB6257F00C442D0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 40C8D06E2AB6257F00C442D0 /* GoogleService-Info.plist */; };
+		40C8D0712AB6450200C442D0 /* createRecipeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C8D0702AB6450200C442D0 /* createRecipeViewModel.swift */; };
+		40C8D0732AB6455A00C442D0 /* CookTimeEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C8D0722AB6455A00C442D0 /* CookTimeEnum.swift */; };
+		40C8D0782AB6E95D00C442D0 /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C8D0772AB6E95D00C442D0 /* PickerViewController.swift */; };
+		40C8D07C2AB72B9300C442D0 /* PickerTypeEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C8D07B2AB72B9300C442D0 /* PickerTypeEnum.swift */; };
 		40EE66FF2A9DED9B00461299 /* PopularCategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EE66FE2A9DED9B00461299 /* PopularCategoryModel.swift */; };
 		40EE67032A9E160900461299 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EE67022A9E160900461299 /* NetworkService.swift */; };
 		40EE67052A9E1CD500461299 /* URLRequestGeneratore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EE67042A9E1CD500461299 /* URLRequestGeneratore.swift */; };
 		4CE0980D2A9E7FCE000D17F6 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4CE0980C2A9E7FCE000D17F6 /* SnapKit */; };
 		4CE0980F2A9E8034000D17F6 /* CastomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE0980E2A9E8034000D17F6 /* CastomTableViewCell.swift */; };
-		4CE098142AA90788000D17F6 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 4CE098132AA90788000D17F6 /* FirebaseAuth */; };
-		4CE098162AA90788000D17F6 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 4CE098152AA90788000D17F6 /* FirebaseStorage */; };
 		4CE098182AA90A2D000D17F6 /* FireBaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE098172AA90A2D000D17F6 /* FireBaseAuthManager.swift */; };
 		4CE0981A2AA90BB7000D17F6 /* UserAuthData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE098192AA90BB7000D17F6 /* UserAuthData.swift */; };
 		522A7DDE2AA1F76700BE821F /* DetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522A7DDD2AA1F76700BE821F /* DetailModel.swift */; };
@@ -56,10 +64,8 @@
 		52EC93932AA5EB35006A959C /* RecipeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EC93922AA5EB35006A959C /* RecipeImageView.swift */; };
 		79BD78DE2A9F8E2B005D5900 /* PagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BD78DD2A9F8E2B005D5900 /* PagesViewController.swift */; };
 		79BD78E02AA0605A005D5900 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BD78DF2AA0605A005D5900 /* OnboardingViewController.swift */; };
-		8622966E2AADD08B00C5672C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8622966D2AADD08B00C5672C /* GoogleService-Info.plist */; };
 		863B3D402A9D1B0400187864 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 863B3D3F2A9D1B0400187864 /* Kingfisher */; };
 		864AAB992A9B45CD001955C7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864AAB982A9B45CD001955C7 /* AppDelegate.swift */; };
-		864AAB9B2A9B45CD001955C7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864AAB9A2A9B45CD001955C7 /* SceneDelegate.swift */; };
 		864AABA22A9B45CE001955C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 864AABA12A9B45CE001955C7 /* Assets.xcassets */; };
 		864AABA52A9B45CE001955C7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 864AABA32A9B45CE001955C7 /* LaunchScreen.storyboard */; };
 		864AABB32A9B4876001955C7 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864AABB22A9B4876001955C7 /* MainTabBarController.swift */; };
@@ -80,9 +86,7 @@
 		8695E0242AA9EF660093B18E /* IngredientsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8695E0232AA9EF660093B18E /* IngredientsCollectionViewCell.swift */; };
 		86AA64982AA125BB00270237 /* InstructionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AA64962AA125BB00270237 /* InstructionCell.swift */; };
 		86AA64992AA125BB00270237 /* IngredientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AA64972AA125BB00270237 /* IngredientCell.swift */; };
-		86FBB5612AA8C2DE00B370F2 /* ServesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FBB5602AA8C2DE00B370F2 /* ServesTableViewController.swift */; };
 		86FBB5652AA8D53C00B370F2 /* CookTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FBB5642AA8D53C00B370F2 /* CookTimeView.swift */; };
-		86FBB5672AA8E90800B370F2 /* CookTimeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FBB5662AA8E90800B370F2 /* CookTimeTableViewController.swift */; };
 		C34A5FBB2A9DE9F100EBC15E /* SeeAllViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34A5FBA2A9DE9F100EBC15E /* SeeAllViewController.swift */; };
 		C34A5FBF2A9F331C00EBC15E /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34A5FBE2A9F331C00EBC15E /* CustomCell.swift */; };
 		C34A5FC12A9F506500EBC15E /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34A5FC02A9F506500EBC15E /* RatingView.swift */; };
@@ -121,6 +125,13 @@
 		40C8D02D2AB30E1300C442D0 /* DiscoverViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewModel.swift; sourceTree = "<group>"; };
 		40C8D0302AB36EF100C442D0 /* RecipeDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailViewModel.swift; sourceTree = "<group>"; };
 		40C8D0322AB4D77700C442D0 /* CreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewController.swift; sourceTree = "<group>"; };
+		40C8D0362AB5FE1500C442D0 /* UIPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPickerView.swift; sourceTree = "<group>"; };
+		40C8D04B2AB60CA300C442D0 /* AutorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutorizationViewController.swift; sourceTree = "<group>"; };
+		40C8D06E2AB6257F00C442D0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		40C8D0702AB6450200C442D0 /* createRecipeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = createRecipeViewModel.swift; sourceTree = "<group>"; };
+		40C8D0722AB6455A00C442D0 /* CookTimeEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookTimeEnum.swift; sourceTree = "<group>"; };
+		40C8D0772AB6E95D00C442D0 /* PickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
+		40C8D07B2AB72B9300C442D0 /* PickerTypeEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerTypeEnum.swift; sourceTree = "<group>"; };
 		40EE66FE2A9DED9B00461299 /* PopularCategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularCategoryModel.swift; sourceTree = "<group>"; };
 		40EE67022A9E160900461299 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		40EE67042A9E1CD500461299 /* URLRequestGeneratore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestGeneratore.swift; sourceTree = "<group>"; };
@@ -134,10 +145,8 @@
 		52EC93922AA5EB35006A959C /* RecipeImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeImageView.swift; sourceTree = "<group>"; };
 		79BD78DD2A9F8E2B005D5900 /* PagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagesViewController.swift; sourceTree = "<group>"; };
 		79BD78DF2AA0605A005D5900 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
-		8622966D2AADD08B00C5672C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		864AAB952A9B45CD001955C7 /* RecipesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecipesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		864AAB982A9B45CD001955C7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		864AAB9A2A9B45CD001955C7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		864AABA12A9B45CE001955C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		864AABA42A9B45CE001955C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		864AABA62A9B45CE001955C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -159,9 +168,7 @@
 		8695E0232AA9EF660093B18E /* IngredientsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsCollectionViewCell.swift; sourceTree = "<group>"; };
 		86AA64962AA125BB00270237 /* InstructionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionCell.swift; sourceTree = "<group>"; };
 		86AA64972AA125BB00270237 /* IngredientCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientCell.swift; sourceTree = "<group>"; };
-		86FBB5602AA8C2DE00B370F2 /* ServesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServesTableViewController.swift; sourceTree = "<group>"; };
 		86FBB5642AA8D53C00B370F2 /* CookTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookTimeView.swift; sourceTree = "<group>"; };
-		86FBB5662AA8E90800B370F2 /* CookTimeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookTimeTableViewController.swift; sourceTree = "<group>"; };
 		C34A5FBA2A9DE9F100EBC15E /* SeeAllViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeAllViewController.swift; sourceTree = "<group>"; };
 		C34A5FBE2A9F331C00EBC15E /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		C34A5FC02A9F506500EBC15E /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
@@ -174,11 +181,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				40569B542AA49F2600C87666 /* AlertKit in Frameworks */,
-				4CE098142AA90788000D17F6 /* FirebaseAuth in Frameworks */,
+				40C8D0602AB620ED00C442D0 /* FirebaseAuth in Frameworks */,
+				40C8D0672AB621E000C442D0 /* GoogleSignInSwift in Frameworks */,
 				40569B512AA4970B00C87666 /* RealmSwift in Frameworks */,
 				863B3D402A9D1B0400187864 /* Kingfisher in Frameworks */,
 				4CE0980D2A9E7FCE000D17F6 /* SnapKit in Frameworks */,
-				4CE098162AA90788000D17F6 /* FirebaseStorage in Frameworks */,
+				40C8D0652AB621E000C442D0 /* GoogleSignIn in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,10 +257,10 @@
 		40C8D0112AAF8E4F00C442D0 /* Recources */ = {
 			isa = PBXGroup;
 			children = (
-				8622966D2AADD08B00C5672C /* GoogleService-Info.plist */,
 				864AABA12A9B45CE001955C7 /* Assets.xcassets */,
 				864AABA32A9B45CE001955C7 /* LaunchScreen.storyboard */,
 				864AABA62A9B45CE001955C7 /* Info.plist */,
+				40C8D06E2AB6257F00C442D0 /* GoogleService-Info.plist */,
 			);
 			path = Recources;
 			sourceTree = "<group>";
@@ -312,6 +320,23 @@
 				40C8D02D2AB30E1300C442D0 /* DiscoverViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		40C8D04A2AB60C0E00C442D0 /* Autorization */ = {
+			isa = PBXGroup;
+			children = (
+				40C8D04B2AB60CA300C442D0 /* AutorizationViewController.swift */,
+			);
+			path = Autorization;
+			sourceTree = "<group>";
+		};
+		40C8D0762AB6466800C442D0 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				40C8D0722AB6455A00C442D0 /* CookTimeEnum.swift */,
+				40C8D07B2AB72B9300C442D0 /* PickerTypeEnum.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		522A7DDC2AA1F75100BE821F /* Model */ = {
@@ -391,6 +416,7 @@
 		864AABAD2A9B4808001955C7 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				40C8D04A2AB60C0E00C442D0 /* Autorization */,
 				864AABC12A9CC468001955C7 /* Welcome */,
 				40C8D0142AAF9E8500C442D0 /* MainTabBar */,
 				864AABC02A9CC448001955C7 /* Home */,
@@ -428,6 +454,7 @@
 				8682CC892AA742F900F7D078 /* CreateRecipeView.swift */,
 				40C8D0242AB0655E00C442D0 /* UIView + App.swift */,
 				40C8D0262AB06B6900C442D0 /* UIStackView + App.swift */,
+				40C8D0362AB5FE1500C442D0 /* UIPickerView.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -445,7 +472,6 @@
 			isa = PBXGroup;
 			children = (
 				864AAB982A9B45CD001955C7 /* AppDelegate.swift */,
-				864AAB9A2A9B45CD001955C7 /* SceneDelegate.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -537,6 +563,7 @@
 		8682CC7F2AA7418800F7D078 /* CreateRecipe */ = {
 			isa = PBXGroup;
 			children = (
+				40C8D0762AB6466800C442D0 /* Helpers */,
 				8682CC802AA7418800F7D078 /* Models */,
 				8682CC832AA7418800F7D078 /* Views */,
 				8682CC812AA7418800F7D078 /* Controllers */,
@@ -548,6 +575,7 @@
 			isa = PBXGroup;
 			children = (
 				40C8D0122AAF9E0E00C442D0 /* IngredientsItem.swift */,
+				40C8D0702AB6450200C442D0 /* createRecipeViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -556,6 +584,7 @@
 			isa = PBXGroup;
 			children = (
 				40C8D0322AB4D77700C442D0 /* CreateViewController.swift */,
+				40C8D0772AB6E95D00C442D0 /* PickerViewController.swift */,
 				8682CC822AA7418800F7D078 /* CreateRecipeViewController.swift */,
 			);
 			path = Controllers;
@@ -564,21 +593,12 @@
 		8682CC832AA7418800F7D078 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				8695E0222AA9EF450093B18E /* Cell */,
-				86FBB5632AA8D50B00B370F2 /* TableView */,
 				8682CC842AA7418800F7D078 /* HeaderView.swift */,
 				86FBB5642AA8D53C00B370F2 /* CookTimeView.swift */,
 				8695E01D2AA9ED330093B18E /* FooterView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		8695E0222AA9EF450093B18E /* Cell */ = {
-			isa = PBXGroup;
-			children = (
 				8695E0232AA9EF660093B18E /* IngredientsCollectionViewCell.swift */,
 			);
-			path = Cell;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		86AA64952AA125BB00270237 /* Views */ = {
@@ -588,15 +608,6 @@
 				86AA64972AA125BB00270237 /* IngredientCell.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		86FBB5632AA8D50B00B370F2 /* TableView */ = {
-			isa = PBXGroup;
-			children = (
-				86FBB5602AA8C2DE00B370F2 /* ServesTableViewController.swift */,
-				86FBB5662AA8E90800B370F2 /* CookTimeTableViewController.swift */,
-			);
-			path = TableView;
 			sourceTree = "<group>";
 		};
 		C34A5FB62A9DE9BD00EBC15E /* Home SeeAll */ = {
@@ -656,8 +667,9 @@
 				4CE0980C2A9E7FCE000D17F6 /* SnapKit */,
 				40569B502AA4970B00C87666 /* RealmSwift */,
 				40569B532AA49F2600C87666 /* AlertKit */,
-				4CE098132AA90788000D17F6 /* FirebaseAuth */,
-				4CE098152AA90788000D17F6 /* FirebaseStorage */,
+				40C8D05F2AB620ED00C442D0 /* FirebaseAuth */,
+				40C8D0642AB621E000C442D0 /* GoogleSignIn */,
+				40C8D0662AB621E000C442D0 /* GoogleSignInSwift */,
 			);
 			productName = RecipesApp;
 			productReference = 864AAB952A9B45CD001955C7 /* RecipesApp.app */;
@@ -692,7 +704,8 @@
 				4CE0980B2A9E7FCE000D17F6 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				40569B4F2AA4970B00C87666 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				40569B522AA49F2600C87666 /* XCRemoteSwiftPackageReference "AlertKit" */,
-				4CE098122AA90788000D17F6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				40C8D05E2AB620ED00C442D0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				40C8D0632AB621E000C442D0 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 			);
 			productRefGroup = 864AAB962A9B45CD001955C7 /* Products */;
 			projectDirPath = "";
@@ -710,7 +723,7 @@
 			files = (
 				864AABBB2A9B5461001955C7 /* Poppins-Regular.ttf in Resources */,
 				864AABA52A9B45CE001955C7 /* LaunchScreen.storyboard in Resources */,
-				8622966E2AADD08B00C5672C /* GoogleService-Info.plist in Resources */,
+				40C8D06F2AB6257F00C442D0 /* GoogleService-Info.plist in Resources */,
 				864AABA22A9B45CE001955C7 /* Assets.xcassets in Resources */,
 				864AABBD2A9CBFA3001955C7 /* Poppins-Bold.ttf in Resources */,
 			);
@@ -730,7 +743,6 @@
 				40EE67032A9E160900461299 /* NetworkService.swift in Sources */,
 				40C8D02E2AB30E1300C442D0 /* DiscoverViewModel.swift in Sources */,
 				40569B422A9FEA7F00C87666 /* SwitchPopularCategoryCollectionViewCell.swift in Sources */,
-				86FBB5612AA8C2DE00B370F2 /* ServesTableViewController.swift in Sources */,
 				40569B4E2AA3905500C87666 /* ReadyInMinutesModel.swift in Sources */,
 				864AABBF2A9CC2E1001955C7 /* UILabel + App.swift in Sources */,
 				52EC938D2AA5D982006A959C /* ProfileViewController.swift in Sources */,
@@ -742,14 +754,17 @@
 				52EC938F2AA5DE73006A959C /* MyProfileCell.swift in Sources */,
 				4084C2272A9D2FE900842DEF /* SearchRecipeModel.swift in Sources */,
 				4CE098182AA90A2D000D17F6 /* FireBaseAuthManager.swift in Sources */,
+				40C8D04C2AB60CA300C442D0 /* AutorizationViewController.swift in Sources */,
 				40EE67052A9E1CD500461299 /* URLRequestGeneratore.swift in Sources */,
+				40C8D0372AB5FE1500C442D0 /* UIPickerView.swift in Sources */,
 				522A7DDE2AA1F76700BE821F /* DetailModel.swift in Sources */,
 				864AABD32A9CCCC5001955C7 /* HomeViewController.swift in Sources */,
-				86FBB5672AA8E90800B370F2 /* CookTimeTableViewController.swift in Sources */,
+				40C8D0732AB6455A00C442D0 /* CookTimeEnum.swift in Sources */,
 				40569B4C2AA3547F00C87666 /* PopularCategoryModel2.swift in Sources */,
 				40569B612AA62F4000C87666 /* SearchRecipeViewController.swift in Sources */,
 				40569B462A9FFB5800C87666 /* UIButton + App.swift in Sources */,
 				864AABB62A9B4A1D001955C7 /* UIColor+App.swift in Sources */,
+				40C8D07C2AB72B9300C442D0 /* PickerTypeEnum.swift in Sources */,
 				40506C062A9E77160058332A /* RecentRecipeCollectionViewCell.swift in Sources */,
 				4CE0981A2AA90BB7000D17F6 /* UserAuthData.swift in Sources */,
 				40C8D0132AAF9E0E00C442D0 /* IngredientsItem.swift in Sources */,
@@ -772,11 +787,12 @@
 				40569B5E2AA5C24700C87666 /* SavedRecipeModel.swift in Sources */,
 				86FBB5652AA8D53C00B370F2 /* CookTimeView.swift in Sources */,
 				52EC93932AA5EB35006A959C /* RecipeImageView.swift in Sources */,
+				40C8D0782AB6E95D00C442D0 /* PickerViewController.swift in Sources */,
 				C34A5FBF2A9F331C00EBC15E /* CustomCell.swift in Sources */,
 				40C8D0272AB06B6900C442D0 /* UIStackView + App.swift in Sources */,
+				40C8D0712AB6450200C442D0 /* createRecipeViewModel.swift in Sources */,
 				40C8D01A2AAFA69900C442D0 /* HomeViewModel.swift in Sources */,
 				79BD78E02AA0605A005D5900 /* OnboardingViewController.swift in Sources */,
-				864AAB9B2A9B45CD001955C7 /* SceneDelegate.swift in Sources */,
 				40569B442A9FF3F700C87666 /* UICollectionView + App.swift in Sources */,
 				40569B482AA0B3F500C87666 /* UIView addSubviews + App.swift in Sources */,
 				40506C042A9E6F7F0058332A /* PopularCategoryCollectionViewCell.swift in Sources */,
@@ -1025,20 +1041,28 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		40C8D05E2AB620ED00C442D0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
+		40C8D0632AB621E000C442D0 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 		4CE0980B2A9E7FCE000D17F6 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 5.0.0;
-			};
-		};
-		4CE098122AA90788000D17F6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 10.0.0;
 			};
 		};
 		863B3D3E2A9D1B0400187864 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
@@ -1062,20 +1086,25 @@
 			package = 40569B522AA49F2600C87666 /* XCRemoteSwiftPackageReference "AlertKit" */;
 			productName = AlertKit;
 		};
+		40C8D05F2AB620ED00C442D0 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 40C8D05E2AB620ED00C442D0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		40C8D0642AB621E000C442D0 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 40C8D0632AB621E000C442D0 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		40C8D0662AB621E000C442D0 /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 40C8D0632AB621E000C442D0 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
 		4CE0980C2A9E7FCE000D17F6 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 4CE0980B2A9E7FCE000D17F6 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
-		};
-		4CE098132AA90788000D17F6 /* FirebaseAuth */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4CE098122AA90788000D17F6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAuth;
-		};
-		4CE098152AA90788000D17F6 /* FirebaseStorage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4CE098122AA90788000D17F6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseStorage;
 		};
 		863B3D3F2A9D1B0400187864 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
