@@ -73,7 +73,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             }
             alertController.addAction(photoLibraryAction)
         }
-      
+        
         alertController.popoverPresentationController?.sourceView = sender
         present(alertController, animated: true)
     }
@@ -91,12 +91,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             guard let self = self else { return }
 
             let vc = AuthorizationViewController()
-            do {
-                try Auth.auth().signOut()
-            } catch let signOutError as NSError {
-                print("Error signing out: %@", signOutError)
-            }
-            signOut()
+            profileViewModel.signOut()
             if let window = UIApplication.shared.delegate?.window {
                 UIView.transition(with: window!, duration: 0.3, options: .transitionCrossDissolve, animations: {
                     window?.rootViewController = vc
@@ -107,13 +102,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         alert.addAction(cancelAction)
         alert.addAction(logOutAction)
         self.present(alert, animated: true)
-    }
-    func signOut() {
-        do {
-            try Auth.auth().signOut()
-        } catch let signOutError as NSError {
-            print("Error signing out: %@", signOutError)
-        }
     }
 }
 

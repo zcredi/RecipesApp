@@ -1,4 +1,5 @@
 import Firebase
+import FirebaseAuth
 import FirebaseFirestore
 import Foundation
 
@@ -50,5 +51,12 @@ class ProfileViewModel {
             throw ProfileError.decodingError
         }
         return recipe
+    }
+    func signOut() {
+        do {
+            try Auth.auth().signOut()
+        } catch let signOutError as NSError {
+            print("Error signing out: %@", signOutError)
+        }
     }
 }

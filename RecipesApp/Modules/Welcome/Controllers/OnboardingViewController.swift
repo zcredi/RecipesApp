@@ -24,14 +24,9 @@ class OnboardingViewController: UIPageViewController, UIPageViewControllerDataSo
         return button
     }()
     
-    lazy var skipButton: UIButton = {
-        let button = UIButton(name: "Skip", backgroundColor: .clear, font: .poppinsRegular10(), titleColor: .white)
-        button.addTarget(self, action: #selector(handleSkipButton), for: .touchUpInside)
-        return button
-    }()
     
     lazy var bottomStack: UIStackView = {
-        let buttonsStackView = UIStackView(arrangedSubviews: [continueButton, skipButton])
+        let buttonsStackView = UIStackView(arrangedSubviews: [continueButton])
         buttonsStackView.axis = .vertical
         buttonsStackView.spacing = 12
         
