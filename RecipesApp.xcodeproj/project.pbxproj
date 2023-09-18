@@ -14,6 +14,7 @@
 		40108C032AB780630073D579 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 40108C022AB780630073D579 /* FirebaseFirestore */; };
 		40108C052AB780630073D579 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 40108C042AB780630073D579 /* FirebaseFirestoreSwift */; };
 		40108C072AB780630073D579 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 40108C062AB780630073D579 /* FirebaseStorage */; };
+		404913AB2AB8BF6D00DC62BC /* RecipeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404913AA2AB8BF6D00DC62BC /* RecipeError.swift */; };
 		40506C022A9E64030058332A /* TrendingNowCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40506C012A9E64030058332A /* TrendingNowCollectionViewCell.swift */; };
 		40506C042A9E6F7F0058332A /* PopularCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40506C032A9E6F7F0058332A /* PopularCategoryCollectionViewCell.swift */; };
 		40506C062A9E77160058332A /* RecentRecipeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40506C052A9E77160058332A /* RecentRecipeCollectionViewCell.swift */; };
@@ -101,6 +102,7 @@
 
 /* Begin PBXFileReference section */
 		40108BF92AB76A800073D579 /* RecipeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeModel.swift; sourceTree = "<group>"; };
+		404913AA2AB8BF6D00DC62BC /* RecipeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeError.swift; sourceTree = "<group>"; };
 		40506C012A9E64030058332A /* TrendingNowCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingNowCollectionViewCell.swift; sourceTree = "<group>"; };
 		40506C032A9E6F7F0058332A /* PopularCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		40506C052A9E77160058332A /* RecentRecipeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentRecipeCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -347,6 +349,7 @@
 			children = (
 				40C8D0722AB6455A00C442D0 /* CookTimeEnum.swift */,
 				40C8D07B2AB72B9300C442D0 /* PickerTypeEnum.swift */,
+				404913AA2AB8BF6D00DC62BC /* RecipeError.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -806,6 +809,7 @@
 				86FBB5652AA8D53C00B370F2 /* CookTimeView.swift in Sources */,
 				52EC93932AA5EB35006A959C /* RecipeImageView.swift in Sources */,
 				40C8D0782AB6E95D00C442D0 /* PickerViewController.swift in Sources */,
+				404913AB2AB8BF6D00DC62BC /* RecipeError.swift in Sources */,
 				C34A5FBF2A9F331C00EBC15E /* CustomCell.swift in Sources */,
 				40C8D0272AB06B6900C442D0 /* UIStackView + App.swift in Sources */,
 				40C8D0712AB6450200C442D0 /* createRecipeViewModel.swift in Sources */,

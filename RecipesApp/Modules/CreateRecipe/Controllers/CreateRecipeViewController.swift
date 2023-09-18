@@ -20,15 +20,13 @@ class CreateRecipeViewController: UIViewController {
     @IBAction private func createRecipeButtonTapped() {
         guard let recipeName = headerView.recipeNameTextField.text, !recipeName.isEmpty,
               let image = headerView.recipeImage.image,
-              let imageData = image.jpegData(compressionQuality: 0.8),
-              let serves = headerView.servesNumberLabel.text,
               let cookTime = cookTimeView.timeLabel.text,
               !footerView.ingredientsArray.isEmpty
         else {
             errorAlert()
             return
         }
-        print(footerView.ingredientsArray)
+        self.createRecipeViewModel.saveRecipe(image: image, title: recipeName, cookTime: cookTime, ingredients: footerView.ingredientsArray)
         completeAlert()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.navigationController?.popViewController(animated: true)
