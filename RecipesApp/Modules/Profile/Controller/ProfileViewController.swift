@@ -36,7 +36,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     
     @objc
-    private func buttonTap(_ sender: UIButton) {
+    private func imageTapped(_ sender: UIImageView) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         let alertController = UIAlertController(title: "Choose Image Source", message: nil, preferredStyle: .actionSheet)
@@ -143,7 +143,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             let editButton = UIButton(type: .system)
             editButton.tintColor = UIColor(named: "blackWhite")!
             editButton.setImage(UIImage(systemName: "ellipsis"), for: .normal)
-            editButton.addTarget(self, action: #selector(buttonTap), for: .touchUpInside)
             let stackView = UIStackView(arrangedSubviews: [label, editButton])
             stackView.spacing = 2
             stackView.distribution = .equalSpacing
@@ -160,6 +159,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.section {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: MyProfileCell.identifier, for: indexPath) as! MyProfileCell
+            cell.delegate = self
             cell.backgroundColor = .clear
             return cell
         case 1:
@@ -169,5 +169,11 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         default:
             return UITableViewCell()
         }
+    }
+}
+
+extension ProfileViewController: ProfileImagePressedDelegate {
+    func profileImagePressed(_ sender: UIImageView) {
+        imageTapped(sender)
     }
 }

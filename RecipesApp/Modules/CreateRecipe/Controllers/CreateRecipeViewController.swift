@@ -1,5 +1,8 @@
 import AlertKit
 import UIKit
+import FirebaseStorage
+import FirebaseFirestore
+
 
 class CreateRecipeViewController: UIViewController {
     private var createRecipeViewModel = CreateRecipeViewModel()
@@ -16,6 +19,8 @@ class CreateRecipeViewController: UIViewController {
     
     @IBAction private func createRecipeButtonTapped() {
         guard let recipeName = headerView.recipeNameTextField.text, !recipeName.isEmpty,
+              let image = headerView.recipeImage.image,
+              let imageData = image.jpegData(compressionQuality: 0.8),
               let serves = headerView.servesNumberLabel.text,
               let cookTime = cookTimeView.timeLabel.text,
               !footerView.ingredientsArray.isEmpty

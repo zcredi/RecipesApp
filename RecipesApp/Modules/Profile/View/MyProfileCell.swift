@@ -2,11 +2,15 @@ import Foundation
 import UIKit
 
 // MARK: - MyProfileCell
-
+protocol ProfileImagePressedDelegate: NSObject {
+    func profileImagePressed(_ sender: UIImageView)
+}
 final class MyProfileCell: UITableViewCell {
     static let identifier = "MyProfileCell"
+    weak var delegate: ProfileImagePressedDelegate?
     
     lazy var photoImageView = UIImageView(image: "Christina Tosi", cornerRadius: 50)
+    private lazy var tapGesture = UITapGestureRecognizer(target: self, action: #selector(myProfileImagePressed))
   
     // MARK: - Initializers
 
@@ -24,7 +28,13 @@ final class MyProfileCell: UITableViewCell {
  
     // MARK: - Private Methods
 
+    @IBAction func myProfileImagePressed() {
+        delegate?.profileImagePressed(photoImageView)
+    }
+    
     private func setupCell() {
+        photoImageView.isUserInteractionEnabled = true
+        photoImageView.addGestureRecognizer(tapGesture)
         selectionStyle = .none
         contentView.addSubviews(photoImageView)
     }
