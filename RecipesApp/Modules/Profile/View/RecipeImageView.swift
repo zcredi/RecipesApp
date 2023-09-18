@@ -32,7 +32,7 @@ final class RecipeImageView: UIImageView {
     }
   
     // MARK: - Private Methods
-
+    
     private func setupView() {
         addSubviews(recipeNameLabel, ingredientsLabel, lineView, cookingTime)
         recipeNameLabel.numberOfLines = 0

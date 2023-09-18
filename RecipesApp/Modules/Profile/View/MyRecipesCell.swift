@@ -28,6 +28,14 @@ final class MyRecipesCell: UITableViewCell {
         selectionStyle = .none
         contentView.addSubviews(photoImageView)
     }
+    
+    func setupCell(model: CreateRecipeModel) {
+        guard let url = URL(string: model.image) else { return }
+        photoImageView.kf.setImage(with: url)
+        photoImageView.recipeNameLabel.text = model.title
+        photoImageView.cookingTime.text = model.cookTime
+        photoImageView.ingredientsLabel.text = "\(model.ingredients.count) ingredients"
+    }
   
     // MARK: - Layout
 

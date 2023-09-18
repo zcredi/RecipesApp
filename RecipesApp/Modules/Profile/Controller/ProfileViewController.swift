@@ -10,6 +10,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
     }
     
+    private var profileViewModel = ProfileViewModel()
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.estimatedRowHeight = UITableView.automaticDimension
@@ -24,6 +26,18 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         navigationItem.title = "My profile"
         setupView()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        profileViewModel.fetchRecipes { result in
+            switch result {
+            case .success(let success):
+                self.tableView.reloadData()
+            case .failure(let failure):
+                print(failure)
+            }
+        }
+    }
+
     
     // MARK: - Action Methods
 
@@ -138,7 +152,7 @@ private extension ProfileViewController {
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return profileViewModel.recipes.isEmpty ? 1 : 2
     }
   
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -146,7 +160,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         case 0:
             return 1
         case 1:
-            return 3
+            return profileViewModel.recipes.count
         default: return 0
         }
     }
@@ -185,6 +199,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: MyRecipesCell.identifier, for: indexPath) as! MyRecipesCell
+            
+            cell.setupCell(model: profileViewModel.recipes[indexPath.row])
             cell.backgroundColor = .clear
             return cell
         default:
