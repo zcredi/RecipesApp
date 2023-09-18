@@ -1,11 +1,13 @@
 import UIKit
+import FirebaseAuth
 
 // MARK: - ProfileViewController
 
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     // MARK: - Private Property
-    private var dynamicImage: UIImage = UIImage() {
-        didSet{
+
+    private var dynamicImage: UIImage = .init() {
+        didSet {
             updateCellImage()
         }
     }
@@ -26,6 +28,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         navigationItem.title = "My profile"
         setupView()
     }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         profileViewModel.fetchRecipes { result in
@@ -38,7 +41,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
     }
 
-    
     // MARK: - Action Methods
 
     private func updateCellImage() {
@@ -47,8 +49,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
     }
 
-    
-    
     @objc
     private func imageTapped(_ sender: UIImageView) {
         let imagePicker = UIImagePickerController()
@@ -78,7 +78,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         present(alertController, animated: true)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         guard let selectedImage = info[.originalImage] as? UIImage else { return }
         dynamicImage = selectedImage
         picker.dismiss(animated: true)
@@ -91,6 +91,12 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             guard let self = self else { return }
 
             let vc = AuthorizationViewController()
+            do {
+                try Auth.auth().signOut()
+            } catch let signOutError as NSError {
+                print("Error signing out: %@", signOutError)
+            }
+            signOut()
             if let window = UIApplication.shared.delegate?.window {
                 UIView.transition(with: window!, duration: 0.3, options: .transitionCrossDissolve, animations: {
                     window?.rootViewController = vc
@@ -102,8 +108,13 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         alert.addAction(logOutAction)
         self.present(alert, animated: true)
     }
-
-    
+    func signOut() {
+        do {
+            try Auth.auth().signOut()
+        } catch let signOutError as NSError {
+            print("Error signing out: %@", signOutError)
+        }
+    }
 }
 
 // MARK: - Setting Views
