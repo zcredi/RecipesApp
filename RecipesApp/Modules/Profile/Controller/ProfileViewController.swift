@@ -70,6 +70,26 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         picker.dismiss(animated: true)
     }
     
+    @IBAction func editButtonPressed(_ sender: UIButton) {
+        let alert = UIAlertController(title: "Log Out", message: "Do you really want to log out of your account?", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        let logOutAction = UIAlertAction(title: "Log Out", style: .cancel) { [weak self] _ in
+            guard let self = self else { return }
+
+            let vc = AuthorizationViewController()
+            if let window = UIApplication.shared.delegate?.window {
+                UIView.transition(with: window!, duration: 0.3, options: .transitionCrossDissolve, animations: {
+                    window?.rootViewController = vc
+                }, completion: nil)
+            }
+        }
+
+        alert.addAction(cancelAction)
+        alert.addAction(logOutAction)
+        self.present(alert, animated: true)
+    }
+
+    
 }
 
 // MARK: - Setting Views
@@ -143,6 +163,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             let editButton = UIButton(type: .system)
             editButton.tintColor = UIColor(named: "blackWhite")!
             editButton.setImage(UIImage(systemName: "ellipsis"), for: .normal)
+            editButton.addTarget(self, action: #selector(editButtonPressed(_:)), for: .touchUpInside)
             let stackView = UIStackView(arrangedSubviews: [label, editButton])
             stackView.spacing = 2
             stackView.distribution = .equalSpacing

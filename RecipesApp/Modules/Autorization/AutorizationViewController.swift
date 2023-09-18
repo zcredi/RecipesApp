@@ -4,15 +4,15 @@ import GoogleSignInSwift
 import UIKit
 
 class AuthorizationViewController: UIViewController {
-    private let titleLabel = UILabel(text: "My Recipe App", font: .systemFont(ofSize: 24, weight: .bold), textColor: .black, numberOfLines: 0)
+    private lazy var titleLabel = UILabel(text: "My Recipe App", font: .systemFont(ofSize: 24, weight: .bold), textColor: UIColor(named: "blackWhite")!, numberOfLines: 0)
     
-    private let GIDButton: GIDSignInButton = {
+    private lazy var GIDButton: GIDSignInButton = {
         let button = GIDSignInButton()
         button.addTarget(self, action: #selector(signInWithGoogle), for: .touchUpInside)
         return button
     }()
     
-    private let emailTextField: UITextField = {
+    private lazy var emailTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Аккаунт (введите логин)"
         textField.borderStyle = .roundedRect
@@ -20,7 +20,7 @@ class AuthorizationViewController: UIViewController {
         return textField
     }()
     
-    private let passwordTextField: UITextField = {
+    private lazy var passwordTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Пароль (введите пароль)"
         textField.borderStyle = .roundedRect
@@ -28,16 +28,16 @@ class AuthorizationViewController: UIViewController {
         return textField
     }()
     
-    private let createAccountButton: UIButton = {
-        let button = UIButton(name: "Create Account", backgroundColor: .blue, font: nil, titleColor: .systemBackground)
+    private lazy var  createAccountButton: UIButton = {
+        let button = UIButton(name: "Create Account", backgroundColor: .systemBlue, font: nil, titleColor: .white)
         button.addTarget(self, action: #selector(createAccountTapped), for: .touchUpInside)
         button.layer.cornerRadius = 8
         return button
     }()
        
     
-    private let loginButton: UIButton = {
-        let button = UIButton(name: "Sign in", backgroundColor: .green, font: nil, titleColor: .systemBackground)
+    private lazy var loginButton: UIButton = {
+        let button = UIButton(name: "Sign in", backgroundColor: .systemGreen, font: nil, titleColor: .white)
         button.addTarget(self, action: #selector(loginTapped), for: .touchUpInside)
         button.layer.cornerRadius = 8
         return button
@@ -59,10 +59,17 @@ class AuthorizationViewController: UIViewController {
     }
     
     func showMainTabBar() {
-        let vc = MainTabBarController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
+        guard let window = UIApplication.shared.delegate?.window else { return }
+        
+        let mainTabBarController = MainTabBarController()
+
+        // Анимационный переход между старым и новым rootViewController
+        UIView.transition(with: window!, duration: 0.3, options: .transitionCrossDissolve, animations: {
+            window?.rootViewController = mainTabBarController
+        }, completion: nil)
     }
+
+
     
     func setupViews() {
         view.addSubviews(titleLabel, emailTextField, passwordTextField, GIDButton, createAccountButton, loginButton)
@@ -111,7 +118,7 @@ class AuthorizationViewController: UIViewController {
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
         let config = GIDConfiguration(clientID: clientID)
         GIDSignIn.sharedInstance.configuration = config
-        GIDSignIn.sharedInstance.signIn(withPresenting: self) { [unowned self] result, error in
+        GIDSignIn.sharedInstance.signIn(withPresenting: self) { [weak self] result, error in
             guard error == nil else {
                 print("Error: \(error?.localizedDescription ?? "No error description")")
                 return
@@ -126,7 +133,7 @@ class AuthorizationViewController: UIViewController {
             
             let credential = GoogleAuthProvider.credential(withIDToken: idToken,
                                                            accessToken: user.accessToken.tokenString)
-            Auth.auth().signIn(with: credential) { [unowned self] result, error in
+            Auth.auth().signIn(with: credential) { [weak self] result, error in
                 guard error == nil else {
                     print("Error: \(error?.localizedDescription)")
                     return
@@ -137,9 +144,7 @@ class AuthorizationViewController: UIViewController {
                     return
                 }
 
-                let vc = MainTabBarController()
-                vc.modalPresentationStyle = .fullScreen
-                present(vc, animated: true)
+                self?.showMainTabBar()
             }
         }
     }

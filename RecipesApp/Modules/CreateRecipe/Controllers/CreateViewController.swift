@@ -1,7 +1,6 @@
 import UIKit
 
 class CreateViewController: UIViewController {
-    
     private lazy var createRecipeImage = UIImageView(image: "createRecipe", cornerRadius: 12)
     private lazy var createRecipeButton: UIButton = {
         let button = UIButton(name: "Create your custom recipe", backgroundColor: UIColor(named: "redBlue"), font: .boldSystemFont(ofSize: 20), titleColor: .white)

@@ -13,11 +13,11 @@ class SearchRecipeViewModel {
             guard let self = self else { return }
             
             let request = self.urlGenerator.request(endpoint: "recipes/complexSearch", queryItems: [URLQueryItem(name: "query", value: text), URLQueryItem(name: "addRecipeInformation", value: "true")])
-            self.networkManager.request(generator: request) { (result: Swift.Result<SearchRecipe, Error>) in
+            self.networkManager.request(generator: request) {[weak self] (result: Swift.Result<SearchRecipe, Error>) in
                 DispatchQueue.main.async {
                     switch result {
                     case .success(let searched):
-                        self.searchedRecipe = searched.results
+                        self?.searchedRecipe = searched.results
                         completion()
                     case .failure(let failure):
                         print(failure.localizedDescription)

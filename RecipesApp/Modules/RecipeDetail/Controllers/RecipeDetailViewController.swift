@@ -5,6 +5,9 @@ import UIKit
 // MARK: - RecipeDetailViewController
 
 final class RecipeDetailViewController: UIViewController {
+    deinit {
+        print("Recipe detail deinit")
+    }
     let recipeDetailViewModel = RecipeDetailViewModel()
     // MARK: - Private Property
 

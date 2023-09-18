@@ -1,7 +1,6 @@
 import UIKit
 
 class OnboardingViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
-    
     var pages = [UIViewController]()
     let initialPage = 0
     
@@ -17,11 +16,7 @@ class OnboardingViewController: UIPageViewController, UIPageViewControllerDataSo
     }()
     
     lazy var continueButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Continue", for: .normal)
-        button.backgroundColor = .primary50
-        button.titleLabel?.font = .poppinsRegular20()
-        button.setTitleColor(.white, for: .normal)
+        let button = UIButton(name: "Continue", backgroundColor: .primary50, font: .poppinsRegular20(), titleColor: .white)
         button.clipsToBounds = true
         button.layer.cornerRadius = 20
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -30,12 +25,7 @@ class OnboardingViewController: UIPageViewController, UIPageViewControllerDataSo
     }()
     
     lazy var skipButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Skip", for: .normal)
-        button.backgroundColor = .clear
-        button.titleLabel?.font = .poppinsRegular10()
-        button.setTitleColor(.white, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
+        let button = UIButton(name: "Skip", backgroundColor: .clear, font: .poppinsRegular10(), titleColor: .white)
         button.addTarget(self, action: #selector(handleSkipButton), for: .touchUpInside)
         return button
     }()
@@ -89,10 +79,12 @@ class OnboardingViewController: UIPageViewController, UIPageViewControllerDataSo
     }
     
     @objc func handleSkipButton() {
-        let vc = AuthorizationViewController()
-        vc.modalTransitionStyle = .crossDissolve
-        vc.modalPresentationStyle = .fullScreen
-        show(vc, sender: self)
+        self.dismiss(animated: true){
+            let vc = AuthorizationViewController()
+            vc.modalTransitionStyle = .crossDissolve
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
+        }
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {

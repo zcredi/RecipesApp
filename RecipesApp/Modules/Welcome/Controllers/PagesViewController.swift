@@ -8,7 +8,6 @@
 import UIKit
 
 class PagesViewController: UIViewController {
-    
     var imageName: String
     var titleTextFirstPart: String
     var titleTextSecondPart: String

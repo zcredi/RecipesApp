@@ -1,7 +1,6 @@
 import UIKit
 
 class SearchRecipeViewController: UIViewController {
-    
     let searchViewModel = SearchRecipeViewModel()
     private lazy var searchRecipesTableView: UITableView = {
         let tableView = UITableView()

@@ -1,9 +1,7 @@
 import UIKit
 import FirebaseAuth
 class WelcomeViewController: UIViewController {
-    
     let backgroundImageView = UIImageView(image: "background", cornerRadius: 0)
-    
     lazy var titleText = UILabel(text: "Best Recipe", font: .poppinsBold56(), textColor: .white, numberOfLines: 0)
     lazy var subtitleText = UILabel(text: "Find best recipes for cooking", font: .poppinsRegular16(), textColor: .white, numberOfLines: 1)
     lazy var titleStack: UIStackView = {
