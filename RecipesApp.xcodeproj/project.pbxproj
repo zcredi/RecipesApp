@@ -16,6 +16,11 @@
 		40108C072AB780630073D579 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 40108C062AB780630073D579 /* FirebaseStorage */; };
 		404913AB2AB8BF6D00DC62BC /* RecipeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404913AA2AB8BF6D00DC62BC /* RecipeError.swift */; };
 		404913B02AB8E62300DC62BC /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404913AF2AB8E62300DC62BC /* ProfileViewModel.swift */; };
+		404913B32ABACA9600DC62BC /* AuthorizationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404913B22ABACA9600DC62BC /* AuthorizationViewModel.swift */; };
+		404913B72ABAD14F00DC62BC /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404913B62ABAD14F00DC62BC /* RegistrationViewController.swift */; };
+		404913B92ABAD1F000DC62BC /* UITextField + App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404913B82ABAD1F000DC62BC /* UITextField + App.swift */; };
+		404913BB2ABAE14B00DC62BC /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404913BA2ABAE14B00DC62BC /* RegistrationViewModel.swift */; };
+		404913BD2ABAE69500DC62BC /* FirebaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404913BC2ABAE69500DC62BC /* FirebaseError.swift */; };
 		40506C022A9E64030058332A /* TrendingNowCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40506C012A9E64030058332A /* TrendingNowCollectionViewCell.swift */; };
 		40506C042A9E6F7F0058332A /* PopularCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40506C032A9E6F7F0058332A /* PopularCategoryCollectionViewCell.swift */; };
 		40506C062A9E77160058332A /* RecentRecipeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40506C052A9E77160058332A /* RecentRecipeCollectionViewCell.swift */; };
@@ -104,6 +109,11 @@
 		40108BF92AB76A800073D579 /* RecipeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeModel.swift; sourceTree = "<group>"; };
 		404913AA2AB8BF6D00DC62BC /* RecipeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeError.swift; sourceTree = "<group>"; };
 		404913AF2AB8E62300DC62BC /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		404913B22ABACA9600DC62BC /* AuthorizationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewModel.swift; sourceTree = "<group>"; };
+		404913B62ABAD14F00DC62BC /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		404913B82ABAD1F000DC62BC /* UITextField + App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField + App.swift"; sourceTree = "<group>"; };
+		404913BA2ABAE14B00DC62BC /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
+		404913BC2ABAE69500DC62BC /* FirebaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseError.swift; sourceTree = "<group>"; };
 		40506C012A9E64030058332A /* TrendingNowCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingNowCollectionViewCell.swift; sourceTree = "<group>"; };
 		40506C032A9E6F7F0058332A /* PopularCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		40506C052A9E77160058332A /* RecentRecipeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentRecipeCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -219,6 +229,24 @@
 			isa = PBXGroup;
 			children = (
 				404913AF2AB8E62300DC62BC /* ProfileViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		404913B42ABACA9B00DC62BC /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				40C8D04B2AB60CA300C442D0 /* AutorizationViewController.swift */,
+				404913B62ABAD14F00DC62BC /* RegistrationViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		404913B52ABACAA300DC62BC /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				404913B22ABACA9600DC62BC /* AuthorizationViewModel.swift */,
+				404913BA2ABAE14B00DC62BC /* RegistrationViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -355,7 +383,9 @@
 		40C8D04A2AB60C0E00C442D0 /* Autorization */ = {
 			isa = PBXGroup;
 			children = (
-				40C8D04B2AB60CA300C442D0 /* AutorizationViewController.swift */,
+				404913BC2ABAE69500DC62BC /* FirebaseError.swift */,
+				404913B52ABACAA300DC62BC /* ViewModel */,
+				404913B42ABACA9B00DC62BC /* Controller */,
 			);
 			path = Autorization;
 			sourceTree = "<group>";
@@ -488,6 +518,7 @@
 				40C8D0242AB0655E00C442D0 /* UIView + App.swift */,
 				40C8D0262AB06B6900C442D0 /* UIStackView + App.swift */,
 				40C8D0362AB5FE1500C442D0 /* UIPickerView.swift */,
+				404913B82ABAD1F000DC62BC /* UITextField + App.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -775,6 +806,7 @@
 			files = (
 				40569B562AA4AD1800C87666 /* RecentRecipeModel.swift in Sources */,
 				864AABD52A9CCCCF001955C7 /* DiscoverViewController.swift in Sources */,
+				404913B72ABAD14F00DC62BC /* RegistrationViewController.swift in Sources */,
 				40C8D0292AB259CF00C442D0 /* SeeAllViewModel.swift in Sources */,
 				40506C022A9E64030058332A /* TrendingNowCollectionViewCell.swift in Sources */,
 				40EE67032A9E160900461299 /* NetworkService.swift in Sources */,
@@ -812,6 +844,7 @@
 				40C8D0252AB0655E00C442D0 /* UIView + App.swift in Sources */,
 				8695E0242AA9EF660093B18E /* IngredientsCollectionViewCell.swift in Sources */,
 				404913B02AB8E62300DC62BC /* ProfileViewModel.swift in Sources */,
+				404913B32ABACA9600DC62BC /* AuthorizationViewModel.swift in Sources */,
 				C34A5FC12A9F506500EBC15E /* RatingView.swift in Sources */,
 				C34A5FC32A9F7C8000EBC15E /* SeeAllTableView.swift in Sources */,
 				40C8D01F2AAFABAF00C442D0 /* PopularCreator.swift in Sources */,
@@ -821,6 +854,7 @@
 				C34A5FBB2A9DE9F100EBC15E /* SeeAllViewController.swift in Sources */,
 				40569B632AA62FFF00C87666 /* SearchRecipeTableViewCell.swift in Sources */,
 				40C8D0212AB0596D00C442D0 /* UIImageView + App.swift in Sources */,
+				404913B92ABAD1F000DC62BC /* UITextField + App.swift in Sources */,
 				40569B5E2AA5C24700C87666 /* SavedRecipeModel.swift in Sources */,
 				86FBB5652AA8D53C00B370F2 /* CookTimeView.swift in Sources */,
 				52EC93932AA5EB35006A959C /* RecipeImageView.swift in Sources */,
@@ -831,6 +865,7 @@
 				40C8D0712AB6450200C442D0 /* createRecipeViewModel.swift in Sources */,
 				40C8D01A2AAFA69900C442D0 /* HomeViewModel.swift in Sources */,
 				79BD78E02AA0605A005D5900 /* OnboardingViewController.swift in Sources */,
+				404913BB2ABAE14B00DC62BC /* RegistrationViewModel.swift in Sources */,
 				40569B442A9FF3F700C87666 /* UICollectionView + App.swift in Sources */,
 				40569B482AA0B3F500C87666 /* UIView addSubviews + App.swift in Sources */,
 				40506C042A9E6F7F0058332A /* PopularCategoryCollectionViewCell.swift in Sources */,
@@ -846,6 +881,7 @@
 				40506C082A9E79C50058332A /* PopularCreatorsCollectionViewCell.swift in Sources */,
 				40C8D01D2AAFAB8A00C442D0 /* DishCategory.swift in Sources */,
 				40569B5B2AA5B8AB00C87666 /* NavigationBar.swift in Sources */,
+				404913BD2ABAE69500DC62BC /* FirebaseError.swift in Sources */,
 				8682CC8A2AA742F900F7D078 /* CreateRecipeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

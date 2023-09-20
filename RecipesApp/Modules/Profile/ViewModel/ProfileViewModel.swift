@@ -14,7 +14,7 @@ class ProfileViewModel {
             return
         }
 
-        db.collection("Recipes").document(userID).collection("userRecipes").getDocuments { snapshot, error in
+        db.collection("Recipes").document(userID).collection("userRecipes").getDocuments { [weak self] snapshot, error in
             if let error = error {
                 completion(.failure(.firestoreError(error)))
                 return
@@ -28,8 +28,8 @@ class ProfileViewModel {
             var loadedRecipes: [CreateRecipeModel] = []
             for document in snapshot.documents {
                 do {
-                    let recipe = try self.decodeRecipe(documentData: document.data())
-                    loadedRecipes.append(recipe)
+                    let recipe = try self?.decodeRecipe(documentData: document.data())
+                    loadedRecipes.append(recipe!)
                 } catch let error as ProfileError {
                     completion(.failure(error))
                     return
@@ -38,8 +38,8 @@ class ProfileViewModel {
                     return
                 }
             }
-            self.recipes = loadedRecipes
-            completion(.success(self.recipes))
+            self?.recipes = loadedRecipes.reversed()
+            completion(.success(self!.recipes))
         }
     }
 

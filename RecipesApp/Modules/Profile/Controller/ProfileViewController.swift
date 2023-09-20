@@ -31,10 +31,10 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        profileViewModel.fetchRecipes { result in
+        profileViewModel.fetchRecipes { [weak self] result in
             switch result {
             case .success(let success):
-                self.tableView.reloadData()
+                self?.tableView.reloadData()
             case .failure(let failure):
                 print(failure)
             }

@@ -1,9 +1,11 @@
-import Firebase
-import GoogleSignIn
-import GoogleSignInSwift
 import UIKit
+import GoogleSignIn
+import AlertKit
 
 class AuthorizationViewController: UIViewController {
+    
+    private var authorizationViewModel = AutrhorizationViewModel()
+    
     private lazy var titleLabel = UILabel(text: "My Recipe App", font: .systemFont(ofSize: 24, weight: .bold), textColor: UIColor(named: "blackWhite")!, numberOfLines: 0)
     
     private lazy var GIDButton: GIDSignInButton = {
@@ -13,17 +15,14 @@ class AuthorizationViewController: UIViewController {
     }()
     
     private lazy var emailTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Аккаунт (введите логин)"
-        textField.borderStyle = .roundedRect
+        let textField = UITextField(placeholder: "Аккаунт (введите логин)", delegate: self)
         textField.keyboardType = .emailAddress
         return textField
     }()
     
     private lazy var passwordTextField: UITextField = {
-        let textField = UITextField()
+        let textField = UITextField(placeholder: "Пароль (введите пароль)", delegate: self)
         textField.placeholder = "Пароль (введите пароль)"
-        textField.borderStyle = .roundedRect
         textField.isSecureTextEntry = true
         return textField
     }()
@@ -49,12 +48,14 @@ class AuthorizationViewController: UIViewController {
     }
     
     func checkAutorization() {
-        if Auth.auth().currentUser != nil {
-            showMainTabBar()
-        } else {
-            view.backgroundColor = .systemBackground
-            setupViews()
-            layoutViews()
+        authorizationViewModel.checkAuthorization { [weak self] isAuthorized in
+            if isAuthorized {
+                self?.showMainTabBar()
+            } else {
+                self?.view.backgroundColor = .systemBackground
+                self?.setupViews()
+                self?.layoutViews()
+            }
         }
     }
     
@@ -67,6 +68,10 @@ class AuthorizationViewController: UIViewController {
         UIView.transition(with: window!, duration: 0.3, options: .transitionCrossDissolve, animations: {
             window?.rootViewController = mainTabBarController
         }, completion: nil)
+    }
+    
+    func showAlertError(error: Error) {
+        AlertKitAPI.present(title: "Error", subtitle: "\(error)", icon: .error, style: .iOS16AppleMusic, haptic: .error)
     }
 
 
@@ -115,59 +120,39 @@ class AuthorizationViewController: UIViewController {
     }
 
     @objc func signInWithGoogle() {
-        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
-        let config = GIDConfiguration(clientID: clientID)
-        GIDSignIn.sharedInstance.configuration = config
-        GIDSignIn.sharedInstance.signIn(withPresenting: self) { [weak self] result, error in
-            guard error == nil else {
-                print("Error: \(error?.localizedDescription ?? "No error description")")
-                return
-            }
-            
-            guard let user = result?.user,
-                  let idToken = user.idToken?.tokenString
-            else {
-                print("Error: No user or idToken")
-                return
-            }
-            
-            let credential = GoogleAuthProvider.credential(withIDToken: idToken,
-                                                           accessToken: user.accessToken.tokenString)
-            Auth.auth().signIn(with: credential) { [weak self] result, error in
-                guard error == nil else {
-                    print("Error: \(error?.localizedDescription)")
-                    return
-                }
-
-                guard let user = result?.user else {
-                    print("Error: No user")
-                    return
-                }
-
-                self?.showMainTabBar()
-            }
+        authorizationViewModel.signInWithGoogle(vc: self) {
+            self.showMainTabBar()
         }
     }
     
     @objc func createAccountTapped() {
-        // Реализуй этот метод, чтобы открыть экран регистрации или выполнить другое действие
+        let vc = RegistrationViewController()
+        present(vc, animated: true)
     }
     
     @objc func loginTapped() {
-        // Получаем введенные email и пароль
         guard let email = emailTextField.text, !email.isEmpty,
               let password = passwordTextField.text, !password.isEmpty
         else {
             print("Error: Email or Password is empty")
             return
         }
-
-        // Вход в аккаунт с использованием Firebase
-        Auth.auth().signIn(withEmail: email, password: password) { [weak self] _, error in
-            guard error == nil else {
-                print("Login error: \(error!.localizedDescription)")
-                return
+        authorizationViewModel.signInWithFirebase(email: email, password: password) { [weak self] result in
+                switch result {
+                case .success:
+                    self?.showMainTabBar()
+                case .failure(let error):
+                    self?.showAlertError(error: error)
+                }
             }
-        }
     }
 }
+
+extension AuthorizationViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        emailTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
+        return true
+    }
+}
+
