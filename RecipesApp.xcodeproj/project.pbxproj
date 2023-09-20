@@ -67,9 +67,6 @@
 		40EE67052A9E1CD500461299 /* URLRequestGeneratore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EE67042A9E1CD500461299 /* URLRequestGeneratore.swift */; };
 		4CE0980D2A9E7FCE000D17F6 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4CE0980C2A9E7FCE000D17F6 /* SnapKit */; };
 		4CE0980F2A9E8034000D17F6 /* CastomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE0980E2A9E8034000D17F6 /* CastomTableViewCell.swift */; };
-		4CE098182AA90A2D000D17F6 /* FireBaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE098172AA90A2D000D17F6 /* FireBaseAuthManager.swift */; };
-		4CE0981A2AA90BB7000D17F6 /* UserAuthData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE098192AA90BB7000D17F6 /* UserAuthData.swift */; };
-		522A7DDE2AA1F76700BE821F /* DetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522A7DDD2AA1F76700BE821F /* DetailModel.swift */; };
 		52EC938D2AA5D982006A959C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EC938C2AA5D982006A959C /* ProfileViewController.swift */; };
 		52EC938F2AA5DE73006A959C /* MyProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EC938E2AA5DE73006A959C /* MyProfileCell.swift */; };
 		52EC93912AA5E885006A959C /* MyRecipesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EC93902AA5E885006A959C /* MyRecipesCell.swift */; };
@@ -155,9 +152,6 @@
 		40EE67022A9E160900461299 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		40EE67042A9E1CD500461299 /* URLRequestGeneratore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestGeneratore.swift; sourceTree = "<group>"; };
 		4CE0980E2A9E8034000D17F6 /* CastomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastomTableViewCell.swift; sourceTree = "<group>"; };
-		4CE098172AA90A2D000D17F6 /* FireBaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseAuthManager.swift; sourceTree = "<group>"; };
-		4CE098192AA90BB7000D17F6 /* UserAuthData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthData.swift; sourceTree = "<group>"; };
-		522A7DDD2AA1F76700BE821F /* DetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailModel.swift; sourceTree = "<group>"; };
 		52EC938C2AA5D982006A959C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		52EC938E2AA5DE73006A959C /* MyProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileCell.swift; sourceTree = "<group>"; };
 		52EC93902AA5E885006A959C /* MyRecipesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecipesCell.swift; sourceTree = "<group>"; };
@@ -403,7 +397,6 @@
 		522A7DDC2AA1F75100BE821F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				522A7DDD2AA1F76700BE821F /* DetailModel.swift */,
 				40C8D0302AB36EF100C442D0 /* RecipeDetailViewModel.swift */,
 			);
 			path = Model;
@@ -460,7 +453,6 @@
 				864AABB42A9B4887001955C7 /* Application */,
 				864AABAC2A9B47F5001955C7 /* Network Layer */,
 				864AABAD2A9B4808001955C7 /* Modules */,
-				864AABB02A9B4834001955C7 /* Service */,
 				864AABAE2A9B4825001955C7 /* UIConstants */,
 				40C8D0112AAF8E4F00C442D0 /* Recources */,
 			);
@@ -521,15 +513,6 @@
 				404913B82ABAD1F000DC62BC /* UITextField + App.swift */,
 			);
 			path = UIKit;
-			sourceTree = "<group>";
-		};
-		864AABB02A9B4834001955C7 /* Service */ = {
-			isa = PBXGroup;
-			children = (
-				4CE098172AA90A2D000D17F6 /* FireBaseAuthManager.swift */,
-				4CE098192AA90BB7000D17F6 /* UserAuthData.swift */,
-			);
-			path = Service;
 			sourceTree = "<group>";
 		};
 		864AABB42A9B4887001955C7 /* Application */ = {
@@ -822,11 +805,9 @@
 				864AABB82A9B4A31001955C7 /* UIFont+App.swift in Sources */,
 				52EC938F2AA5DE73006A959C /* MyProfileCell.swift in Sources */,
 				4084C2272A9D2FE900842DEF /* SearchRecipeModel.swift in Sources */,
-				4CE098182AA90A2D000D17F6 /* FireBaseAuthManager.swift in Sources */,
 				40C8D04C2AB60CA300C442D0 /* AutorizationViewController.swift in Sources */,
 				40EE67052A9E1CD500461299 /* URLRequestGeneratore.swift in Sources */,
 				40C8D0372AB5FE1500C442D0 /* UIPickerView.swift in Sources */,
-				522A7DDE2AA1F76700BE821F /* DetailModel.swift in Sources */,
 				864AABD32A9CCCC5001955C7 /* HomeViewController.swift in Sources */,
 				40C8D0732AB6455A00C442D0 /* CookTimeEnum.swift in Sources */,
 				40569B4C2AA3547F00C87666 /* PopularCategoryModel2.swift in Sources */,
@@ -835,7 +816,6 @@
 				864AABB62A9B4A1D001955C7 /* UIColor+App.swift in Sources */,
 				40C8D07C2AB72B9300C442D0 /* PickerTypeEnum.swift in Sources */,
 				40506C062A9E77160058332A /* RecentRecipeCollectionViewCell.swift in Sources */,
-				4CE0981A2AA90BB7000D17F6 /* UserAuthData.swift in Sources */,
 				8695E01E2AA9ED330093B18E /* FooterView.swift in Sources */,
 				4084C22D2A9D367100842DEF /* InformationAboutIngradientModel.swift in Sources */,
 				40C8D0332AB4D77700C442D0 /* CreateViewController.swift in Sources */,
