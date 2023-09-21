@@ -33,7 +33,6 @@ final class MyProfileCell: UITableViewCell {
     }
     
     private func setupCell() {
-        photoImageView.isUserInteractionEnabled = true
         photoImageView.addGestureRecognizer(tapGesture)
         selectionStyle = .none
         contentView.addSubviews(photoImageView)

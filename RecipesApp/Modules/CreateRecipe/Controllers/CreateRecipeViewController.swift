@@ -1,8 +1,5 @@
 import AlertKit
 import UIKit
-import FirebaseStorage
-import FirebaseFirestore
-
 
 class CreateRecipeViewController: UIViewController {
     private var createRecipeViewModel = CreateRecipeViewModel()

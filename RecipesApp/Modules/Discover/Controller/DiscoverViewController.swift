@@ -1,4 +1,3 @@
-import SnapKit
 import UIKit
 
 class DiscoverViewController: UIViewController {

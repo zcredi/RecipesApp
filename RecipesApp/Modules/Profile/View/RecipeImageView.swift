@@ -41,8 +41,6 @@ final class RecipeImageView: UIImageView {
     // MARK: - Layout
 
     private func layoutUI() {
-        
-
         NSLayoutConstraint.activate([
             recipeNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
             recipeNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),

@@ -1,13 +1,13 @@
 import Foundation
 
-struct CreateRecipeModel: Codable {
+struct CreateRecipeModel: Decodable {
     let cookTime: String
     let image: String
     let ingredients: [IngredientsItemModel]
     let title: String
 }
 
-struct IngredientsItemModel: Codable {
+struct IngredientsItemModel: Decodable {
     let itemName: String
     let quantity: String
 }

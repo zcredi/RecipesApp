@@ -2,7 +2,6 @@ import Firebase
 import FirebaseFirestore
 import FirebaseStorage
 import Foundation
-import UIKit
 
 class CreateRecipeViewModel {
     var servesCount = ["01", "02", "03", "04", "05"]
@@ -23,15 +22,15 @@ class CreateRecipeViewModel {
         
         // 2. Upload Image to Firebase Storage
         let storageRef = Storage.storage().reference().child("recipes/\(userID)/\(UUID().uuidString).jpg")
-        storageRef.putData(imageData, metadata: nil) { _, error in
+        storageRef.putData(imageData, metadata: nil) { [weak self] _, error in
             if let error = error {
                 print("Ошибка загрузки изображения: \(error.localizedDescription)")
-                self.onRecipeSaved?(false, RecipeError.downloadImageToDataBase)
+                self?.onRecipeSaved?(false, RecipeError.downloadImageToDataBase)
                 return
             }
             
             // 3. Get the image URL
-            storageRef.downloadURL { result in
+            storageRef.downloadURL { [weak self] result in
                 switch result {
                 case .success(let urlImage):
                     
@@ -54,15 +53,15 @@ class CreateRecipeViewModel {
                     userRecipeRef.setData(recipeData) { error in
                         if let error = error {
                             print("Ошибка при добавлении рецепта: \(error.localizedDescription)")
-                            self.onRecipeSaved?(false, RecipeError.savingRecipeFailed)
+                            self?.onRecipeSaved?(false, RecipeError.savingRecipeFailed)
                         } else {
                             print("Рецепт успешно добавлен!")
-                            self.onRecipeSaved?(true, nil)
+                            self?.onRecipeSaved?(true, nil)
                         }
                     }
                 case .failure(let error):
                     print("Ошибка при получении URL изображения: \(error.localizedDescription)")
-                    self.onRecipeSaved?(false, RecipeError.getURLInfo)
+                    self?.onRecipeSaved?(false, RecipeError.getURLInfo)
                 }
             }
         }

@@ -6,7 +6,7 @@ class MainTabBarController: UITabBarController {
         addSomeTabItems()
         setupCustomTabBar()
     }
-
+    
     func setupCustomTabBar() {
         self.tabBar.tintColor = .primary50
         self.tabBar.unselectedItemTintColor = .neutral50
@@ -23,7 +23,6 @@ class MainTabBarController: UITabBarController {
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.gray], for: .normal)
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor(named: "redBlue")!], for: .selected)
     }
-
     
     func addItem(vc: UIViewController, image: UIImage?, titleImage: UIImage?, title: String) -> UIViewController {
         let item = UINavigationController(rootViewController: vc)
@@ -41,7 +40,5 @@ class MainTabBarController: UITabBarController {
         let profile = addItem(vc: ProfileViewController(), image: UIImage(systemName: "person"), titleImage: UIImage(systemName: "person.fill"), title: "Profile")
         
         setViewControllers([home, search, createRecipe, discover, profile], animated: true)
-    
     }
 }
-

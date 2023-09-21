@@ -71,8 +71,8 @@ extension SearchRecipeViewController: UITableViewDataSource, UITableViewDelegate
 extension SearchRecipeViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if let text = searchBar.text, !text.isEmpty {
-            searchViewModel.fetchSearchRecipes(text: text) {
-                self.searchRecipesTableView.reloadData()
+            searchViewModel.fetchSearchRecipes(text: text) { [weak self] in
+                self?.searchRecipesTableView.reloadData()
             }
         }
     }
