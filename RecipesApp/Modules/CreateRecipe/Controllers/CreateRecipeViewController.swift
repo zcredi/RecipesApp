@@ -86,7 +86,7 @@ extension CreateRecipeViewController {
             footerView.topAnchor.constraint(equalTo: cookTimeView.bottomAnchor, constant: 16),
             footerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             footerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            footerView.heightAnchor.constraint(equalToConstant: 270)
+            footerView.heightAnchor.constraint(equalToConstant: 270),
         ])
 
         createRecipeButton.translatesAutoresizingMaskIntoConstraints = false

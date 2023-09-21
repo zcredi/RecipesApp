@@ -24,38 +24,21 @@ class MainTabBarController: UITabBarController {
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor(named: "redBlue")!], for: .selected)
     }
 
+    
+    func addItem(vc: UIViewController, image: UIImage?, titleImage: UIImage?, title: String) -> UIViewController {
+        let item = UINavigationController(rootViewController: vc)
+        
+        let itemImageSelected = image?.withTintColor(UIColor(named: "redBlue")!, renderingMode: .alwaysOriginal)
+        vc.tabBarItem = UITabBarItem(title: title, image: image, selectedImage: titleImage?.withTintColor(UIColor(named: "redBlue")!, renderingMode: .alwaysOriginal))
+        return item
+    }
+    
     func addSomeTabItems() {
-        let home = UINavigationController(rootViewController: HomeViewController())
-        let homeImage = UIImage(systemName: "house")
-        let houseImageSelected = UIImage(systemName: "house.fill")?.withTintColor(UIColor(named: "redBlue")!, renderingMode: .alwaysOriginal)
-        home.tabBarItem = UITabBarItem(title: "Home", image: homeImage, selectedImage: houseImageSelected)
-
-        
-        let search = UINavigationController(rootViewController: SearchRecipeViewController())
-        let normalImage = UIImage(systemName: "magnifyingglass")?.withTintColor(.gray, renderingMode: .alwaysOriginal)
-        let selectedImage = UIImage(systemName: "magnifyingglass")?.withTintColor(UIColor(named: "redBlue")!, renderingMode: .alwaysOriginal)
-
-        search.tabBarItem = UITabBarItem(title: "Search", image: normalImage, selectedImage: selectedImage)
-        
-        
-        
-        let plusImage = UIImage(systemName: "plus.circle")
-        let plusImageSelected = UIImage(systemName: "plus.circle.fill")?.withTintColor(UIColor(named: "redBlue")!, renderingMode: .alwaysOriginal)
-        let createRecipe = UINavigationController(rootViewController: CreateViewController())
-        createRecipe.tabBarItem = UITabBarItem(title: "Create", image: plusImage, selectedImage: plusImageSelected)
-        
-        
-        
-        let discoverImage = UIImage(systemName: "bookmark")
-        let discoverImageSelected = UIImage(systemName: "bookmark.fill")?.withTintColor(UIColor(named: "redBlue")!, renderingMode: .alwaysOriginal)
-        let discover = UINavigationController(rootViewController: DiscoverViewController())
-        discover.tabBarItem = UITabBarItem(title: "Discover", image: discoverImage, selectedImage: discoverImageSelected)
-
-        
-        let profileImage = UIImage(systemName: "person")
-        let profileImageSelected = UIImage(systemName: "person.fill")?.withTintColor(UIColor(named: "redBlue")!, renderingMode: .alwaysOriginal)
-        let profile = UINavigationController(rootViewController: ProfileViewController())
-        profile.tabBarItem = UITabBarItem(title: "Profile", image:  profileImage, selectedImage: profileImageSelected)
+        let home = addItem(vc: HomeViewController(), image: UIImage(systemName: "house"), titleImage: UIImage(systemName: "house.fill"), title: "Home")
+        let search = addItem(vc: SearchRecipeViewController(), image: UIImage(systemName: "magnifyingglass"), titleImage: UIImage(systemName: "magnifyingglass"), title: "Search")
+        let createRecipe = addItem(vc: CreateViewController(), image: UIImage(systemName: "plus.circle"), titleImage: UIImage(systemName: "plus.circle.fill"), title: "Create")
+        let discover = addItem(vc: DiscoverViewController(), image: UIImage(systemName: "bookmark"), titleImage: UIImage(systemName: "bookmark.fill"), title: "Discover")
+        let profile = addItem(vc: ProfileViewController(), image: UIImage(systemName: "person"), titleImage: UIImage(systemName: "person.fill"), title: "Profile")
         
         setViewControllers([home, search, createRecipe, discover, profile], animated: true)
     

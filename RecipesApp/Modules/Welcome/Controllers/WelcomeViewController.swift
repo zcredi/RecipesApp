@@ -21,8 +21,6 @@ class WelcomeViewController: UIViewController {
         var button = UIButton(name: "Get started", backgroundColor: .primary50, font: .poppinsBold16(), titleColor: .white)
         button.clipsToBounds = true
         button.layer.cornerRadius = 10
-        button.heightAnchor.constraint(equalToConstant: 56).isActive = true
-        button.widthAnchor.constraint(equalToConstant: 156).isActive = true
         button.translatesAutoresizingMaskIntoConstraints = false
         
         button.addTarget(self, action: #selector(startedButton), for: .touchUpInside)
@@ -57,7 +55,7 @@ class WelcomeViewController: UIViewController {
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .fullScreen
         
-        show(vc, sender: self)
+        present(vc, animated: true)
         
     }
     
@@ -76,14 +74,17 @@ class WelcomeViewController: UIViewController {
 
         NSLayoutConstraint.activate([
             buttonView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -48),
-            buttonView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            buttonView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            buttonView.heightAnchor.constraint(equalToConstant: 56),
+            buttonView.widthAnchor.constraint(equalToConstant: 156)
+
           
         ])
 
         NSLayoutConstraint.activate([
             titleStack.bottomAnchor.constraint(equalTo: buttonView.topAnchor, constant: -32),
-            titleStack.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        
+            titleStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                    
         ])
         
         NSLayoutConstraint.activate([

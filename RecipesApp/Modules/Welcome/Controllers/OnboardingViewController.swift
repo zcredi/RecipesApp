@@ -116,18 +116,19 @@ class OnboardingViewController: UIPageViewController, UIPageViewControllerDataSo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.dataSource = self
         self.delegate = self
-        
+        setupPages()
+        setupViews()
+    }
+    
+    func setupPages() {
         let page1 = PagesViewController(imageName: "Onboarding Page-1", titleTextFirstPart: "Recipes from all", titleTextSecondPart: "over the World", subtitleText: "")
         let page2 = PagesViewController(imageName: "Onboarding Page-2", titleTextFirstPart: "Recipes with", titleTextSecondPart: "each and every detail", subtitleText: "")
         let page3 = PagesViewController(imageName: "Onboarding Page-3", titleTextFirstPart: "Cook it now or", titleTextSecondPart: "save it for later", subtitleText: "")
         
         self.pages.append(contentsOf: [page1, page2, page3])
         setViewControllers([pages[initialPage]], direction: .forward, animated: true, completion: nil)
-        
-        setupViews()
     }
     
     private func setupViews() {

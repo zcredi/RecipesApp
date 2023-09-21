@@ -2,7 +2,7 @@ import Firebase
 import GoogleSignIn
 import GoogleSignInSwift
 
-class AutrhorizationViewModel {
+class AuthorizationViewModel {
     
     
     func checkAuthorization(completionHandler: @escaping (Bool) -> Void) {

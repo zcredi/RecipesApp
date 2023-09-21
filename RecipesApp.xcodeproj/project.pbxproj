@@ -374,14 +374,14 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		40C8D04A2AB60C0E00C442D0 /* Autorization */ = {
+		40C8D04A2AB60C0E00C442D0 /* Authorization */ = {
 			isa = PBXGroup;
 			children = (
 				404913BC2ABAE69500DC62BC /* FirebaseError.swift */,
 				404913B52ABACAA300DC62BC /* ViewModel */,
 				404913B42ABACA9B00DC62BC /* Controller */,
 			);
-			path = Autorization;
+			path = Authorization;
 			sourceTree = "<group>";
 		};
 		40C8D0762AB6466800C442D0 /* Helpers */ = {
@@ -471,7 +471,7 @@
 		864AABAD2A9B4808001955C7 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				40C8D04A2AB60C0E00C442D0 /* Autorization */,
+				40C8D04A2AB60C0E00C442D0 /* Authorization */,
 				864AABC12A9CC468001955C7 /* Welcome */,
 				40C8D0142AAF9E8500C442D0 /* MainTabBar */,
 				864AABC02A9CC448001955C7 /* Home */,

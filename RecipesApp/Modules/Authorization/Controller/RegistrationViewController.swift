@@ -38,12 +38,12 @@ class RegistrationViewController: UIViewController {
             textFieldEmptyError()
             return
         }
-        registrationViewModel.createUser(email: email, password: password) { result in
+        registrationViewModel.createUser(email: email, password: password) { [weak self] result in
             switch result {
             case .success:
-                self.successCreateAccount()
+                self?.successCreateAccount()
             case .failure(let failure):
-                self.authorizationError(error: failure)
+                self?.authorizationError(error: failure)
             }
         }
     }
@@ -61,7 +61,7 @@ class RegistrationViewController: UIViewController {
     
     private func successCreateAccount() {
         AlertKitAPI.present(title: "The account was created", subtitle: nil, icon: .done, style: .iOS16AppleMusic, haptic: .success)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             self.dismiss(animated: true)
             self.logIn()
         }

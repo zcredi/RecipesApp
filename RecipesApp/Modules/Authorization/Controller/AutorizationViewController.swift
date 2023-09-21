@@ -4,7 +4,7 @@ import AlertKit
 
 class AuthorizationViewController: UIViewController {
     
-    private var authorizationViewModel = AutrhorizationViewModel()
+    private var authorizationViewModel = AuthorizationViewModel()
     
     private lazy var titleLabel = UILabel(text: "My Recipe App", font: .systemFont(ofSize: 24, weight: .bold), textColor: UIColor(named: "blackWhite")!, numberOfLines: 0)
     

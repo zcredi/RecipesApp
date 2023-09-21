@@ -1,10 +1,3 @@
-//
-//  PagesViewController.swift
-//  RecipesApp
-//
-//  Created by Anna Zaitsava on 30.08.23.
-//
-
 import UIKit
 
 class PagesViewController: UIViewController {
@@ -30,7 +23,7 @@ class PagesViewController: UIViewController {
     lazy var onboardingImage: UIImageView = {
         let imageName = imageName
         let image = UIImage(named: imageName)
-        let imageView = UIImageView(image: image!)
+        let imageView = UIImageView(image: image ?? UIImage(systemName: "trash.fill"))
         
         return imageView
     }()
@@ -59,10 +52,12 @@ class PagesViewController: UIViewController {
         return textStackView
     }()
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        setupUI()
+    }
     
-    override func loadView() {
-        super.loadView()
-        
+    private func setupUI() {
         view.addSubviews(onboardingImage, textStack)
         onboardingImage.translatesAutoresizingMaskIntoConstraints = false
         onboardingImage.sizeToFit()
@@ -80,11 +75,6 @@ class PagesViewController: UIViewController {
             textStack.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
             textStack.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20)
         ])
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
     
 }
