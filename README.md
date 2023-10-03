@@ -6,8 +6,8 @@
 
 | Feature | Preview |
 | --- | --- |
-| **Onboarding Screen** <br/>The first time you enter the app, we have a welcome message pop up for new users | ![onboarding](https://github.com/fullzoom59/RecipesApp/assets/119012478/650acd97-d2a6-4ff5-a2a9-8898b7a0bb3f) |
-| **Authorization Screen** <br/>Registration via Firebase is available in our application | ![authorization](https://github.com/fullzoom59/RecipesApp/assets/119012478/397680a6-d5ed-4fee-8d35-1f5275c59ae8) |
+| **Onboarding Screen** <br/>The first time you enter the app, we have a welcome message pop up for new users | ![onboarding](https://github.com/zcredi/RecipesApp/assets/119012478/8ab47074-7839-4bc4-8105-3a3057093fd1) |
+| **Authorization Screen** <br/>Registration via Firebase is available in our application | ![authorization](https://github.com/zcredi/RecipesApp/assets/119012478/3e104855-b693-4047-b4af-0a76411d5f8c) |
 | **Home Screen** <br/>When a user successfully logs in, they are taken to the home screen, which shows popular recipes, recipes by category, and popular recipe creators | ![home](https://github.com/zcredi/RecipesApp/assets/119012478/56c11606-038f-4727-acd3-70f1ffec61d5) |
 | **Recipe Detail Screen** <br/>When we click on a collection cell, we are taken to the recipe information screen. We can see the detailed recipe, ingredients, select ingredients and save the recipe to favorites. Also when we click on a recipe in the collection it is saved to recent via Realm | ![recipeDetail](https://github.com/zcredi/RecipesApp/assets/119012478/2c9bb1e1-8b9e-4789-a77d-ab546fe3ad2d) |
 | **See All Screen** <br/>When we click on the see all button, we are taken to a screen that loads more recipes from the API. We can also see these recipes and add them to our favorites | ![seeAll](https://github.com/zcredi/RecipesApp/assets/119012478/d1b9568e-4efa-45f3-b93b-29e54c2163f0) |
